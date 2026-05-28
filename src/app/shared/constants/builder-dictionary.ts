@@ -7,6 +7,7 @@ export const BUILDER_DICTIONARY = {
         reset: 'Reset All',
         getStarted: 'Get Started',
         savePreset: 'Save Preset',
+        getPlugin: 'Get Plugin',
     },
     labels: {
         contents: 'Contents',
@@ -116,5 +117,16 @@ export const BUILDER_DICTIONARY = {
         minLength: 'Minimum length is {{min}} characters.',
         maxLength: 'Maximum length is {{max}} characters.',
         invalid: 'Invalid input.',
+    },
+    getPluginDialog: {
+        dialogTitle: 'Get Plugin',
+        confirmButton: 'Download ZIP',
+        cancelButton: 'Cancel',
+        instructions: {
+            antigravity:
+                'To install this plugin in your project:<br><br>1. Click <span class="highlight">"Download ZIP"</span> to save the configuration.<br><br>2. Extract the ZIP contents directly into your project\'s root directory.<br><br>3. Verify that the <span class="highlight">".agents/"</span> directory is created at the root.<br><br>4. Restart your Antigravity agent session to load the rules.',
+            claude: 'To install this plugin in your project:<br><br>1. Click <span class="highlight">"Download ZIP"</span> to save the configuration.<br><br>2. Extract the ZIP contents directly into your project\'s root directory.<br><br>3. Verify that the <span class="highlight">".claude/"</span> directory is created at the root.<br><br>4. Restart your Claude Code CLI session to load the rules.',
+            cursor: 'To install this plugin in your project:<br><br>1. Click <span class="highlight">"Download ZIP"</span> to save the configuration.<br><br>2. Extract the ZIP contents directly into your project\'s root directory.<br><br>3. Verify that the plugin folder is created at the root.<br><br>4. Restart your Cursor editor to activate the custom rules (.mdc) and hooks.',
+        },
     },
 } as const;

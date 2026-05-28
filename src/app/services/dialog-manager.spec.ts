@@ -36,4 +36,41 @@ describe('DialogManager', () => {
         });
         consoleSpy.mockRestore();
     });
+
+    it('should open info dialog with correct params', () => {
+        const spy = vi.spyOn(dialogService, 'open').mockReturnValue(of(undefined));
+        service.openInfoDialog('Title', 'Content', 'l');
+        expect(spy).toHaveBeenCalledWith('Content', {
+            label: 'Title',
+            size: 'l',
+        });
+    });
+
+    it('should open confirm dialog with correct params including cancelLabel and default size', () => {
+        const spy = vi.spyOn(dialogService, 'open').mockReturnValue(of(true));
+        service.openConfirmDialog('Confirm Title', 'Confirm Message', 'ConfirmBtn', 'CancelBtn');
+        expect(spy).toHaveBeenCalledWith(expect.any(Object), {
+            label: 'Confirm Title',
+            size: 's',
+            data: {
+                content: 'Confirm Message',
+                yes: 'ConfirmBtn',
+                no: 'CancelBtn',
+            },
+        });
+    });
+
+    it('should open confirm dialog with custom size', () => {
+        const spy = vi.spyOn(dialogService, 'open').mockReturnValue(of(true));
+        service.openConfirmDialog('Confirm Title', 'Confirm Message', 'ConfirmBtn', 'CancelBtn', 'm');
+        expect(spy).toHaveBeenCalledWith(expect.any(Object), {
+            label: 'Confirm Title',
+            size: 'm',
+            data: {
+                content: 'Confirm Message',
+                yes: 'ConfirmBtn',
+                no: 'CancelBtn',
+            },
+        });
+    });
 });

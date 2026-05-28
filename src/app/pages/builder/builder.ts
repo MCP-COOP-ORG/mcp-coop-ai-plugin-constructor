@@ -93,6 +93,23 @@ export class Builder {
         this.dialogManager.openPresetDialog();
     }
 
+    getPlugin(): void {
+        const reviewData = this.builderState.reviewData();
+        const activeAgent = (reviewData['aiAgent'] as string) || 'antigravity';
+
+        const dictionary = this.view.getPluginDialog;
+        const instructionTexts = dictionary.instructions;
+        const message = instructionTexts[activeAgent as keyof typeof instructionTexts] || instructionTexts.antigravity;
+
+        this.dialogManager
+            .openConfirmDialog(dictionary.dialogTitle, message, dictionary.confirmButton, dictionary.cancelButton, 'm')
+            .subscribe((confirmed) => {
+                if (confirmed) {
+                    this.download();
+                }
+            });
+    }
+
     download(): void {
         // Trigger the download immediately
         this.archiveGenerator.downloadArchive(this.archiveGenerator.previewFiles());

@@ -44,8 +44,8 @@
                 (click)="savePreset()">
                 {{ view.buttons.savePreset }}
             </button>
-            <button tuiButton appearance="primary" size="m" [iconEnd]="view.icons.downloadButton" (click)="download()">
-                {{ view.buttons.download }}
+            <button tuiButton appearance="primary" size="m" [iconEnd]="view.icons.downloadButton" (click)="getPlugin()">
+                {{ view.buttons.getPlugin }}
             </button>
             } @else {
             <!-- On the second-to-last step (Stack), show "Generate" instead of "Next" -->

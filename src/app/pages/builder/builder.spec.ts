@@ -138,6 +138,34 @@ describe('Builder', () => {
         });
     });
 
+    describe('getPlugin', () => {
+        it('should open confirm dialog and trigger download if confirmed', () => {
+            const dialogSpy = vi.spyOn(component['dialogManager'], 'openConfirmDialog').mockReturnValue(of(true));
+            const downloadSpy = vi.spyOn(component, 'download').mockImplementation(() => undefined);
+
+            component.getPlugin();
+
+            expect(dialogSpy).toHaveBeenCalledWith(
+                component.view.getPluginDialog.dialogTitle,
+                expect.any(String),
+                component.view.getPluginDialog.confirmButton,
+                component.view.getPluginDialog.cancelButton,
+                'm',
+            );
+            expect(downloadSpy).toHaveBeenCalled();
+        });
+
+        it('should open confirm dialog and not trigger download if cancelled', () => {
+            const dialogSpy = vi.spyOn(component['dialogManager'], 'openConfirmDialog').mockReturnValue(of(false));
+            const downloadSpy = vi.spyOn(component, 'download').mockImplementation(() => undefined);
+
+            component.getPlugin();
+
+            expect(dialogSpy).toHaveBeenCalled();
+            expect(downloadSpy).not.toHaveBeenCalled();
+        });
+    });
+
     describe('savePreset', () => {
         it('should open preset dialog', () => {
             const dialogSpy = vi.spyOn(component['dialogManager'], 'openPresetDialog');

@@ -6,6 +6,17 @@ The MCP COOP AI Plugin Constructor is a standalone web application built with An
 
 ## Development History
 
+### Commit (Pending): feat(ui): replace direct download with Get Plugin dialog and environment-specific instructions
+
+**Status:** Completed
+**Key Features Implemented:**
+
+- **Get Plugin Interceptor**: Replaced the immediate ZIP archive download in the wizard footer with a confirmation dialog to prevent accidental triggers and improve Developer Experience.
+- **Dynamic Installation Guides**: Integrated step-by-step instructions in correct English within the dialog. The instructions adapt reactively depending on the active AI environment (Antigravity, Claude Code, Cursor) to guide users to unzip into the project root workspace.
+- **TUI_CONFIRM Customization**: Expanded `DialogManager.openConfirmDialog` signature to accept configurable sizes (`size`) and custom cancel button labels (`cancelLabel`), reusing the native Taiga UI confirmation overlay to strictly adhere to KISS & DRY.
+- **Layout & Highlights Formatting**: Configured the dialog size to medium (`'m'`) to prevent text wrapping, and styled key directories and actions using the standard `.highlight` class (vibrant blue color) instead of generic bold tags.
+- **Quality Assurance**: Added/updated unit tests in `builder.spec.ts` and `dialog-manager.spec.ts`, maintaining global code coverage well above the 85% threshold.
+
 ### Commit (Pending): feat: improve step subtitles, configure color-only highlights, and fix overlapping path matchers
 
 **Status:** Completed
