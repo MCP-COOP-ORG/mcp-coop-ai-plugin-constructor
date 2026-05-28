@@ -2,6 +2,14 @@
     "label": "Agents",
     "icon": "@tui.bot",
     "title": "Agents Configuration",
-    "description": "Select the programming languages, frameworks, and tools your project uses.\n The AI will strictly adhere to the official syntax, best practices, and patterns of these selected technologies.\n Generated as isolated markdown skills (e.g., skills/angular.md).",
+    "description": "Select the programming languages, frameworks, and tools your project uses.\nThe AI will strictly adhere to the official syntax, best practices, and patterns of these selected technologies.\n\nGenerated as isolated markdown skills within the plugin directory:\ne.g., skills/frontend-agent/SKILL.md or .agents/plugins/my-project-plugin/skills/frontend-agent/SKILL.md",
+    "highlights": [
+        "programming languages, frameworks, and tools",
+        "strictly adhere",
+        "official syntax, best practices, and patterns",
+        "isolated markdown skills",
+        "skills/frontend-agent/SKILL.md",
+        ".agents/plugins/my-project-plugin"
+    ],
     "wrapperType": "skill"
 }

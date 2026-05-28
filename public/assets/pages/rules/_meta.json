@@ -2,6 +2,14 @@
     "label": "Rules",
     "icon": "@tui.shield-check",
     "title": "Project Rules",
-    "description": "Choose the architectural boundaries, coding standards, and security constraints for your team.\n The AI will proactively enforce these rules during code generation and refactoring.\n Saved as global instructions (e.g., rules/architecture.md).",
+    "description": "Choose the architectural boundaries, coding standards, and security constraints for your team.\nThe AI will proactively enforce these rules during code generation and refactoring.\n\nSaved as rules or instructions at the workspace or plugin level:\ne.g., .agents/plugins/my-project-plugin/rules/code-quality.md, .claude/rules/code-quality.md, or my-project-plugin/rules/code-quality.mdc",
+    "highlights": [
+        "architectural boundaries, coding standards, and security constraints",
+        "proactively enforce",
+        "workspace or plugin level",
+        ".agents/plugins/my-project-plugin/rules/code-quality.md",
+        ".claude/rules/code-quality.md",
+        "my-project-plugin/rules/code-quality.mdc"
+    ],
     "wrapperType": "rule"
 }

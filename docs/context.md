@@ -6,7 +6,20 @@ The MCP COOP AI Plugin Constructor is a standalone web application built with An
 
 ## Development History
 
-### Commit (Pending): feat: refactor archive structure to native plugin format and integrate Cursor lifecycle hooks
+### Commit (Pending): feat: improve step subtitles, configure color-only highlights, and fix overlapping path matchers
+
+**Status:** Completed
+**Key Features Implemented:**
+
+- **Clean Step Subtitles & Logical Spacing**: Split all dynamic step descriptions (Agents, Rules, Workflows, Hooks) and static step descriptions (Plugin, Review) with clean, structured line breaks. Long file paths and archive names now render on separate lines to avoid awkward text wrapping in the wizard header.
+- **Concrete Example Names**: Eliminated technical placeholder brackets (`[plugin]`, `[category]`, `[item]`, `<project-name>`) from description texts. Replaced them with clean, real-world examples (e.g. `my-project-plugin`, `frontend-agent`, `code-quality.md`, `trunk-based.md`, `my-project.zip`).
+- **Color-only Highlights**: Modified the `.highlight` style class to style highlighted text using color alone without forcing a bold font weight, maintaining uniform text styling.
+- **Highlight Matching Fixes**:
+    - Resolved regex matching overlaps on the Agents page by splitting keywords into non-overlapping tokens (`skills/frontend-agent/SKILL.md` and `.agents/plugins/my-project-plugin`).
+    - Resolved HTML-escaped matching conflicts on the Review step description by replacing the escaped `<project-name>.zip` pattern with the clean string `my-project.zip`.
+- **Review Step Binding**: Bound `highlights` signal inputs to the `<app-step-header>` component on the Review step page to enable active highlighting on the final page of the builder wizard.
+
+### Commit `c144a70`: feat: refactor archive structure to native plugin format and integrate Cursor lifecycle hooks
 
 **Status:** Completed
 **Key Features Implemented:**

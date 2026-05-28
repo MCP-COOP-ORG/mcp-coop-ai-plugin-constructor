@@ -2,6 +2,15 @@
     "label": "Hooks",
     "icon": "@tui.webhook",
     "title": "Lifecycle Hooks",
-    "description": "Define automated shell scripts that trigger during specific AI session events, like before starting a task or after executing commands.\n This enables seamless CI/CD integration and cache management.\n Stored as configuration hooks (e.g., settings.json, hooks.json).",
+    "description": "Define automated shell scripts that trigger during specific AI session events, like before starting a task or after executing commands.\nThis enables seamless CI/CD integration and cache management.\n\nStored as platform-specific configuration hooks:\ne.g., .gemini/settings.json, .claude/settings.json, or .cursor/hooks.json",
+    "highlights": [
+        "automated shell scripts",
+        "session events",
+        "CI/CD integration",
+        "cache management",
+        ".gemini/settings.json",
+        ".claude/settings.json",
+        ".cursor/hooks.json"
+    ],
     "wrapperType": "hook"
 }

@@ -1,4 +1,7 @@
-<app-step-header [title]="view.step.title" [description]="view.step.description"></app-step-header>
+<app-step-header
+    [title]="view.step.title"
+    [description]="view.step.description"
+    [highlights]="view.step.highlights || []"></app-step-header>
 
 <div class="review-step__ide">
     <!-- ── LEFT: Sidebar / File Explorer ── -->

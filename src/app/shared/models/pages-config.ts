@@ -30,6 +30,7 @@ export interface PageConfig {
     icon: string;
     title: string;
     description: string;
+    highlights?: string[];
     order?: number;
     wrapperType?: string;
     categories: ConfigCategory[];

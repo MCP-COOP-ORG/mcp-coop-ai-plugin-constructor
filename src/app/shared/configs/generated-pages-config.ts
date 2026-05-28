@@ -12,7 +12,15 @@ export const GENERATED_PAGES_CONFIG: Record<string, PageConfig> = {
         icon: '@tui.bot',
         title: 'Agents Configuration',
         description:
-            'Select the programming languages, frameworks, and tools your project uses.\n The AI will strictly adhere to the official syntax, best practices, and patterns of these selected technologies.\n Generated as isolated markdown skills (e.g., skills/angular.md).',
+            'Select the programming languages, frameworks, and tools your project uses.\nThe AI will strictly adhere to the official syntax, best practices, and patterns of these selected technologies.\n\nGenerated as isolated markdown skills within the plugin directory:\ne.g., skills/frontend-agent/SKILL.md or .agents/plugins/my-project-plugin/skills/frontend-agent/SKILL.md',
+        highlights: [
+            'programming languages, frameworks, and tools',
+            'strictly adhere',
+            'official syntax, best practices, and patterns',
+            'isolated markdown skills',
+            'skills/frontend-agent/SKILL.md',
+            '.agents/plugins/my-project-plugin',
+        ],
         wrapperType: 'skill',
         categories: [
             {
@@ -208,7 +216,16 @@ export const GENERATED_PAGES_CONFIG: Record<string, PageConfig> = {
         icon: '@tui.webhook',
         title: 'Lifecycle Hooks',
         description:
-            'Define automated shell scripts that trigger during specific AI session events, like before starting a task or after executing commands.\n This enables seamless CI/CD integration and cache management.\n Stored as configuration hooks (e.g., settings.json, hooks.json).',
+            'Define automated shell scripts that trigger during specific AI session events, like before starting a task or after executing commands.\nThis enables seamless CI/CD integration and cache management.\n\nStored as platform-specific configuration hooks:\ne.g., .gemini/settings.json, .claude/settings.json, or .cursor/hooks.json',
+        highlights: [
+            'automated shell scripts',
+            'session events',
+            'CI/CD integration',
+            'cache management',
+            '.gemini/settings.json',
+            '.claude/settings.json',
+            '.cursor/hooks.json',
+        ],
         wrapperType: 'hook',
         categories: [
             {
@@ -514,7 +531,15 @@ export const GENERATED_PAGES_CONFIG: Record<string, PageConfig> = {
         icon: '@tui.shield-check',
         title: 'Project Rules',
         description:
-            'Choose the architectural boundaries, coding standards, and security constraints for your team.\n The AI will proactively enforce these rules during code generation and refactoring.\n Saved as global instructions (e.g., rules/architecture.md).',
+            'Choose the architectural boundaries, coding standards, and security constraints for your team.\nThe AI will proactively enforce these rules during code generation and refactoring.\n\nSaved as rules or instructions at the workspace or plugin level:\ne.g., .agents/plugins/my-project-plugin/rules/code-quality.md, .claude/rules/code-quality.md, or my-project-plugin/rules/code-quality.mdc',
+        highlights: [
+            'architectural boundaries, coding standards, and security constraints',
+            'proactively enforce',
+            'workspace or plugin level',
+            '.agents/plugins/my-project-plugin/rules/code-quality.md',
+            '.claude/rules/code-quality.md',
+            'my-project-plugin/rules/code-quality.mdc',
+        ],
         wrapperType: 'rule',
         categories: [
             {
@@ -673,7 +698,15 @@ export const GENERATED_PAGES_CONFIG: Record<string, PageConfig> = {
         icon: '@tui.git-merge',
         title: 'Workflows',
         description:
-            'Select predefined operational sequences for complex tasks, like git branching, deployment, or testing routines.\n These act as step-by-step algorithms that the AI will follow autonomously.\n Compiled into workflow definitions (e.g., rules/workflows.md).',
+            'Select predefined operational sequences for complex tasks, like git branching, deployment, or testing routines.\nThese act as step-by-step algorithms that the AI will follow autonomously.\n\nCompiled into workflow definitions and stored at the workspace or plugin level:\ne.g., .agents/workflows/trunk-based.md, .claude/rules/workflows.md, or my-project-plugin/rules/workflows.mdc',
+        highlights: [
+            'predefined operational sequences',
+            'step-by-step algorithms',
+            'git branching, deployment, or testing routines',
+            '.agents/workflows/trunk-based.md',
+            '.claude/rules/workflows.md',
+            'my-project-plugin/rules/workflows.mdc',
+        ],
         wrapperType: 'workflow',
         categories: [
             {

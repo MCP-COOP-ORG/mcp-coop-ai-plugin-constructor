@@ -54,13 +54,15 @@ export const BUILDER_STEPS: BuilderStep[] = [
         icon: '@tui.folder-code',
         title: 'Plugin Configuration',
         description:
-            'Define the core business logic, primary goals, and domain constraints of your project.\n This provides the AI with deep contextual understanding to avoid generic assumptions.\n Injected into the root configuration files (e.g., CLAUDE.md, GEMINI.md, AGENTS.md, etc.).',
+            'Define the core business logic, primary goals, and domain constraints of your project.\nThis provides the AI with deep contextual understanding to avoid generic assumptions.\n\nInjected into the root configuration files:\ne.g., CLAUDE.md, GEMINI.md, AGENTS.md, etc.',
         highlights: [
             'core business logic',
             'domain constraints',
             'deep contextual understanding',
             'avoid generic assumptions',
-            'CLAUDE.md, GEMINI.md, AGENTS.md',
+            'CLAUDE.md',
+            'GEMINI.md',
+            'AGENTS.md',
         ],
     },
     ...(Object.values(GENERATED_PAGES_CONFIG).sort(
@@ -72,6 +74,7 @@ export const BUILDER_STEPS: BuilderStep[] = [
         icon: '@tui.file-check',
         title: 'Review & Export',
         description:
-            'Review the generated Markdown and JSON files for your agent configuration. You can make manual tweaks to the code before downloading the final bundle.\n Exports as a standalone bundle (e.g., ai-context.zip).',
+            'Review the generated configuration files (Markdown rules/skills and JSON settings) for your agent environment.\nYou can make manual tweaks to the code before downloading the final bundle.\n\nExports as a standalone bundle:\ne.g., my-project.zip',
+        highlights: ['Markdown rules/skills', 'JSON settings', 'manual tweaks', 'my-project.zip'],
     },
 ];

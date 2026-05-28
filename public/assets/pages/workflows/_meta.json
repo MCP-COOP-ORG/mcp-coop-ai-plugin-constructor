@@ -2,6 +2,14 @@
     "label": "Workflows",
     "icon": "@tui.git-merge",
     "title": "Workflows",
-    "description": "Select predefined operational sequences for complex tasks, like git branching, deployment, or testing routines.\n These act as step-by-step algorithms that the AI will follow autonomously.\n Compiled into workflow definitions (e.g., rules/workflows.md).",
+    "description": "Select predefined operational sequences for complex tasks, like git branching, deployment, or testing routines.\nThese act as step-by-step algorithms that the AI will follow autonomously.\n\nCompiled into workflow definitions and stored at the workspace or plugin level:\ne.g., .agents/workflows/trunk-based.md, .claude/rules/workflows.md, or my-project-plugin/rules/workflows.mdc",
+    "highlights": [
+        "predefined operational sequences",
+        "step-by-step algorithms",
+        "git branching, deployment, or testing routines",
+        ".agents/workflows/trunk-based.md",
+        ".claude/rules/workflows.md",
+        "my-project-plugin/rules/workflows.mdc"
+    ],
     "wrapperType": "workflow"
 }
