@@ -5,7 +5,8 @@
     "order": 1,
     "events": {
         "antigravity": "SessionStart",
-        "claude": "SessionStart"
+        "claude": "SessionStart",
+        "cursor": "sessionStart"
     },
     "description": "Fires immediately when the AI session or project starts."
 }

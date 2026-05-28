@@ -5,7 +5,8 @@
     "order": 2,
     "events": {
         "antigravity": "SessionEnd",
-        "claude": "SessionEnd"
+        "claude": "SessionEnd",
+        "cursor": "sessionEnd"
     },
     "description": "Fires when the AI session or project is explicitly terminated."
 }

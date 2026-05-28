@@ -5,7 +5,8 @@
     "order": 7,
     "events": {
         "antigravity": "BeforeTool",
-        "claude": "PreToolUse"
+        "claude": "PreToolUse",
+        "cursor": "preToolUse"
     },
     "description": "Fires every time the AI is about to execute a tool or shell command."
 }

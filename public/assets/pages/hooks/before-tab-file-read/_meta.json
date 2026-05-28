@@ -1,0 +1,10 @@
+{
+    "title": "Before Tab File Read",
+    "icon": "@tui.keyboard",
+    "type": "checkbox",
+    "order": 17,
+    "events": {
+        "cursor": "beforeTabFileRead"
+    },
+    "description": "Fires before Cursor Tab reads a file for inline code suggestions."
+}

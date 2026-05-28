@@ -8,13 +8,17 @@ export const CLAUDE: ArchivePattern[] = [
         url: MAIN['claude'],
     },
     {
-        // Agent skills (Following official Claude docs: a folder named after the skill containing SKILL.md)
+        type: 'plugin-manifest',
+        path: '[plugin]/.claude-plugin/plugin.json',
+    },
+    {
+        // Agent skills inside the plugin directory
         type: 'dynamic-category',
-        path: '.claude/skills/[category]/SKILL.md',
+        path: '[plugin]/skills/[category]-agent/SKILL.md',
         categories: GENERATED_PAGE_CATEGORIES['agents'],
     },
     {
-        // Custom rules and instructions are organized within the .claude/rules/ directory
+        // Rules + Workflows at workspace level (.claude/rules/) — Claude does NOT support rules inside plugins
         type: 'dynamic-category',
         path: '.claude/rules/[category].md',
         categories: Array.from(

@@ -1,0 +1,10 @@
+{
+    "title": "Before Read File",
+    "icon": "@tui.book-open",
+    "type": "checkbox",
+    "order": 15,
+    "events": {
+        "cursor": "beforeReadFile"
+    },
+    "description": "Fires before the AI reads a file's contents from the workspace."
+}

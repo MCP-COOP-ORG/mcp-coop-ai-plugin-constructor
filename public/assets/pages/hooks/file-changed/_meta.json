@@ -4,7 +4,8 @@
     "type": "checkbox",
     "order": 28,
     "events": {
-        "claude": "FileChanged"
+        "claude": "FileChanged",
+        "cursor": "afterFileEdit"
     },
     "description": "Fires whenever a file in the workspace is modified by the AI."
 }

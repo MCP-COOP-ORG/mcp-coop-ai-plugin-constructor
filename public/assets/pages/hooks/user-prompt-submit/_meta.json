@@ -4,7 +4,8 @@
     "type": "checkbox",
     "order": 20,
     "events": {
-        "claude": "UserPromptSubmit"
+        "claude": "UserPromptSubmit",
+        "cursor": "beforeSubmitPrompt"
     },
     "description": "Fires every time the user submits a new prompt or message."
 }

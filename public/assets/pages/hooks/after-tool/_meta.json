@@ -5,7 +5,8 @@
     "order": 8,
     "events": {
         "antigravity": "AfterTool",
-        "claude": "PostToolUse"
+        "claude": "PostToolUse",
+        "cursor": "postToolUse"
     },
     "description": "Fires immediately after a tool or shell command has finished execution."
 }

@@ -6,6 +6,23 @@ The MCP COOP AI Plugin Constructor is a standalone web application built with An
 
 ## Development History
 
+### Commit (Pending): feat: refactor archive structure to native plugin format and integrate Cursor lifecycle hooks
+
+**Status:** Completed
+**Key Features Implemented:**
+
+- **Native Plugin Architecture**: Transitioned the generated archive format to the official native plugin specs for Antigravity, Claude Code, and Cursor.
+    - **Antigravity**: Relocated rules and skills into `.agents/plugins/[plugin]/` with a manifest `plugin.json` in the plugin root. Workflows remain at workspace-level `.agents/workflows/`.
+    - **Claude Code**: Rules and workflows remain at workspace-level `.claude/rules/`. Mapped agents as skills inside the `[plugin]/skills/` directory with a manifest `[plugin]/.claude-plugin/plugin.json`.
+    - **Cursor**: Relocated rules, workflows (compiled with `.mdc` extension), and skills (agents) inside the `[plugin]/` directory with a manifest `[plugin]/.cursor-plugin/plugin.json`.
+- **Archive Naming & Placeholders**: Updated the generated ZIP name to use the project name (`<project-name>.zip` instead of `ai-context.zip`). Centralized dynamic `[plugin]` placeholder resolution in `ArchiveGenerator` before strategy dispatch.
+- **Review Step UI Adjustments**: Expanded the review sidebar width by 1.5 times (from `18rem` to `27rem`) to prevent long nested plugin path truncation. Replaced the static header and tree root folder names with the dynamically derived project name (`<project-name>.zip` in uppercase for the header, and lowercase for the root folder).
+- **Full Cursor Hooks Integration**:
+    - Mapped all 12 existing hook categories to native Cursor events (e.g. `sessionStart`, `preToolUse`, `postToolUse`, `afterFileEdit`).
+    - Added native `"cursor"` configuration blocks (commands and matchers) to all 8 standard hook files (`direnv-load.json`, `env-guard.json`, etc.).
+    - Created 9 new Cursor-specific hook categories (such as shell/MCP execution hooks, file read guards, workspace open, and tab edits) under `public/assets/pages/hooks/` with metadata (`_meta.json`) and fallback sample json configs.
+- **Quality Assurance**: Regenerated all pages configs, ran code formatter, and successfully passed all linting (`ng lint`), typechecking (`tsc --noEmit`), and Vitest unit tests (100% pass rate: 208/208, with global coverage >91.4% Statements, >88% Branches, >85% Functions, and >95% Lines).
+
 ### Commit (Pending): fix: strictly enforce Zero Literals in project identity form and eliminate any types from tests
 
 **Status:** Completed

@@ -5,7 +5,7 @@
     <aside class="review-step__sidebar">
         <div class="review-step__sidebar-title">
             <tui-icon [icon]="view.dictionary.icons.explorerIcon" class="review-step__sidebar-icon"></tui-icon>
-            {{ view.dictionary.review.sidebarTitle }}
+            {{ archiveName().toUpperCase() }}
         </div>
 
         @if (isLoading()) {

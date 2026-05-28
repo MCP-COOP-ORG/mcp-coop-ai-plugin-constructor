@@ -8,6 +8,7 @@ import {
     DynamicCategoryPattern,
     DynamicItemPattern,
     DynamicHookPattern,
+    PluginManifestPattern,
     PlatformConfig,
 } from '@shared/models';
 import { TemplateInterpolator } from '@services';
@@ -19,6 +20,21 @@ export function getWrapperType(category: string): string {
         }
     }
     return 'workflow';
+}
+
+/**
+ * Derives a plugin directory name from the project name.
+ * "My Cool Project" → "my-cool-project-plugin"
+ */
+export function toPluginName(projectName: string): string {
+    return (
+        projectName
+            .trim()
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/-+/g, '-')
+            .replace(/^-|-$/g, '') + '-plugin'
+    );
 }
 
 interface SnippetData {
@@ -210,5 +226,23 @@ export class DynamicHookStrategy implements ArchiveStrategy<DynamicHookPattern> 
 
         const settingsJson = JSON.stringify({ hooks: hookEntries }, undefined, 2);
         return [{ path: pattern.path, type: 'file', content: settingsJson }];
+    }
+}
+
+export class PluginManifestStrategy implements ArchiveStrategy<PluginManifestPattern> {
+    async generate(pattern: PluginManifestPattern, context: Record<string, unknown>): Promise<GeneratedFile[]> {
+        const projectName = (context['name'] as string) || 'untitled';
+        const pluginName = toPluginName(projectName);
+        const description = (context['description'] as string) || '';
+
+        const manifest = {
+            name: pluginName,
+            description,
+            version: '1.0.0',
+            author: { name: 'MCP COOP AI Plugin Constructor' },
+        };
+
+        // pattern.path is already resolved by ArchiveGenerator (no [plugin] placeholder)
+        return [{ path: pattern.path, type: 'file', content: JSON.stringify(manifest, undefined, 2) }];
     }
 }

@@ -8,13 +8,18 @@ export const CURSOR: ArchivePattern[] = [
         url: MAIN['cursor'],
     },
     {
-        type: 'dynamic-category',
-        path: '.cursor/skills/[category]/SKILL.md',
-        categories: [...(GENERATED_PAGE_CATEGORIES['agents'] ?? [])],
+        type: 'plugin-manifest',
+        path: '[plugin]/.cursor-plugin/plugin.json',
     },
     {
         type: 'dynamic-category',
-        path: '.cursor/rules/[category].mdc',
+        path: '[plugin]/skills/[category]-agent/SKILL.md',
+        categories: [...(GENERATED_PAGE_CATEGORIES['agents'] ?? [])],
+    },
+    {
+        // Rules + Workflows inside plugin with .mdc extension — Cursor supports rules in plugins
+        type: 'dynamic-category',
+        path: '[plugin]/rules/[category].mdc',
         categories: Array.from(
             new Set([...(GENERATED_PAGE_CATEGORIES['rules'] ?? []), ...(GENERATED_PAGE_CATEGORIES['workflows'] ?? [])]),
         ),

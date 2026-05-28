@@ -1,0 +1,10 @@
+{
+    "title": "Before Shell Execution",
+    "icon": "@tui.terminal",
+    "type": "checkbox",
+    "order": 11,
+    "events": {
+        "cursor": "beforeShellExecution"
+    },
+    "description": "Fires before a shell command or script is executed in the terminal."
+}

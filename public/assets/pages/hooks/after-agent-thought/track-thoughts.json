@@ -1,0 +1,12 @@
+{
+    "description": {
+        "default": "Sample agent thought tracking hook."
+    },
+    "hook": {
+        "cursor": {
+            "matcher": "*",
+            "type": "command",
+            "command": "echo 'Agent thought phase completed' >&2"
+        }
+    }
+}

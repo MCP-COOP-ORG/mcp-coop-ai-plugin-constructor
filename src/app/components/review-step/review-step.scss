@@ -9,7 +9,7 @@
 .review-step {
     &__ide {
         display: grid;
-        grid-template-columns: 18rem 1fr; // Slightly wider sidebar for readability
+        grid-template-columns: 27rem 1fr; // Sidebar 1.5x wider (18rem * 1.5) for readability
         flex: 1;
         min-height: 0;
         border: 1px solid var(--tui-border-normal);

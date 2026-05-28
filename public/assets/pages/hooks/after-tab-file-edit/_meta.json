@@ -1,0 +1,10 @@
+{
+    "title": "After Tab File Edit",
+    "icon": "@tui.keyboard-square",
+    "type": "checkbox",
+    "order": 18,
+    "events": {
+        "cursor": "afterTabFileEdit"
+    },
+    "description": "Fires immediately after Cursor Tab updates a file with inline code suggestions."
+}

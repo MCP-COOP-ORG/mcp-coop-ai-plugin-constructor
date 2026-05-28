@@ -4,7 +4,8 @@
     "type": "checkbox",
     "order": 27,
     "events": {
-        "claude": "Stop"
+        "claude": "Stop",
+        "cursor": "stop"
     },
     "description": "Fires when the AI session is explicitly stopped or finished."
 }

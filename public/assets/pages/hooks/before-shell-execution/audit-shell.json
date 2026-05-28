@@ -1,0 +1,12 @@
+{
+    "description": {
+        "default": "Sample shell execution audit log hook."
+    },
+    "hook": {
+        "cursor": {
+            "matcher": "*",
+            "type": "command",
+            "command": "echo 'Command about to execute' >&2"
+        }
+    }
+}

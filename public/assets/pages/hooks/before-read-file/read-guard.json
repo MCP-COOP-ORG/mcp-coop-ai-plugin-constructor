@@ -1,0 +1,12 @@
+{
+    "description": {
+        "default": "Sample file read guard hook."
+    },
+    "hook": {
+        "cursor": {
+            "matcher": "*",
+            "type": "command",
+            "command": "echo 'File read request initiated' >&2"
+        }
+    }
+}

@@ -12,6 +12,11 @@
             "matcher": "Edit|Write",
             "type": "command",
             "command": "jq -r '.tool_input.file_path // empty' | grep -qE '\\.env' && exit 2 || exit 0"
+        },
+        "cursor": {
+            "matcher": "Write|Edit",
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path // empty' | grep -qE '\\.env' && exit 2 || exit 0"
         }
     }
 }

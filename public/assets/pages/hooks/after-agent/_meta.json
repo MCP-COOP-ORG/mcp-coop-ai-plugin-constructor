@@ -4,7 +4,8 @@
     "type": "checkbox",
     "order": 4,
     "events": {
-        "antigravity": "AfterAgent"
+        "antigravity": "AfterAgent",
+        "cursor": "afterAgentResponse"
     },
     "description": "Fires after the primary AI agent completes its turn or task."
 }

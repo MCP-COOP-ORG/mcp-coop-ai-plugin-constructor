@@ -1,0 +1,10 @@
+{
+    "title": "Workspace Open",
+    "icon": "@tui.folder-open",
+    "type": "checkbox",
+    "order": 19,
+    "events": {
+        "cursor": "workspaceOpen"
+    },
+    "description": "Fires when the IDE workspace is opened or switched."
+}

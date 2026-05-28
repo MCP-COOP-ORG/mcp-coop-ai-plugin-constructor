@@ -8,11 +8,13 @@ import { BuilderState } from './builder-state';
 import { TemplateInterpolator } from './template-interpolator';
 import {
     triggerDownload,
+    toPluginName,
     ArchiveStrategy,
     StaticFileStrategy,
     DynamicCategoryStrategy,
     DynamicItemStrategy,
     DynamicHookStrategy,
+    PluginManifestStrategy,
 } from '@shared/utils';
 
 // -----------------------------------------------------------------------------
@@ -39,6 +41,7 @@ export class ArchiveGenerator {
         'dynamic-category': new DynamicCategoryStrategy(),
         'dynamic-item': new DynamicItemStrategy(),
         'dynamic-hook': new DynamicHookStrategy(),
+        'plugin-manifest': new PluginManifestStrategy(),
     };
 
     /** In-memory cache of generated files — populated by generatePreview(), consumed by downloadArchive() */
@@ -72,6 +75,9 @@ export class ArchiveGenerator {
             }
         }
 
+        const projectName = (projectIdentity['name'] as string) || 'untitled';
+        const pluginName = toPluginName(projectName);
+
         const context: Record<string, unknown> = {
             ...desc,
             ...projectIdentity,
@@ -84,9 +90,19 @@ export class ArchiveGenerator {
         const files: GeneratedFile[] = [];
 
         for (const pattern of schema) {
-            const strategy = this.strategies[pattern.type];
+            // Resolve [plugin] placeholder in pattern paths before passing to strategy
+            const resolvedPattern =
+                'path' in pattern ? { ...pattern, path: pattern.path.replace(/\[plugin\]/g, pluginName) } : pattern;
+
+            const strategy = this.strategies[resolvedPattern.type];
             if (strategy) {
-                const generated = await strategy.generate(pattern, context, agent, platformConfig, this.interpolator);
+                const generated = await strategy.generate(
+                    resolvedPattern,
+                    context,
+                    agent,
+                    platformConfig,
+                    this.interpolator,
+                );
                 files.push(...generated);
             }
         }
@@ -116,6 +132,18 @@ export class ArchiveGenerator {
 
         const zipped = zipSync(zipData);
         const blob = new Blob([zipped.buffer as ArrayBuffer], { type: 'application/zip' });
-        triggerDownload(blob, 'ai-context.zip');
+
+        // Derive archive name from project name
+        const desc = this.builderState.descriptionData();
+        const projectIdentity = (desc['projectIdentity'] as Record<string, unknown>) || {};
+        const projectName = (projectIdentity['name'] as string) || 'ai-context';
+        const archiveName =
+            projectName
+                .trim()
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-|-$/g, '') + '.zip';
+
+        triggerDownload(blob, archiveName);
     }
 }

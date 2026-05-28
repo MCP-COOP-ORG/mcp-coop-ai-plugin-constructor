@@ -29,4 +29,15 @@ export interface DynamicHookPattern {
     categories: string[]; // Array of event category IDs to collect hooks from
 }
 
-export type ArchivePattern = StaticFilePattern | DynamicCategoryPattern | DynamicItemPattern | DynamicHookPattern;
+// Generates a plugin.json manifest file at the platform-specific location
+export interface PluginManifestPattern {
+    type: 'plugin-manifest';
+    path: string; // e.g., '.agents/plugins/[plugin]/plugin.json'
+}
+
+export type ArchivePattern =
+    | StaticFilePattern
+    | DynamicCategoryPattern
+    | DynamicItemPattern
+    | DynamicHookPattern
+    | PluginManifestPattern;

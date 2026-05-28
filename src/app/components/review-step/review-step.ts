@@ -55,9 +55,19 @@ export class ReviewStep {
 
     // ── Computed ──────────────────────────────────────────────────────────────
     readonly activeFile = computed(() => this.files().find((f) => f.path === this.activeFilePath()) ?? null);
-    readonly treeRoot = computed<FileTreeNode>(() =>
-        buildFileTree(this.files(), BUILDER_DICTIONARY.review.sidebarTitle),
-    );
+    readonly archiveName = computed(() => {
+        const desc = this.builderState.descriptionData();
+        const projectIdentity = (desc['projectIdentity'] as Record<string, unknown>) || {};
+        const projectName = (projectIdentity['name'] as string) || 'ai-context';
+        return (
+            projectName
+                .trim()
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-|-$/g, '') + '.zip'
+        );
+    });
+    readonly treeRoot = computed<FileTreeNode>(() => buildFileTree(this.files(), this.archiveName()));
 
     readonly activeLanguage = computed(() => {
         const path = this.activeFilePath() ?? '';

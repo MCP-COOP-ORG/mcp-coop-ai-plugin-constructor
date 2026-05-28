@@ -4,7 +4,8 @@
     "type": "checkbox",
     "order": 26,
     "events": {
-        "claude": "SubagentStop"
+        "claude": "SubagentStop",
+        "cursor": "subagentStop"
     },
     "description": "Fires when a sub-agent completes its task and returns control."
 }

@@ -1,0 +1,10 @@
+{
+    "title": "After MCP Execution",
+    "icon": "@tui.blocks-square",
+    "type": "checkbox",
+    "order": 14,
+    "events": {
+        "cursor": "afterMCPExecution"
+    },
+    "description": "Fires immediately after an MCP tool call finishes execution."
+}

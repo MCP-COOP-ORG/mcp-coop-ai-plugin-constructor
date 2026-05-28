@@ -220,6 +220,7 @@ export const GENERATED_PAGES_CONFIG: Record<string, PageConfig> = {
                 events: {
                     antigravity: 'SessionStart',
                     claude: 'SessionStart',
+                    cursor: 'sessionStart',
                 },
                 description: 'Fires immediately when the AI session or project starts.',
                 items: [
@@ -244,6 +245,7 @@ export const GENERATED_PAGES_CONFIG: Record<string, PageConfig> = {
                 events: {
                     antigravity: 'BeforeTool',
                     claude: 'PreToolUse',
+                    cursor: 'preToolUse',
                 },
                 description: 'Fires every time the AI is about to execute a tool or shell command.',
                 items: [
@@ -268,6 +270,7 @@ export const GENERATED_PAGES_CONFIG: Record<string, PageConfig> = {
                 events: {
                     antigravity: 'AfterTool',
                     claude: 'PostToolUse',
+                    cursor: 'postToolUse',
                 },
                 description: 'Fires immediately after a tool or shell command has finished execution.',
                 items: [
@@ -311,6 +314,7 @@ export const GENERATED_PAGES_CONFIG: Record<string, PageConfig> = {
                 events: {
                     antigravity: 'PreCompress',
                     claude: 'PreCompact',
+                    cursor: 'preCompact',
                 },
                 description: 'Fires before the AI attempts to compress or compact its context history.',
                 items: [
@@ -322,6 +326,168 @@ export const GENERATED_PAGES_CONFIG: Record<string, PageConfig> = {
                 ],
             },
             {
+                id: 'before-shell-execution',
+                title: 'Before Shell Execution',
+                icon: '@tui.terminal',
+                type: 'checkbox',
+                order: 11,
+                events: {
+                    cursor: 'beforeShellExecution',
+                },
+                description: 'Fires before a shell command or script is executed in the terminal.',
+                items: [
+                    {
+                        id: 'audit-shell',
+                        label: 'Audit Shell',
+                        filePath: 'assets/pages/hooks/before-shell-execution/audit-shell.json',
+                    },
+                ],
+            },
+            {
+                id: 'after-shell-execution',
+                title: 'After Shell Execution',
+                icon: '@tui.terminal-square',
+                type: 'checkbox',
+                order: 12,
+                events: {
+                    cursor: 'afterShellExecution',
+                },
+                description: 'Fires immediately after a shell command or script finishes execution.',
+                items: [
+                    {
+                        id: 'log-shell-exit',
+                        label: 'Log Shell Exit',
+                        filePath: 'assets/pages/hooks/after-shell-execution/log-shell-exit.json',
+                    },
+                ],
+            },
+            {
+                id: 'before-mcp-execution',
+                title: 'Before MCP Execution',
+                icon: '@tui.blocks',
+                type: 'checkbox',
+                order: 13,
+                events: {
+                    cursor: 'beforeMCPExecution',
+                },
+                description: 'Fires before calling an external tool or server via Model Context Protocol.',
+                items: [
+                    {
+                        id: 'audit-mcp',
+                        label: 'Audit Mcp',
+                        filePath: 'assets/pages/hooks/before-mcp-execution/audit-mcp.json',
+                    },
+                ],
+            },
+            {
+                id: 'after-mcp-execution',
+                title: 'After MCP Execution',
+                icon: '@tui.blocks-square',
+                type: 'checkbox',
+                order: 14,
+                events: {
+                    cursor: 'afterMCPExecution',
+                },
+                description: 'Fires immediately after an MCP tool call finishes execution.',
+                items: [
+                    {
+                        id: 'log-mcp-result',
+                        label: 'Log Mcp Result',
+                        filePath: 'assets/pages/hooks/after-mcp-execution/log-mcp-result.json',
+                    },
+                ],
+            },
+            {
+                id: 'before-read-file',
+                title: 'Before Read File',
+                icon: '@tui.book-open',
+                type: 'checkbox',
+                order: 15,
+                events: {
+                    cursor: 'beforeReadFile',
+                },
+                description: "Fires before the AI reads a file's contents from the workspace.",
+                items: [
+                    {
+                        id: 'read-guard',
+                        label: 'Read Guard',
+                        filePath: 'assets/pages/hooks/before-read-file/read-guard.json',
+                    },
+                ],
+            },
+            {
+                id: 'after-agent-thought',
+                title: 'After Agent Thought',
+                icon: '@tui.sparkles',
+                type: 'checkbox',
+                order: 16,
+                events: {
+                    cursor: 'afterAgentThought',
+                },
+                description: 'Fires after the AI completes its reasoning/thought process.',
+                items: [
+                    {
+                        id: 'track-thoughts',
+                        label: 'Track Thoughts',
+                        filePath: 'assets/pages/hooks/after-agent-thought/track-thoughts.json',
+                    },
+                ],
+            },
+            {
+                id: 'before-tab-file-read',
+                title: 'Before Tab File Read',
+                icon: '@tui.keyboard',
+                type: 'checkbox',
+                order: 17,
+                events: {
+                    cursor: 'beforeTabFileRead',
+                },
+                description: 'Fires before Cursor Tab reads a file for inline code suggestions.',
+                items: [
+                    {
+                        id: 'secrets-redact-tab',
+                        label: 'Secrets Redact Tab',
+                        filePath: 'assets/pages/hooks/before-tab-file-read/secrets-redact-tab.json',
+                    },
+                ],
+            },
+            {
+                id: 'after-tab-file-edit',
+                title: 'After Tab File Edit',
+                icon: '@tui.keyboard-square',
+                type: 'checkbox',
+                order: 18,
+                events: {
+                    cursor: 'afterTabFileEdit',
+                },
+                description: 'Fires immediately after Cursor Tab updates a file with inline code suggestions.',
+                items: [
+                    {
+                        id: 'format-tab-edit',
+                        label: 'Format Tab Edit',
+                        filePath: 'assets/pages/hooks/after-tab-file-edit/format-tab-edit.json',
+                    },
+                ],
+            },
+            {
+                id: 'workspace-open',
+                title: 'Workspace Open',
+                icon: '@tui.folder-open',
+                type: 'checkbox',
+                order: 19,
+                events: {
+                    cursor: 'workspaceOpen',
+                },
+                description: 'Fires when the IDE workspace is opened or switched.',
+                items: [
+                    {
+                        id: 'init-plugins',
+                        label: 'Init Plugins',
+                        filePath: 'assets/pages/hooks/workspace-open/init-plugins.json',
+                    },
+                ],
+            },
+            {
                 id: 'stop',
                 title: 'Stop',
                 icon: '@tui.square',
@@ -329,6 +495,7 @@ export const GENERATED_PAGES_CONFIG: Record<string, PageConfig> = {
                 order: 27,
                 events: {
                     claude: 'Stop',
+                    cursor: 'stop',
                 },
                 description: 'Fires when the AI session is explicitly stopped or finished.',
                 items: [
@@ -622,7 +789,23 @@ export const GENERATED_PLATFORMS_CONFIG: Record<string, PlatformConfig> = {
 
 export const GENERATED_PAGE_CATEGORIES: Record<string, string[]> = {
     agents: ['conventions', 'frontend', 'backend', 'database', 'mobile', 'tooling'],
-    hooks: ['session-start', 'before-tool', 'after-tool', 'notification', 'pre-compress', 'stop'],
+    hooks: [
+        'session-start',
+        'before-tool',
+        'after-tool',
+        'notification',
+        'pre-compress',
+        'before-shell-execution',
+        'after-shell-execution',
+        'before-mcp-execution',
+        'after-mcp-execution',
+        'before-read-file',
+        'after-agent-thought',
+        'before-tab-file-read',
+        'after-tab-file-edit',
+        'workspace-open',
+        'stop',
+    ],
     rules: ['conventions', 'code-quality', 'security', 'tooling', 'basic-rules'],
     workflows: ['development', 'basic-workflows'],
 };
@@ -663,8 +846,16 @@ export const ASSET_FILE_PATHS: Record<string, string> = {
     docker: 'assets/pages/agents/tooling/docker.json',
     'github-actions': 'assets/pages/agents/tooling/github-actions.json',
     jest: 'assets/pages/rules/tooling/jest.json',
+    'track-thoughts': 'assets/pages/hooks/after-agent-thought/track-thoughts.json',
+    'log-mcp-result': 'assets/pages/hooks/after-mcp-execution/log-mcp-result.json',
+    'log-shell-exit': 'assets/pages/hooks/after-shell-execution/log-shell-exit.json',
+    'format-tab-edit': 'assets/pages/hooks/after-tab-file-edit/format-tab-edit.json',
     'auto-eslint': 'assets/pages/hooks/after-tool/auto-eslint.json',
     'auto-prettier': 'assets/pages/hooks/after-tool/auto-prettier.json',
+    'audit-mcp': 'assets/pages/hooks/before-mcp-execution/audit-mcp.json',
+    'read-guard': 'assets/pages/hooks/before-read-file/read-guard.json',
+    'audit-shell': 'assets/pages/hooks/before-shell-execution/audit-shell.json',
+    'secrets-redact-tab': 'assets/pages/hooks/before-tab-file-read/secrets-redact-tab.json',
     'env-guard': 'assets/pages/hooks/before-tool/env-guard.json',
     'lockfile-guard': 'assets/pages/hooks/before-tool/lockfile-guard.json',
     'desktop-alert': 'assets/pages/hooks/notification/desktop-alert.json',
@@ -672,6 +863,7 @@ export const ASSET_FILE_PATHS: Record<string, string> = {
     'direnv-load': 'assets/pages/hooks/session-start/direnv-load.json',
     'git-context': 'assets/pages/hooks/session-start/git-context.json',
     'git-status-check': 'assets/pages/hooks/stop/git-status-check.json',
+    'init-plugins': 'assets/pages/hooks/workspace-open/init-plugins.json',
     'code-readability': 'assets/pages/rules/basic-rules/code-readability.json',
     'error-handling': 'assets/pages/rules/basic-rules/error-handling.json',
     'naming-conventions': 'assets/pages/rules/basic-rules/naming-conventions.json',

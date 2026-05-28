@@ -1,0 +1,12 @@
+{
+    "description": {
+        "default": "Sample MCP execution audit hook."
+    },
+    "hook": {
+        "cursor": {
+            "matcher": "*",
+            "type": "command",
+            "command": "echo 'MCP tool request initiated' >&2"
+        }
+    }
+}

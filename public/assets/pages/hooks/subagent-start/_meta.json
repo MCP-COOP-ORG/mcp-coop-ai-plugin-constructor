@@ -4,7 +4,8 @@
     "type": "checkbox",
     "order": 25,
     "events": {
-        "claude": "SubagentStart"
+        "claude": "SubagentStart",
+        "cursor": "subagentStart"
     },
     "description": "Fires when a specialized sub-agent is spawned to handle a sub-task."
 }

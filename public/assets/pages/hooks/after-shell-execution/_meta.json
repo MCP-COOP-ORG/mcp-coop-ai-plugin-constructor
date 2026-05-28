@@ -1,0 +1,10 @@
+{
+    "title": "After Shell Execution",
+    "icon": "@tui.terminal-square",
+    "type": "checkbox",
+    "order": 12,
+    "events": {
+        "cursor": "afterShellExecution"
+    },
+    "description": "Fires immediately after a shell command or script finishes execution."
+}

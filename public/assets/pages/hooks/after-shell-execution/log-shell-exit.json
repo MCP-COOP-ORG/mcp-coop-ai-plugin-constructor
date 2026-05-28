@@ -1,0 +1,12 @@
+{
+    "description": {
+        "default": "Sample hook to log terminal command exit codes."
+    },
+    "hook": {
+        "cursor": {
+            "matcher": "*",
+            "type": "command",
+            "command": "echo 'Command execution finished' >&2"
+        }
+    }
+}

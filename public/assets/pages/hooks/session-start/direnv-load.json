@@ -12,6 +12,10 @@
             "matcher": "startup",
             "type": "command",
             "command": "eval \"$(direnv export bash 2>/dev/null)\""
+        },
+        "cursor": {
+            "type": "command",
+            "command": "eval \"$(direnv export bash 2>/dev/null)\""
         }
     }
 }

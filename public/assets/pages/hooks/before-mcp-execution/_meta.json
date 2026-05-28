@@ -1,0 +1,10 @@
+{
+    "title": "Before MCP Execution",
+    "icon": "@tui.blocks",
+    "type": "checkbox",
+    "order": 13,
+    "events": {
+        "cursor": "beforeMCPExecution"
+    },
+    "description": "Fires before calling an external tool or server via Model Context Protocol."
+}

@@ -5,7 +5,8 @@
     "order": 10,
     "events": {
         "antigravity": "PreCompress",
-        "claude": "PreCompact"
+        "claude": "PreCompact",
+        "cursor": "preCompact"
     },
     "description": "Fires before the AI attempts to compress or compact its context history."
 }

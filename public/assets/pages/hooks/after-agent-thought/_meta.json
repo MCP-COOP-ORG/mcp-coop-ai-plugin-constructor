@@ -1,0 +1,10 @@
+{
+    "title": "After Agent Thought",
+    "icon": "@tui.sparkles",
+    "type": "checkbox",
+    "order": 16,
+    "events": {
+        "cursor": "afterAgentThought"
+    },
+    "description": "Fires after the AI completes its reasoning/thought process."
+}

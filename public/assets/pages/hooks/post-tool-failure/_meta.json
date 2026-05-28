@@ -4,7 +4,8 @@
     "type": "checkbox",
     "order": 23,
     "events": {
-        "claude": "PostToolUseFailure"
+        "claude": "PostToolUseFailure",
+        "cursor": "postToolUseFailure"
     },
     "description": "Fires when a tool or command execution fails or returns an error."
 }

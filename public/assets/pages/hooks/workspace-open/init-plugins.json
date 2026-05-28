@@ -1,0 +1,12 @@
+{
+    "description": {
+        "default": "Sample hook to register plugins on workspace open."
+    },
+    "hook": {
+        "cursor": {
+            "matcher": "*",
+            "type": "command",
+            "command": "echo 'Workspace opened' >&2"
+        }
+    }
+}
