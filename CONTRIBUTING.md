@@ -1,6 +1,6 @@
-# Contributing to MCP COOP Agentic Workspace Builder
+# Contributing to MCP COOP AI Plugin Constructor
 
-First off, thank you for considering contributing to the MCP COOP Agentic Workspace Builder! It's people like you that make this tool a powerful, community-driven resource.
+First off, thank you for considering contributing to the MCP COOP AI Plugin Constructor! It's people like you that make this tool a powerful, community-driven resource.
 
 This project is a 100% client-side, configuration-driven application. We heavily rely on JSON assets to generate context files for AI assistants. This means you don't even need to know Angular to contribute — you can add new AI platforms or context rules just by creating or editing JSON files!
 

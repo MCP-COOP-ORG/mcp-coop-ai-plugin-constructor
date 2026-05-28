@@ -1,4 +1,4 @@
-# [MCP COOP Agentic Workspace Builder](https://mcpcoop.org/agent-builder/) 🤖🛠️
+# [MCP COOP AI Plugin Constructor](https://mcpcoop.org/agent-builder/) 🤖🛠️
 
 ![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)
 ![Production Ready](https://img.shields.io/badge/status-production_ready-success.svg)

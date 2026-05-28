@@ -13,14 +13,14 @@ export const BUILDER_DICTIONARY = {
         projectIdentity: 'Project Identity',
         projectName: 'Project Name',
         businessDomains: 'Domain-Specific Rules',
-        welcomeTitle: 'MCP COOP Agentic Workspace Builder',
+        welcomeTitle: 'MCP COOP AI Plugin Constructor',
         welcomeTitleLink: 'MCP COOP',
-        welcomeTitleText: ' Agentic Workspace Builder',
+        welcomeTitleText: ' AI Plugin Constructor',
         welcomeTitleHref: 'https://mcpcoop.org/en',
         welcomeDescription:
-            'Basic AI assistants are too abstract and require you to constantly provide project context manually.\n MCP COOP Agent Builder is a visual configurator for assembling autonomous AI agents tailored specifically to your codebase. Choose your tech stack and architectural patterns, and the system will generate a ready-to-use agent bundle for your AI environment.\nThis is your reliable foundation for AI-Driven Development: seamlessly integrate AI into your engineering workflow while strictly adhering to development standards and maintaining absolute data privacy.',
+            'Basic AI assistants are too abstract and require you to constantly provide project context manually.\n MCP COOP AI Plugin Constructor is a visual configurator for assembling autonomous AI agents tailored specifically to your codebase. Choose your tech stack and architectural patterns, and the system will generate a ready-to-use agent bundle for your AI environment.\nThis is your reliable foundation for AI-Driven Development: seamlessly integrate AI into your engineering workflow while strictly adhering to development standards and maintaining absolute data privacy.',
         welcomeHighlights: [
-            'MCP COOP Agent Builder is a visual configurator',
+            'MCP COOP AI Plugin Constructor is a visual configurator',
             'AI-Driven Development',
             'your engineering workflow',
             'specifically to your codebase',

@@ -1,6 +1,6 @@
 # Adding Platforms & IDEs
 
-The MCP COOP Agent Builder supports generating context for various AI assistants and IDEs (e.g., Cursor, Claude, Antigravity).
+The MCP COOP AI Plugin Constructor supports generating context for various AI assistants and IDEs (e.g., Cursor, Claude, Antigravity).
 All platform definitions live in `public/assets/platforms/`.
 
 ## How to add a new Platform

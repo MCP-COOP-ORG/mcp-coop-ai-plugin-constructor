@@ -1,6 +1,6 @@
 {
-  "name": "MCP COOP Agent Builder",
-  "short_name": "Agent Builder",
+  "name": "MCP COOP AI Plugin Constructor",
+  "short_name": "AI Plugin Constructor",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",

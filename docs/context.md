@@ -2,9 +2,18 @@
 
 ## General Context
 
-The MCP COOP Agent Builder is a standalone web application built with Angular 21 and Taiga UI. It uses a dual-build architecture: standalone mode (default, optimized) via `@angular/build:application`, and an optional micro-frontend mode via `@angular-architects/native-federation:build` (accessible through `npm run build:federation`). The builder uses a 3-step workflow (Setup, Stack, Review) with Lucide icons on the TuiStepper. All form steps are implemented strictly adhering to the Zero Literals and View Model patterns.
+The MCP COOP AI Plugin Constructor is a standalone web application built with Angular 21 and Taiga UI. It uses a dual-build architecture: standalone mode (default, optimized) via `@angular/build:application`, and an optional micro-frontend mode via `@angular-architects/native-federation:build` (accessible through `npm run build:federation`). The builder uses a 3-step workflow (Setup, Stack, Review) with Lucide icons on the TuiStepper. All form steps are implemented strictly adhering to the Zero Literals and View Model patterns.
 
 ## Development History
+
+### Commit (Pending): refactor: rebrand project to MCP COOP AI Plugin Constructor
+
+**Status:** Completed
+**Key Features Implemented:**
+
+- **Project Rebranding:** Renamed all user-facing instances of the application to "MCP COOP AI Plugin Constructor". Updated the HTML `<title>` tag, PWA web manifest (`name` and `short_name`), and welcome page text (titles, descriptions, highlights in `builder-dictionary.ts`).
+- **Technical Name Preservation:** Kept the technical name `agent-builder` / `mcp-coop-agent-builder` intact for configs, folder names, Nginx SPA paths, and Native Federation identifiers to ensure zero regression.
+- **Documentation Alignment:** Updated branding references in `Gemini.md`, `README.md`, `CONTRIBUTING.md`, `docs/concept.md`, and all sub-module guide files (`src/README.md`, etc.). Corrected path links in `src/README.md`.
 
 ### Commit (Pending): fix: resolve duplicate basic categories and review step active node styling
 
