@@ -1,3 +1,12 @@
 :host {
     display: block;
+    width: 100%;
+}
+
+:host(.ng-invalid.ng-touched) tui-textfield {
+    border-radius: var(--tui-radius-m);
+    box-shadow: inset 0 0 0 1px var(--tui-text-negative) !important;
+    --tui-border-normal: var(--tui-text-negative);
+    --tui-border-hover: var(--tui-text-negative);
+    --tui-border-focus: var(--tui-text-negative);
 }

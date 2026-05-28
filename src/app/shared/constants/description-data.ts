@@ -5,7 +5,7 @@ import { GENERATED_PROJECT_META } from '@shared/configs';
 export const DESCRIPTION_BLOCKS: BuilderBlockConfig[] = [
     {
         id: 'projectIdentity',
-        title: 'Project Identity',
+        title: 'Plugin Identity',
         icon: '@tui.folder-code',
         type: 'composite',
         fields: [
@@ -15,7 +15,8 @@ export const DESCRIPTION_BLOCKS: BuilderBlockConfig[] = [
                 label: BUILDER_DICTIONARY.labels.projectName,
                 placeholder: BUILDER_DICTIONARY.placeholders.projectName,
                 layout: 'half',
-                validators: ['required'],
+                validators: ['required', 'minLength:3', 'maxLength:100'],
+                maxLength: 100,
             },
             {
                 id: 'preset',

@@ -1,7 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { InputField } from './input-field';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgControl, ValidationErrors } from '@angular/forms';
 import { ComponentRef } from '@angular/core';
+
+interface MockNgControl {
+    invalid: boolean;
+    touched: boolean;
+    errors: ValidationErrors | null;
+    control: {
+        markAsTouched: () => void;
+        statusChanges: {
+            subscribe: (fn: () => void) => { unsubscribe: () => void };
+        };
+    };
+}
 
 describe('InputField', () => {
     let component: InputField;
@@ -64,5 +76,74 @@ describe('InputField', () => {
             component['onChange']('test');
             component['onTouched']();
         }).not.toThrow();
+    });
+});
+
+describe('InputField with NgControl', () => {
+    let component: InputField;
+    let fixture: ComponentFixture<InputField>;
+    let mockNgControl: MockNgControl;
+
+    beforeEach(async () => {
+        mockNgControl = {
+            invalid: true,
+            touched: true,
+            errors: { required: true },
+            control: {
+                markAsTouched: vi.fn(),
+                statusChanges: {
+                    subscribe: (fn: () => void) => {
+                        fn();
+                        return { unsubscribe: vi.fn() };
+                    },
+                },
+            },
+        };
+
+        await TestBed.configureTestingModule({
+            imports: [InputField, FormsModule],
+        })
+            .overrideComponent(InputField, {
+                set: {
+                    providers: [{ provide: NgControl, useValue: mockNgControl as unknown as NgControl }],
+                },
+            })
+            .compileComponents();
+
+        fixture = TestBed.createComponent(InputField);
+        component = fixture.componentInstance;
+        fixture.componentRef.setInput('label', 'Test Label');
+        fixture.detectChanges();
+    });
+
+    it('should return required error message', () => {
+        mockNgControl.errors = { required: true };
+        expect(component.errorMessage).toBe('This field is required.');
+    });
+
+    it('should return minlength error message', () => {
+        mockNgControl.errors = { minlength: { requiredLength: 3 } };
+        expect(component.errorMessage).toBe('Minimum length is 3 characters.');
+    });
+
+    it('should return maxlength error message', () => {
+        mockNgControl.errors = { maxlength: { requiredLength: 100 } };
+        expect(component.errorMessage).toBe('Maximum length is 100 characters.');
+    });
+
+    it('should return invalid error message for unknown errors', () => {
+        mockNgControl.errors = { somethingElse: true };
+        expect(component.errorMessage).toBe('Invalid input.');
+    });
+
+    it('should return null if valid', () => {
+        mockNgControl.invalid = false;
+        expect(component.errorMessage).toBeNull();
+    });
+
+    it('should override markAsTouched on control', () => {
+        expect(mockNgControl.control.markAsTouched).toBeDefined();
+        // Trigger the patched method
+        mockNgControl.control.markAsTouched();
     });
 });

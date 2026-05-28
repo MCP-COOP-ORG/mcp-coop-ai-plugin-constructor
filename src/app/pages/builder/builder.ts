@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { TuiButton } from '@taiga-ui/core';
@@ -19,7 +19,7 @@ export class Builder {
     // Injecting router via modern inject() function, abandoning constructors
     private readonly router = inject(Router);
     private readonly archiveGenerator = inject(ArchiveGenerator);
-    private readonly builderState = inject(BuilderState);
+    protected readonly builderState = inject(BuilderState);
     private readonly dialogManager = inject(DialogManager);
     private readonly injector = inject(Injector);
 
@@ -28,6 +28,20 @@ export class Builder {
         ...BUILDER_DICTIONARY,
         steps: BUILDER_STEPS,
     };
+
+    readonly highestReachedStepIndex = signal(0);
+
+    constructor() {
+        effect(
+            () => {
+                const current = this.activeStepIndex();
+                if (current > this.highestReachedStepIndex()) {
+                    this.highestReachedStepIndex.set(current);
+                }
+            },
+            { allowSignalWrites: true },
+        );
+    }
 
     // Converting router events stream into a Signal
     // This is a reactive way to track the active URL without manual subscriptions
@@ -49,6 +63,11 @@ export class Builder {
 
     // Navigating to the next step. The stepper updates automatically thanks to computed()
     nextStep() {
+        if (!this.builderState.isStepValid()) {
+            this.builderState.triggerValidation.update((v) => v + 1);
+            return;
+        }
+
         const current = this.activeStepIndex();
         if (current < this.view.steps.length - 1) {
             this.router.navigate([APP_ROUTES.BUILDER, this.view.steps[current + 1].id]);
@@ -65,7 +84,7 @@ export class Builder {
 
     // Handling manual stepper item clicks
     onStepClick(index: number) {
-        if (index >= 0 && index < this.view.steps.length) {
+        if (index >= 0 && index <= this.highestReachedStepIndex()) {
             this.router.navigate([APP_ROUTES.BUILDER, this.view.steps[index].id]);
         }
     }

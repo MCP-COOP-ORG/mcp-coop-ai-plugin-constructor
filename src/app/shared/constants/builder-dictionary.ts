@@ -28,11 +28,11 @@ export const BUILDER_DICTIONARY = {
     },
     placeholders: {
         projectIdentity: 'Describe your project goal, key features, and core identity...',
-        projectName: 'e.g. My Awesome App',
+        projectName: 'e.g. My Awesome Project',
         businessDomains: 'Select domain rules...',
     },
     presets: {
-        label: 'Load Preset (Optional)',
+        label: 'Plugin Presets (Optional)',
         placeholder: 'Select a saved configuration',
         dialogTitle: 'Save Preset',
         dialogDescription: 'You can optionally save this configuration as a preset for future use.',
@@ -110,5 +110,11 @@ export const BUILDER_DICTIONARY = {
     },
     cache: {
         ttlMs: 300000, // 5 minutes
+    },
+    validation: {
+        required: 'This field is required.',
+        minLength: 'Minimum length is {{min}} characters.',
+        maxLength: 'Maximum length is {{max}} characters.',
+        invalid: 'Invalid input.',
     },
 } as const;

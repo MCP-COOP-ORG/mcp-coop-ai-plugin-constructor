@@ -9,5 +9,7 @@
         [min]="3"
         [disabled]="disabled"
         [ngModel]="value"
-        (ngModelChange)="onModelChange($event)"></textarea>
+        (ngModelChange)="onModelChange($event)"
+        (blur)="onTouched()"></textarea>
 </tui-textfield>
+<tui-error [error]="errorMessage"></tui-error>

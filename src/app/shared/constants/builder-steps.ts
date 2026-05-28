@@ -20,6 +20,7 @@ export interface BuilderFieldConfig {
     options?: { id: string; label: string }[];
     layout?: FieldLayout;
     validators?: string[];
+    maxLength?: number;
 }
 
 export interface BuilderBlockConfig {
@@ -43,16 +44,24 @@ export interface BuilderStep {
     icon: string;
     title: string;
     description: string;
+    highlights?: string[];
 }
 
 export const BUILDER_STEPS: BuilderStep[] = [
     {
         id: STEP_IDS.DESCRIPTION,
-        label: 'Project',
+        label: 'Plugin',
         icon: '@tui.folder-code',
-        title: 'Project Description',
+        title: 'Plugin Configuration',
         description:
-            'Define the core business logic, primary goals, and domain constraints of your project.\n This provides the AI with deep contextual understanding to avoid generic assumptions.\n Injected into the root configuration file (e.g., CLAUDE.md, GEMINI.md, ...).',
+            'Define the core business logic, primary goals, and domain constraints of your project.\n This provides the AI with deep contextual understanding to avoid generic assumptions.\n Injected into the root configuration files (e.g., CLAUDE.md, GEMINI.md, AGENTS.md, etc.).',
+        highlights: [
+            'core business logic',
+            'domain constraints',
+            'deep contextual understanding',
+            'avoid generic assumptions',
+            'CLAUDE.md, GEMINI.md, AGENTS.md',
+        ],
     },
     ...(Object.values(GENERATED_PAGES_CONFIG).sort(
         (a: PageConfig, b: PageConfig) => (a.order ?? 999) - (b.order ?? 999),

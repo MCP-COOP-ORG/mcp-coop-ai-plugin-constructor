@@ -1,4 +1,7 @@
-<app-step-header [title]="step().title" [description]="step().description"></app-step-header>
+<app-step-header
+    [title]="step().title"
+    [description]="step().description"
+    [highlights]="step().highlights || []"></app-step-header>
 
 <div class="step-layout" [class.no-sidebar]="tabs().length <= 1">
     <!-- Main content column -->

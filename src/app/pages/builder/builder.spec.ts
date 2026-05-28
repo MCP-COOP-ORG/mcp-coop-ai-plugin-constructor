@@ -112,8 +112,9 @@ describe('Builder', () => {
     });
 
     describe('onStepClick', () => {
-        it('should navigate to the requested step index', () => {
+        it('should navigate to the requested step index if within highest reached', () => {
             const navigateSpy = vi.spyOn(router, 'navigate');
+            component.highestReachedStepIndex.set(3); // Allow navigating up to step 3
             component.onStepClick(2);
             expect(navigateSpy).toHaveBeenCalledWith([APP_ROUTES.BUILDER, BUILDER_STEPS[2].id]);
         });

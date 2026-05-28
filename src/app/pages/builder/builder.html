@@ -27,8 +27,8 @@
         <div class="footer-center">
             <!-- Stepper is synced with the router and calls onStepClick when clicked manually -->
             <tui-stepper [activeItemIndex]="activeStepIndex()" (activeItemIndexChange)="onStepClick($event)">
-                @for (step of view.steps; track step.id) {
-                <button tuiStep [icon]="step.icon">{{ step.label }}</button>
+                @for (step of view.steps; let i = $index; track step.id) {
+                <button tuiStep [icon]="step.icon" [disabled]="i > highestReachedStepIndex()">{{ step.label }}</button>
                 }
             </tui-stepper>
         </div>

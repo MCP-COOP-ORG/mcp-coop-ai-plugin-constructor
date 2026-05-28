@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, inject, input } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
-import { TuiInput } from '@taiga-ui/core';
-import { TuiTextfield, TuiLabel } from '@taiga-ui/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, input, OnInit, OnDestroy } from '@angular/core';
+import { ControlValueAccessor, FormsModule, NgControl } from '@angular/forms';
+import { TuiInput, TuiTextfield, TuiLabel, TuiError } from '@taiga-ui/core';
+import { Subscription } from 'rxjs';
+import { BUILDER_DICTIONARY } from '@shared/constants';
 
 /**
  * Reusable single-line text input component with floating labels.
@@ -10,20 +11,57 @@ import { TuiTextfield, TuiLabel } from '@taiga-ui/core';
  */
 @Component({
     selector: 'app-input-field',
-    imports: [FormsModule, TuiInput, TuiTextfield, TuiLabel],
+    imports: [FormsModule, TuiInput, TuiTextfield, TuiLabel, TuiError],
     templateUrl: './input-field.html',
     styleUrl: './input-field.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => InputField),
-            multi: true,
-        },
-    ],
 })
-export class InputField implements ControlValueAccessor {
+export class InputField implements ControlValueAccessor, OnInit, OnDestroy {
     private readonly cdr = inject(ChangeDetectorRef);
+    readonly ngControl = inject(NgControl, { optional: true, self: true });
+    private statusSub?: Subscription;
+
+    readonly view = {
+        dict: BUILDER_DICTIONARY,
+    };
+
+    get errorMessage(): string | null {
+        if (!this.ngControl?.invalid || !this.ngControl?.touched) return null;
+        const errors = this.ngControl.errors;
+        if (!errors) return null;
+
+        const vDict = this.view.dict.validation;
+        if (errors['required']) return vDict.required;
+        if (errors['minlength']) return vDict.minLength.replace('{{min}}', errors['minlength'].requiredLength);
+        if (errors['maxlength']) return vDict.maxLength.replace('{{max}}', errors['maxlength'].requiredLength);
+        return vDict.invalid;
+    }
+
+    constructor() {
+        if (this.ngControl) {
+            this.ngControl.valueAccessor = this;
+        }
+    }
+
+    ngOnInit() {
+        const control = this.ngControl?.control;
+        if (control) {
+            this.statusSub = control.statusChanges.subscribe(() => {
+                this.cdr.markForCheck();
+            });
+            const originalMarkAsTouched = control.markAsTouched.bind(control);
+            control.markAsTouched = (opts) => {
+                originalMarkAsTouched(opts);
+                this.cdr.markForCheck();
+            };
+        }
+    }
+
+    ngOnDestroy() {
+        if (this.statusSub) {
+            this.statusSub.unsubscribe();
+        }
+    }
 
     /** The floating label for the text field, supplied by the dictionary */
     label = input.required<string>();
@@ -33,6 +71,12 @@ export class InputField implements ControlValueAccessor {
 
     /** Optional Taiga UI icon to display at the start of the field */
     iconStart = input<string>('');
+
+    /** Maximum allowed characters */
+    maxLength = input<number | null>(null);
+
+    /** Whether the field is required */
+    required = input<boolean>(false);
 
     /** Internal value bound to the native input */
     value = '';
@@ -44,7 +88,7 @@ export class InputField implements ControlValueAccessor {
     protected readonly fieldId = `input-field-${InputField.nextId++}`;
 
     private onChange: (value: string) => void = () => undefined;
-    private onTouched: () => void = () => undefined;
+    onTouched: () => void = () => undefined;
 
     writeValue(val: string): void {
         this.value = val || '';

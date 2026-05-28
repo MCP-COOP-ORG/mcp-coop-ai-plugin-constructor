@@ -19,6 +19,8 @@
                     <app-input-field
                         [label]="field.label || ''"
                         [placeholder]="field.placeholder || ''"
+                        [maxLength]="field.maxLength || null"
+                        [required]="field.validators?.includes('required') || false"
                         [formControlName]="field.id"></app-input-field>
                     } @case ('textarea') {
                     <app-textarea-field

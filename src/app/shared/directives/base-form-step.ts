@@ -1,5 +1,5 @@
 import { Directive, inject, OnInit, WritableSignal, DestroyRef, effect } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, ValidatorFn } from '@angular/forms';
 import { BuilderState } from '@services';
 import { BuilderBlockConfig } from '@shared/constants';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -29,6 +29,13 @@ export abstract class BaseFormStep implements OnInit {
                 this.form.patchValue(state, { emitEvent: false });
             }
         });
+
+        effect(() => {
+            const trigger = this.builderState.triggerValidation();
+            if (trigger > 0 && this.form) {
+                this.form.markAllAsTouched();
+            }
+        });
     }
 
     ngOnInit() {
@@ -43,8 +50,21 @@ export abstract class BaseFormStep implements OnInit {
                             if (field.type === 'select' || field.type === 'radio') {
                                 defaultValue = null;
                             }
-                            const validators = field.validators?.includes('required') ? [Validators.required] : [];
-                            nestedGroup[field.id] = new FormControl(defaultValue, validators);
+                            const validatorsArr: ValidatorFn[] = [];
+                            if (field.validators) {
+                                field.validators.forEach((v) => {
+                                    if (v === 'required') validatorsArr.push(Validators.required);
+                                    if (v.startsWith('maxLength:')) {
+                                        const max = parseInt(v.split(':')[1], 10);
+                                        validatorsArr.push(Validators.maxLength(max));
+                                    }
+                                    if (v.startsWith('minLength:')) {
+                                        const min = parseInt(v.split(':')[1], 10);
+                                        validatorsArr.push(Validators.minLength(min));
+                                    }
+                                });
+                            }
+                            nestedGroup[field.id] = new FormControl(defaultValue, validatorsArr);
                         });
                         acc[block.id] = new FormGroup(nestedGroup);
                     } else {
@@ -68,6 +88,12 @@ export abstract class BaseFormStep implements OnInit {
         } else {
             this.stateSignal.set(this.form.getRawValue() as Record<string, unknown>);
         }
+
+        this.builderState.isStepValid.set(this.form.valid);
+
+        this.form.statusChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((status) => {
+            this.builderState.isStepValid.set(status === 'VALID');
+        });
 
         this.form.valueChanges.pipe(debounceTime(300), takeUntilDestroyed(this.destroyRef)).subscribe(() => {
             this.stateSignal.set(this.form.getRawValue() as Record<string, unknown>);

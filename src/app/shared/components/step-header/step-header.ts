@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { TextFormatPipe } from '@shared/pipes';
 
 @Component({
     selector: 'app-step-header',
-    imports: [],
+    imports: [TextFormatPipe],
     templateUrl: './step-header.html',
     styleUrl: './step-header.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -10,4 +11,5 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 export class StepHeader {
     title = input.required<string>();
     description = input.required<string>();
+    highlights = input<string[]>([]);
 }

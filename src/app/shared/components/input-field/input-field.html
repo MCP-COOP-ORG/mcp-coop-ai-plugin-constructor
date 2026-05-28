@@ -1,10 +1,15 @@
 <tui-textfield tuiTextfieldSize="l" [iconStart]="iconStart()">
-    <label tuiLabel [for]="fieldId">{{ label() }}</label>
+    <label tuiLabel [for]="fieldId">
+        {{ label() }} @if (required()) { <span class="required-asterisk">*</span> }
+    </label>
     <input
         [id]="fieldId"
         tuiInput
         [placeholder]="placeholder()"
         [ngModel]="value"
         (ngModelChange)="onModelChange($event)"
+        (blur)="onTouched()"
+        [attr.maxlength]="maxLength() || null"
         [disabled]="disabled" />
 </tui-textfield>
+<tui-error [error]="errorMessage"></tui-error>

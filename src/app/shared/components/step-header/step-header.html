@@ -1,2 +1,2 @@
 <h2 class="tui-text_h3">{{ title() }}</h2>
-<p class="tui-text_body-m">{{ description() }}</p>
+<p class="tui-text_body-m" [innerHTML]="description() | textFormat : highlights()"></p>

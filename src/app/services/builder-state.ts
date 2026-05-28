@@ -14,6 +14,8 @@ export class BuilderState {
     readonly descriptionData = signal<Record<string, unknown>>({});
     readonly reviewData = signal<Record<string, unknown>>({});
     readonly editedFiles = signal<Record<string, string>>({});
+    readonly isStepValid = signal<boolean>(true);
+    readonly triggerValidation = signal<number>(0);
 
     // Dynamic signals for all generated pages
     readonly dynamicData: Record<string, WritableSignal<Record<string, unknown>>> = {};
