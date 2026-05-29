@@ -1,13 +1,14 @@
-import { Component, ChangeDetectionStrategy, input, forwardRef, inject } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
+import { Component, ChangeDetectionStrategy, input, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { TuiCheckbox, TuiIcon } from '@taiga-ui/core';
 import { ConfigItem, RecommendationStatus } from '@shared/models';
 import { RecommendationEngine, TemplateInterpolator, BuilderState, DialogManager } from '@services';
 import { BUILDER_DICTIONARY } from '@shared/constants';
+import { BaseFormField } from '@shared/directives';
 
 /**
  * Reusable Checkbox Group component for the builder form.
- * Implements ControlValueAccessor to integrate seamlessly with Angular's Reactive Forms.
+ * Inherits CVA, validation, and layout bindings from BaseFormField.
  * Uses Taiga UI checkboxes styled as interactive cards with recommendation highlighting.
  */
 @Component({
@@ -16,23 +17,14 @@ import { BUILDER_DICTIONARY } from '@shared/constants';
     templateUrl: './checkbox-group.html',
     styleUrl: './checkbox-group.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => CheckboxGroup),
-            multi: true,
-        },
-    ],
 })
-export class CheckboxGroup implements ControlValueAccessor {
+export class CheckboxGroup extends BaseFormField<string[]> {
     private readonly recommendationEngine = inject(RecommendationEngine);
     private readonly dialogManager = inject(DialogManager);
     private readonly interpolator = inject(TemplateInterpolator);
     private readonly builderState = inject(BuilderState);
 
-    readonly view = {
-        dictionary: BUILDER_DICTIONARY,
-    } as const;
+    readonly dictionary = BUILDER_DICTIONARY;
 
     /**
      * Array of options to render as interactive checkbox cards.
@@ -41,39 +33,27 @@ export class CheckboxGroup implements ControlValueAccessor {
     options = input.required<ConfigItem[]>();
 
     /** Internal dictionary to map option IDs to their boolean selected state */
-    value: Record<string, boolean> = {};
+    selectedMap: Record<string, boolean> = {};
 
-    private onChange: (value: string[]) => void = () => undefined;
-    private onTouched: () => void = () => undefined;
+    override writeValue(val: string[] | null): void {
+        super.writeValue(val || []);
 
-    writeValue(val: string[]): void {
         const newValue: Record<string, boolean> = {};
-
-        // Initialize all available options to false (prevents indeterminate 'minus' state)
         const currentOptions = this.options();
         if (currentOptions) {
             currentOptions.forEach((opt) => (newValue[opt.id] = false));
         }
 
-        if (val && Array.isArray(val)) {
-            val.forEach((id) => (newValue[id] = true));
+        if (this.value && Array.isArray(this.value)) {
+            this.value.forEach((id) => (newValue[id] = true));
         }
 
-        this.value = newValue;
-    }
-
-    registerOnChange(fn: (value: string[]) => void): void {
-        this.onChange = fn;
-    }
-
-    registerOnTouched(fn: () => void): void {
-        this.onTouched = fn;
+        this.selectedMap = newValue;
     }
 
     onCheckboxChange() {
-        const selectedIds = Object.keys(this.value).filter((k) => this.value[k]);
-        this.onChange(selectedIds);
-        this.onTouched();
+        const selectedIds = Object.keys(this.selectedMap).filter((k) => this.selectedMap[k]);
+        this.onModelChange(selectedIds);
     }
 
     /**

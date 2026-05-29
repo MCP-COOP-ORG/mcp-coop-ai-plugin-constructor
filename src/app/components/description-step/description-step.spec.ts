@@ -10,6 +10,7 @@ describe('DescriptionStep', () => {
     let builderState: BuilderState;
 
     beforeEach(async () => {
+        sessionStorage.clear();
         await TestBed.configureTestingModule({
             imports: [ReactiveFormsModule, DescriptionStep],
             providers: [BuilderState],

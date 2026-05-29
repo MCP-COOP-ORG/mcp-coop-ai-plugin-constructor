@@ -8,6 +8,7 @@ describe('RecommendationEngine', () => {
     let builderState: BuilderState;
 
     beforeEach(() => {
+        sessionStorage.clear();
         TestBed.configureTestingModule({
             providers: [RecommendationEngine, BuilderState],
         });

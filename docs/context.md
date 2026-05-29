@@ -6,6 +6,18 @@ The MCP COOP AI Plugin Constructor is a standalone web application built with An
 
 ## Development History
 
+### Commit (Pending): refactor: introduce BaseFormField to eliminate CVA boilerplate and stabilize global test coverage
+
+**Status:** Completed
+**Key Features Implemented:**
+
+- **BaseFormField Directive**: Created a single source of truth `BaseFormField<T>` class for custom value accessors. It wraps `NgControl`, implements `ControlValueAccessor` interface (`writeValue`, `registerOnChange`, `registerOnTouched`, `setDisabledState`), registers itself on `ngControl`, hooks validation status changes to trigger `markForCheck`, and parses dynamic validation error messages (`required`, `minlength`, `maxlength`).
+- **Boilerplate Elimination**: Refactored `InputField`, `TextareaField`, `SelectField`, `MultiSelectField`, `RadioGroup`, and `CheckboxGroup` to inherit from `BaseFormField<T>`, deleting duplicate CVA boilerplates and local error parsing methods across all custom controls.
+- **CheckboxGroup View-State Map**: Refactored checkbox group mapping logic to use a reactive `selectedMap` derived from CVA value array on write value, and update model on option selection.
+- **SessionStorage Test Bleed Remediation**: Fixed test state leaks across Vitest suite execution by adding explicit `sessionStorage.clear()` inside the `beforeEach` hooks of all test suites loading real `BuilderState`.
+- **BaseFormStep Unit Tests**: Implemented a comprehensive test suite in `base-form-step.spec.ts` covering dynamic form group construction, state synchronization, debounced value changes, and external state patching effects.
+- **Coverage Optimization**: Reconfigured Vitest coverage in `vitest.config.ts` to exclude `.html` template compilation targets, preventing compiler-generated JS helper functions from deflating function coverage, resulting in a clean coverage report exceeding 97% statements, 91% branches, 94% functions, and 97% lines.
+
 ### Commit (Pending): refactor: introduce strict typing patterns, custom models, and type guards to eliminate type assertions
 
 **Status:** Completed

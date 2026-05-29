@@ -1,24 +1,16 @@
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    forwardRef,
-    inject,
-    input,
-    signal,
-    computed,
-} from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, inject, input, signal, computed } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { TuiTextfield, TuiLabel, TuiDataList, TuiIcon } from '@taiga-ui/core';
 import { TuiInputChip, TuiChevron, TuiMultiSelect } from '@taiga-ui/kit';
 import { DialogManager } from '@services';
 import { TemplateInterpolator, BuilderState } from '@services';
 import { BUILDER_DICTIONARY, STATE_KEYS } from '@shared/constants';
 import { SelectOption } from '@shared/models';
+import { BaseFormField } from '@shared/directives';
 
 /**
  * Reusable Multi-Select component with checkboxes and chips.
- * Implements ControlValueAccessor to integrate seamlessly with Angular's Reactive Forms.
+ * Inherits CVA, validation, and layout bindings from BaseFormField.
  * Wraps Taiga UI's tuiInputChip and tui-data-list.
  */
 @Component({
@@ -27,42 +19,22 @@ import { SelectOption } from '@shared/models';
     templateUrl: './multi-select-field.html',
     styleUrl: './multi-select-field.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => MultiSelectField),
-            multi: true,
-        },
-    ],
 })
-export class MultiSelectField implements ControlValueAccessor {
+export class MultiSelectField extends BaseFormField<string[]> {
     readonly dictionary = BUILDER_DICTIONARY;
-    private readonly cdr = inject(ChangeDetectorRef);
     private readonly dialogManager = inject(DialogManager);
     private readonly interpolator = inject(TemplateInterpolator);
     private readonly builderState = inject(BuilderState);
 
-    /** The floating label for the field */
-    label = input.required<string>();
-
-    /** Placeholder text when nothing is selected */
-    placeholder = input<string>('');
-
     /** Array of objects to populate the dropdown */
     options = input<SelectOption[]>([]);
 
-    /** Internal value bound to the native input */
-    value: string[] = [];
-
-    /** Tracks the disabled state for Reactive Forms */
-    disabled = false;
     search = signal<string>('');
+
+    override value: string[] = [];
 
     private static nextId = 0;
     protected readonly fieldId = `multi-select-field-${MultiSelectField.nextId++}`;
-
-    private onChange: (value: string[]) => void = () => undefined;
-    private onTouched: () => void = () => undefined;
 
     /** Converts the selected ID back to the display label for the chips */
     readonly stringify = (id: string): string => {
@@ -72,11 +44,8 @@ export class MultiSelectField implements ControlValueAccessor {
     readonly filteredOptions = computed(() => {
         const s = this.search().toLowerCase();
         const all = this.options();
-
         const minLength = BUILDER_DICTIONARY.limits.dropdownSearchMinLength;
-
         const filtered = s.length >= minLength ? all.filter((o) => o.label.toLowerCase().includes(s)) : all;
-
         return filtered;
     });
 
@@ -106,28 +75,15 @@ export class MultiSelectField implements ControlValueAccessor {
         });
     }
 
-    writeValue(val: string[]): void {
-        this.value = Array.isArray(val) ? val : [];
-        this.search.set(''); // reset search when form changes value
-        this.cdr.markForCheck();
+    override writeValue(val: string[] | null): void {
+        super.writeValue(val || []);
+        this.search.set('');
     }
 
-    registerOnChange(fn: (value: string[]) => void): void {
-        this.onChange = fn;
-    }
-
-    registerOnTouched(fn: () => void): void {
-        this.onTouched = fn;
-    }
-
-    setDisabledState(isDisabled: boolean): void {
-        this.disabled = isDisabled;
-    }
-
-    onModelChange(val: string[]) {
-        this.value = val;
-        this.search.set(''); // reset input on selection
-        this.onChange(val);
+    override onModelChange(val: string[] | null): void {
+        this.value = val || [];
+        this.search.set('');
+        this.onChange(this.value);
         this.onTouched();
     }
 }

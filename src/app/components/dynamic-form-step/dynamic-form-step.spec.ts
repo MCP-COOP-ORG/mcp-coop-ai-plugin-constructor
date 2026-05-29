@@ -59,6 +59,7 @@ describe('DynamicFormStep', () => {
     });
 
     beforeEach(async () => {
+        sessionStorage.clear();
         await TestBed.configureTestingModule({
             imports: [ReactiveFormsModule, DynamicFormStep],
             providers: [

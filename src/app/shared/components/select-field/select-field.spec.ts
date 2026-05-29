@@ -201,4 +201,56 @@ describe('SelectField', () => {
 
         expect(openInfoSpy).toHaveBeenCalledWith('Option 1', 'Fetched Content');
     });
+
+    it('should do nothing if option has no description and no filePath', () => {
+        const selectField = fixture.debugElement.query(By.directive(SelectField)).componentInstance as SelectField;
+        const dialogManager = TestBed.inject(DialogManager);
+        const openInfoSpy = vi.spyOn(dialogManager, 'openInfoDialog');
+
+        const event = { preventDefault: vi.fn(), stopPropagation: vi.fn() } as unknown as Event;
+        const option = { id: '1', label: 'Option 1' };
+
+        selectField.showInfo(event, option);
+
+        expect(openInfoSpy).not.toHaveBeenCalled();
+    });
+
+    it('should do nothing if fetchJson returns null or no description', async () => {
+        const selectField = fixture.debugElement.query(By.directive(SelectField)).componentInstance as SelectField;
+        const dialogManager = TestBed.inject(DialogManager);
+        const interpolator = TestBed.inject(TemplateInterpolator);
+
+        const openInfoSpy = vi.spyOn(dialogManager, 'openInfoDialog');
+        vi.spyOn(interpolator, 'fetchJson').mockResolvedValue(null);
+
+        const event = { preventDefault: vi.fn(), stopPropagation: vi.fn() } as unknown as Event;
+        const option = { id: '1', label: 'Option 1', filePath: 'some/path.json' };
+
+        selectField.showInfo(event, option);
+        await new Promise((r) => setTimeout(r, 0));
+
+        expect(openInfoSpy).not.toHaveBeenCalled();
+    });
+
+    it('should use agent-specific description if available', async () => {
+        const selectField = fixture.debugElement.query(By.directive(SelectField)).componentInstance as SelectField;
+        const dialogManager = TestBed.inject(DialogManager);
+        const interpolator = TestBed.inject(TemplateInterpolator);
+        const builderState = TestBed.inject(BuilderState);
+
+        builderState.reviewData.set({ aiAgent: 'claude' });
+
+        const openInfoSpy = vi.spyOn(dialogManager, 'openInfoDialog');
+        vi.spyOn(interpolator, 'fetchJson').mockResolvedValue({
+            description: { claude: 'Claude Content', default: 'Default Content' },
+        });
+
+        const event = { preventDefault: vi.fn(), stopPropagation: vi.fn() } as unknown as Event;
+        const option = { id: '1', label: 'Option 1', filePath: 'some/path.json' };
+
+        selectField.showInfo(event, option);
+        await new Promise((r) => setTimeout(r, 0));
+
+        expect(openInfoSpy).toHaveBeenCalledWith('Option 1', 'Claude Content');
+    });
 });

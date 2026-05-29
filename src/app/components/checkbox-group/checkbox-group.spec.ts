@@ -64,12 +64,12 @@ describe('CheckboxGroup', () => {
 
     it('should correctly map array of string values to object boolean map via writeValue', () => {
         component.writeValue(['opt2']);
-        expect(component.value['opt1']).toBe(false);
-        expect(component.value['opt2']).toBe(true);
+        expect(component.selectedMap['opt1']).toBe(false);
+        expect(component.selectedMap['opt2']).toBe(true);
     });
 
     it('should emit array of selected IDs on checkbox change', () => {
-        let emittedValue: string[] = [];
+        let emittedValue: string[] | null = [];
         let touched = false;
         component.registerOnChange((val) => {
             emittedValue = val;
@@ -79,7 +79,7 @@ describe('CheckboxGroup', () => {
         });
 
         // Simulate user checking opt1
-        component.value = { opt1: true, opt2: false, opt3: false };
+        component.selectedMap = { opt1: true, opt2: false, opt3: false };
         component.onCheckboxChange();
 
         expect(emittedValue).toEqual(['opt1']);
@@ -121,16 +121,16 @@ describe('CheckboxGroup', () => {
     });
 
     it('should handle writeValue with null or undefined gracefully', () => {
-        component.writeValue(null as unknown as string[]);
-        expect(Object.keys(component.value).length).toBe(MOCK_OPTIONS.length);
-        expect(Object.values(component.value).every((v) => v === false)).toBe(true);
+        component.writeValue(null);
+        expect(Object.keys(component.selectedMap).length).toBe(MOCK_OPTIONS.length);
+        expect(Object.values(component.selectedMap).every((v) => v === false)).toBe(true);
     });
 
     it('should trigger events from template', async () => {
         const checkbox = fixture.nativeElement.querySelector('input[tuiCheckbox]');
         checkbox.click();
         fixture.detectChanges();
-        expect(component.value['opt1']).toBe(true);
+        expect(component.selectedMap['opt1']).toBe(true);
 
         const infoBtn = fixture.nativeElement.querySelector('.checkbox-card__info');
         infoBtn.click();

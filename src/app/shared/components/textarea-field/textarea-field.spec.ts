@@ -63,8 +63,8 @@ describe('TextareaField', () => {
 
     it('should trigger change event on input change', () => {
         let changedValue = '';
-        component.registerOnChange((val: string) => {
-            changedValue = val;
+        component.registerOnChange((val: string | null) => {
+            changedValue = val || '';
         });
         component.onModelChange('new value');
         expect(changedValue).toBe('new value');

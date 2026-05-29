@@ -2,20 +2,20 @@
     @for (option of options(); track option.id) {
     <label
         class="checkbox-card"
-        [class.checkbox-card--active]="value[option.id]"
+        [class.checkbox-card--active]="selectedMap[option.id]"
         [class.checkbox-card--recommended]="getStatus(option.id) === 'recommended'"
         [class.checkbox-card--discouraged]="getStatus(option.id) === 'discouraged'">
         <input
             tuiCheckbox
             type="checkbox"
             size="m"
-            [ngModel]="!!value[option.id]"
-            (ngModelChange)="value[option.id] = $event; onCheckboxChange()" />
+            [ngModel]="!!selectedMap[option.id]"
+            (ngModelChange)="selectedMap[option.id] = $event; onCheckboxChange()" />
         <span class="checkbox-card__label">{{ option.label }}</span>
         <button
             class="checkbox-card__info"
             type="button"
-            [attr.aria-label]="view.dictionary.ariaLabels.moreInfo"
+            [attr.aria-label]="dictionary.ariaLabels.moreInfo"
             (click)="showInfo($event, option)">
             <tui-icon icon="@tui.info" />
         </button>

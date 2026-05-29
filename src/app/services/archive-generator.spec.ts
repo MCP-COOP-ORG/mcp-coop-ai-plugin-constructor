@@ -13,6 +13,7 @@ describe('ArchiveGenerator', () => {
     let interpolator: TemplateInterpolator;
 
     beforeEach(() => {
+        sessionStorage.clear();
         TestBed.configureTestingModule({
             providers: [provideHttpClient()],
         });
