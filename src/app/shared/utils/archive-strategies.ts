@@ -1,6 +1,6 @@
 import { forkJoin, from, lastValueFrom, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { GeneratedFile } from '@shared/constants';
+import { BUILDER_DICTIONARY, STATE_KEYS } from '@shared/constants';
 import { ASSET_FILE_PATHS, GENERATED_PAGES_CONFIG, MAIN } from '@shared/configs';
 import {
     ArchivePattern,
@@ -10,6 +10,9 @@ import {
     DynamicHookPattern,
     PluginManifestPattern,
     PlatformConfig,
+    GeneratedFile,
+    SnippetData,
+    HookEntriesRegistry,
 } from '@shared/models';
 import { TemplateInterpolator } from '@services';
 
@@ -37,10 +40,7 @@ export function toPluginName(projectName: string): string {
     );
 }
 
-interface SnippetData {
-    description?: Record<string, string>;
-    hook?: Record<string, { matcher: string; type: string; command: string }>;
-}
+// SnippetData and HookConfig are now defined as shared models in @shared/models
 
 export async function fetchItemsConcurrently(items: string[], interpolator: TemplateInterpolator) {
     if (!items || items.length === 0) return [];
@@ -105,7 +105,9 @@ export class DynamicCategoryStrategy implements ArchiveStrategy<DynamicCategoryP
 
             let combinedContent = '';
             for (const data of itemsData) {
-                const itemContent = data.snippet?.description?.[agent] ?? data.snippet?.description?.['default'];
+                const itemContent =
+                    data.snippet?.description?.[agent] ??
+                    data.snippet?.description?.[BUILDER_DICTIONARY.common.defaultAssetKey];
                 if (itemContent) combinedContent += itemContent + '\n\n';
             }
 
@@ -154,7 +156,9 @@ export class DynamicItemStrategy implements ArchiveStrategy<DynamicItemPattern> 
             const itemsData = await fetchItemsConcurrently(selectedItems, interpolator);
 
             for (const data of itemsData) {
-                const itemContent = data.snippet?.description?.[agent] ?? data.snippet?.description?.['default'];
+                const itemContent =
+                    data.snippet?.description?.[agent] ??
+                    data.snippet?.description?.[BUILDER_DICTIONARY.common.defaultAssetKey];
 
                 if (itemContent) {
                     const wrapperType = getWrapperType(cat);
@@ -195,7 +199,7 @@ export class DynamicHookStrategy implements ArchiveStrategy<DynamicHookPattern> 
         const hooksPage = GENERATED_PAGES_CONFIG['hooks'];
         if (!hooksPage) return [];
 
-        const hookEntries: Record<string, { matcher: string; hooks: { type: string; command: string }[] }[]> = {};
+        const hookEntries: HookEntriesRegistry = {};
 
         for (const catId of pattern.categories) {
             const selectedItems = context[catId] as string[];
@@ -231,15 +235,15 @@ export class DynamicHookStrategy implements ArchiveStrategy<DynamicHookPattern> 
 
 export class PluginManifestStrategy implements ArchiveStrategy<PluginManifestPattern> {
     async generate(pattern: PluginManifestPattern, context: Record<string, unknown>): Promise<GeneratedFile[]> {
-        const projectName = (context['name'] as string) || 'untitled';
+        const projectName = (context[STATE_KEYS.PROJECT_NAME] as string) || BUILDER_DICTIONARY.common.untitled;
         const pluginName = toPluginName(projectName);
-        const description = (context['description'] as string) || '';
+        const description = (context[STATE_KEYS.DESCRIPTION] as string) || '';
 
         const manifest = {
             name: pluginName,
             description,
-            version: '1.0.0',
-            author: { name: 'MCP COOP AI Plugin Constructor' },
+            version: BUILDER_DICTIONARY.manifest.version,
+            author: { name: BUILDER_DICTIONARY.manifest.author },
         };
 
         // pattern.path is already resolved by ArchiveGenerator (no [plugin] placeholder)

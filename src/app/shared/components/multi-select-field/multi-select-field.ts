@@ -13,14 +13,8 @@ import { TuiTextfield, TuiLabel, TuiDataList, TuiIcon } from '@taiga-ui/core';
 import { TuiInputChip, TuiChevron, TuiMultiSelect } from '@taiga-ui/kit';
 import { DialogManager } from '@services';
 import { TemplateInterpolator, BuilderState } from '@services';
-import { BUILDER_DICTIONARY } from '@shared/constants';
-
-export interface MultiSelectOption {
-    id: string;
-    label: string;
-    filePath?: string;
-    description?: string;
-}
+import { BUILDER_DICTIONARY, STATE_KEYS } from '@shared/constants';
+import { SelectOption } from '@shared/models';
 
 /**
  * Reusable Multi-Select component with checkboxes and chips.
@@ -42,6 +36,7 @@ export interface MultiSelectOption {
     ],
 })
 export class MultiSelectField implements ControlValueAccessor {
+    readonly dictionary = BUILDER_DICTIONARY;
     private readonly cdr = inject(ChangeDetectorRef);
     private readonly dialogManager = inject(DialogManager);
     private readonly interpolator = inject(TemplateInterpolator);
@@ -54,7 +49,7 @@ export class MultiSelectField implements ControlValueAccessor {
     placeholder = input<string>('');
 
     /** Array of objects to populate the dropdown */
-    options = input<MultiSelectOption[]>([]);
+    options = input<SelectOption[]>([]);
 
     /** Internal value bound to the native input */
     value: string[] = [];
@@ -90,7 +85,7 @@ export class MultiSelectField implements ControlValueAccessor {
         this.search.set(inputElement.value);
     }
 
-    showInfo(event: Event, option: MultiSelectOption): void {
+    showInfo(event: Event, option: SelectOption): void {
         event.preventDefault();
         event.stopPropagation();
 
@@ -104,8 +99,9 @@ export class MultiSelectField implements ControlValueAccessor {
         this.interpolator.fetchJson<{ description: Record<string, string> }>(option.filePath).then((json) => {
             if (!json?.description) return;
             const review = this.builderState.reviewData();
-            const agent = (review['aiAgent'] as string) || 'default';
-            const content = json.description[agent] ?? json.description['default'] ?? '';
+            const agent = (review[STATE_KEYS.AI_AGENT] as string) || BUILDER_DICTIONARY.common.defaultAssetKey;
+            const content =
+                json.description[agent] ?? json.description[BUILDER_DICTIONARY.common.defaultAssetKey] ?? '';
             this.dialogManager.openInfoDialog(option.label, content).subscribe();
         });
     }

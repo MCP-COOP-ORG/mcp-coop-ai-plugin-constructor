@@ -15,7 +15,7 @@ import { markdown } from '@codemirror/lang-markdown';
 import { yaml } from '@codemirror/lang-yaml';
 import { Compartment, EditorState } from '@codemirror/state';
 import { EditorView, keymap, lineNumbers } from '@codemirror/view';
-import { type CodeLanguage } from '@shared/constants';
+import { type CodeLanguage } from '@shared/models';
 
 /**
  * Lightweight CodeMirror 6 wrapper component.

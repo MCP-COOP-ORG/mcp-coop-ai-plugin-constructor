@@ -20,13 +20,15 @@ export class PresetDialogComponent {
     private readonly fb = inject(FormBuilder);
 
     readonly dictionary = BUILDER_DICTIONARY.presets;
+    readonly maxPresets = BUILDER_DICTIONARY.limits.presetsLimit;
+    readonly dateFormat = BUILDER_DICTIONARY.review.dateFormat;
 
     readonly presetForm = this.fb.group({
         name: ['', Validators.required],
     });
 
     savePreset(): void {
-        if (this.presetForm.valid && this.presetManager.userPresets().length < 10) {
+        if (this.presetForm.valid && this.presetManager.userPresets().length < this.maxPresets) {
             this.presetManager.saveCurrentStateAsPreset(this.presetForm.value.name ?? '');
             this.context.completeWith();
         }

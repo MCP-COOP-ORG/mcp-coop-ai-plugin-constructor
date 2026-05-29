@@ -1,11 +1,4 @@
-import { GeneratedFile } from '@shared/constants';
-
-export interface FileTreeNode {
-    readonly label: string;
-    readonly path: string;
-    readonly type: 'file' | 'folder';
-    readonly children?: FileTreeNode[];
-}
+import { GeneratedFile, FileTreeNode } from '@shared/models';
 
 /**
  * Converts a flat GeneratedFile[] into a nested FileTreeNode hierarchy.

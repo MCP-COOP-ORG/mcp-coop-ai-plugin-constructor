@@ -3,3 +3,8 @@ export * from './pages-config';
 export * from './platform-config';
 export * from './snapshot';
 export * from './preset';
+export * from './select-option';
+export * from './builder';
+export * from './code-editor';
+export * from './hook';
+export * from './recommendation';

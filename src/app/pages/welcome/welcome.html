@@ -17,6 +17,6 @@
         [innerHTML]="view.labels.welcomeDescription | textFormat:view.labels.welcomeHighlights"></p>
 </div>
 
-<button tuiButton class="welcome__action" type="button" size="l" routerLink="/builder">
+<button tuiButton class="welcome__action" type="button" size="l" [routerLink]="view.routes.BUILDER">
     {{ view.buttons.getStarted }}
 </button>

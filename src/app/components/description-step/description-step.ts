@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy, computed, inject } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { BUILDER_STEPS, STEP_IDS, DESCRIPTION_BLOCKS, BUILDER_DICTIONARY, BuilderFieldConfig } from '@shared/constants';
+import { BUILDER_STEPS, STEP_IDS, DESCRIPTION_BLOCKS, BUILDER_DICTIONARY, STATE_KEYS } from '@shared/constants';
+import { BuilderFieldConfig } from '@shared/models';
 import { StepLayout, RadioGroup, TextareaField, InputField, MultiSelectField, SelectField } from '@shared/components';
 import { BaseFormStep } from '@shared/directives';
 import { CheckboxGroup } from '../checkbox-group/checkbox-group';
@@ -48,11 +49,11 @@ export class DescriptionStep extends BaseFormStep {
         // Find preset field and populate options
         for (const block of blocks) {
             if (block.fields) {
-                const presetField = block.fields.find((f: BuilderFieldConfig) => f.id === 'preset');
+                const presetField = block.fields.find((f: BuilderFieldConfig) => f.id === STATE_KEYS.PRESET);
                 if (presetField) {
                     presetField.options = presets.map((p) => ({
                         id: p.id,
-                        label: p.isSystem ? `${p.name} (System)` : p.name,
+                        label: p.isSystem ? `${p.name}${BUILDER_DICTIONARY.presets.systemLabelSuffix}` : p.name,
                     }));
                 }
             }
@@ -68,7 +69,7 @@ export class DescriptionStep extends BaseFormStep {
         super.ngOnInit();
 
         // Listen to preset changes
-        this.form.get('projectIdentity.preset')?.valueChanges.subscribe((presetId) => {
+        this.form.get(`${STATE_KEYS.PROJECT_IDENTITY}.${STATE_KEYS.PRESET}`)?.valueChanges.subscribe((presetId) => {
             if (presetId) {
                 this.presetManager.loadPreset(presetId);
             }

@@ -4,6 +4,8 @@ import { TuiIcon } from '@taiga-ui/core';
 import { TuiBadge } from '@taiga-ui/kit';
 import { TuiCardLarge } from '@taiga-ui/layout';
 
+import { BUILDER_DICTIONARY } from '@shared/constants';
+
 @Component({
     selector: 'app-builder-block',
     imports: [TuiIcon, TuiCardLarge, TuiBadge, KeyValuePipe],
@@ -12,6 +14,8 @@ import { TuiCardLarge } from '@taiga-ui/layout';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BuilderBlock {
+    readonly dictionary = BUILDER_DICTIONARY;
+
     title = input.required<string>();
     icon = input.required<string>();
     events = input<Record<string, string>>();

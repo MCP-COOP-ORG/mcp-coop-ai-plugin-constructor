@@ -71,7 +71,13 @@ export class TextareaField implements ControlValueAccessor, OnInit, OnDestroy {
     placeholder = input<string>('');
 
     /** Maximum number of characters allowed in the textarea */
-    limit = input<number>(300);
+    limit = input<number>(BUILDER_DICTIONARY.limits.textareaDefaultLimit);
+
+    /** Minimum visible height of the textarea in lines */
+    minRows = input<number>(3);
+
+    /** Maximum visible height of the textarea in lines */
+    maxRows = input<number>(6);
 
     /** Optional Taiga UI icon to display at the start of the field */
     iconStart = input<string>('');

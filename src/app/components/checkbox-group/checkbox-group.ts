@@ -1,14 +1,8 @@
 import { Component, ChangeDetectionStrategy, input, forwardRef, inject } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
 import { TuiCheckbox, TuiIcon } from '@taiga-ui/core';
-import { ConfigItem } from '@shared/models';
-import {
-    RecommendationEngine,
-    RecommendationStatus,
-    TemplateInterpolator,
-    BuilderState,
-    DialogManager,
-} from '@services';
+import { ConfigItem, RecommendationStatus } from '@shared/models';
+import { RecommendationEngine, TemplateInterpolator, BuilderState, DialogManager } from '@services';
 import { BUILDER_DICTIONARY } from '@shared/constants';
 
 /**
@@ -98,8 +92,9 @@ export class CheckboxGroup implements ControlValueAccessor {
             if (!json?.description) return;
 
             const review = this.builderState.reviewData();
-            const agent = (review['aiAgent'] as string) || 'default';
-            const content = json.description[agent] ?? json.description['default'] ?? '';
+            const agent = review.aiAgent || BUILDER_DICTIONARY.common.defaultAssetKey;
+            const content =
+                json.description[agent] ?? json.description[BUILDER_DICTIONARY.common.defaultAssetKey] ?? '';
 
             this.dialogManager.openInfoDialog(option.label, content).subscribe();
         });

@@ -84,6 +84,8 @@ Do not pollute the component TypeScript class with scattered variables used only
 - **No Linter Hacks:** Absolutely NO `eslint-disable` or `@ts-ignore` comments are allowed.
 - All linting and TypeScript errors MUST be fixed at the root cause.
 - Use `unknown` instead of `any`. Ensure custom form controls strictly implement `ControlValueAccessor`.
+- **Zero Inline Types:** Inline object type definitions with 2+ properties are strictly prohibited. All such domain-specific interfaces and type aliases must be declared under `src/app/shared/models/`.
+- **Safe Type Narrowing:** Avoid unsafe type casting/assertions (`as string`, `as string[]`, `as Record<...>`). Enforce safe type narrowing using custom Type Guards (e.g., `isStringArray`, `isNavigationEnd`).
 - All code is automatically formatted by **Prettier** (`npm run format`) during the pre-commit hook.
 
 ### Dual-Build Strategy
@@ -103,10 +105,10 @@ src/
 │   ├── pages/               # Routable "Smart" container components (Welcome, Builder, NotFound). They connect the router to the layout.
 │   ├── components/          # "Dumb" UI feature blocks representing specific workflow steps (SetupStep, ReviewStep, DynamicFormStep).
 │   ├── services/            # Core business logic layer (BuilderState, ArchiveGenerator, RecommendationEngine, PresetService).
-│   ├── models/              # TypeScript interfaces and type definitions (e.g., PageConfig, BuilderStep).
-│   ├── shared/              # Reusable UI elements, pipes, custom form controls (RadioGroup, MultiSelect), and constants.
+│   ├── shared/              # Reusable UI elements, pipes, custom form controls (RadioGroup, MultiSelect), models, and constants.
+│   │   ├── models/          # Central TypeScript interfaces and type definitions (e.g., PageConfig, BuilderStep, SelectOption).
 │   │   ├── constants/       # builder-dictionary.ts, builder-steps.ts (Zero Literals Enforcement).
-│   │   └── utils/           # Helper functions (DOM manipulation, FileTree generation).
+│   │   └── utils/           # Helper functions (DOM manipulation, FileTree generation, Type Guards).
 │   ├── app.config.ts        # Global application configuration (Providers, Router, Taiga UI init).
 │   └── app.routes.ts        # Application routing rules.
 ├── styles/                  # Global CSS variables, resets, and Taiga UI theme customizations (themes.scss).

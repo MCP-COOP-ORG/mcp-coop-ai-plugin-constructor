@@ -6,7 +6,7 @@
         <div class="builder-block__tags">
             @if (isDefault()) {
             <span tuiBadge appearance="custom" size="s" class="builder-block__tag builder-block__tag--recommended">
-                recommended
+                {{ dictionary.common.recommended }}
             </span>
             } @if (events()) { @for (event of events() | keyvalue; track event.key) {
             <span tuiBadge appearance="neutral" size="s" class="builder-block__tag"> #{{ event.key }} </span>

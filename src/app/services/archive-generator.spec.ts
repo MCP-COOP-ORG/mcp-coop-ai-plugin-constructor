@@ -5,7 +5,7 @@ import { ArchiveGenerator } from './archive-generator';
 import { StaticFileStrategy } from '@shared/utils';
 import { BuilderState } from './builder-state';
 import { TemplateInterpolator } from './template-interpolator';
-import { GeneratedFile } from '@shared/constants';
+import { GeneratedFile } from '@shared/models';
 
 describe('ArchiveGenerator', () => {
     let service: ArchiveGenerator;

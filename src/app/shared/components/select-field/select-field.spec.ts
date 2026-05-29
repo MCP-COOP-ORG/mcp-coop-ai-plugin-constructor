@@ -5,7 +5,8 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { TuiRoot, provideTaiga } from '@taiga-ui/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { SelectField, SelectOption } from './select-field';
+import { SelectField } from './select-field';
+import { SelectOption } from '@shared/models';
 import { DialogManager, TemplateInterpolator, BuilderState } from '@services';
 import { of } from 'rxjs';
 

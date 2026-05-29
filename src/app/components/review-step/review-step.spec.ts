@@ -3,7 +3,7 @@ import { By } from '@angular/platform-browser';
 import { signal } from '@angular/core';
 import { vi } from 'vitest';
 import { provideTaiga, TuiNotificationService, TuiDialogService } from '@taiga-ui/core';
-import { GeneratedFile } from '@shared/constants';
+import { GeneratedFile } from '@shared/models';
 import { ArchiveGenerator, BuilderState } from '@services';
 import { ReviewStep } from './review-step';
 import { CodeEditor } from '@shared/components';

@@ -14,7 +14,8 @@ import {
 } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { TuiTabs } from '@taiga-ui/kit';
-import { BuilderStep, BUILDER_DICTIONARY, BuilderBlockConfig } from '@shared/constants';
+import { BUILDER_DICTIONARY } from '@shared/constants';
+import { BuilderStep, BuilderBlockConfig } from '@shared/models';
 import { TuiTextfield, TuiInput } from '@taiga-ui/core';
 import { StepHeader } from '../step-header/step-header';
 import { BuilderBlock } from '../builder-block/builder-block';
@@ -144,7 +145,7 @@ export class StepLayout {
         // Smooth scroll usually takes ~500-800ms. We lock the observer for 1s.
         this.scrollTimeout = setTimeout(() => {
             this.isProgrammaticScroll = false;
-        }, 1000);
+        }, BUILDER_DICTIONARY.timeouts.scrollLockMs);
     }
 
     /**

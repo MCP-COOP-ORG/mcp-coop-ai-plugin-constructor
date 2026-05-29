@@ -22,7 +22,7 @@ export class GlobalErrorHandler implements ErrorHandler {
                     label: BUILDER_DICTIONARY.errors.genericErrorLabel,
                     appearance: 'negative',
                     icon: '@tui.triangle-alert',
-                    autoClose: 5000,
+                    autoClose: BUILDER_DICTIONARY.timeouts.errorAutoCloseMs,
                 })
                 .subscribe();
         });

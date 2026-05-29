@@ -10,7 +10,7 @@
 
     <tui-accordion class="preset-dialog__accordion" [closeOthers]="true">
         <button tuiAccordion type="button">
-            {{ dictionary.existingPresetsLabel }} ({{ presetManager.userPresets().length }}/10)
+            {{ dictionary.existingPresetsLabel }} ({{ presetManager.userPresets().length }}/{{ maxPresets }})
         </button>
         <tui-expand>
             @for (preset of presetManager.userPresets(); track preset.id) {
@@ -23,7 +23,7 @@
                 <span class="preset-dialog__name"> {{ preset.name }} </span>
                 <div class="preset-dialog__meta">
                     <span class="tui-text_body-s tui-text_normal preset-date"
-                        >{{ preset.createdAt | date:'d MMM yyyy' }}</span
+                        >{{ preset.createdAt | date: dateFormat }}</span
                     >
                     <button
                         tuiButton
@@ -47,7 +47,10 @@
         <button tuiButton type="button" appearance="secondary" (click)="cancel()">
             {{ dictionary.downloadOnlyBtn }}
         </button>
-        <button tuiButton type="submit" [disabled]="presetForm.invalid || presetManager.userPresets().length >= 10">
+        <button
+            tuiButton
+            type="submit"
+            [disabled]="presetForm.invalid || presetManager.userPresets().length >= maxPresets">
             {{ dictionary.saveAndDownloadBtn }}
         </button>
     </div>

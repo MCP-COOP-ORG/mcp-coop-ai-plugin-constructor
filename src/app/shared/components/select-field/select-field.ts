@@ -14,14 +14,8 @@ import { TuiChevron, TuiComboBox } from '@taiga-ui/kit';
 import { TuiStringHandler } from '@taiga-ui/cdk';
 import { DialogManager } from '@services';
 import { TemplateInterpolator, BuilderState } from '@services';
-import { BUILDER_DICTIONARY } from '@shared/constants';
-
-export interface SelectOption {
-    id: string;
-    label: string;
-    filePath?: string; // Add filePath to know if it has info
-    description?: string;
-}
+import { BUILDER_DICTIONARY, STATE_KEYS } from '@shared/constants';
+import { SelectOption } from '@shared/models';
 
 @Component({
     selector: 'app-select-field',
@@ -38,6 +32,7 @@ export interface SelectOption {
     ],
 })
 export class SelectField implements ControlValueAccessor {
+    readonly dictionary = BUILDER_DICTIONARY;
     private readonly cdr = inject(ChangeDetectorRef);
     private readonly dialogManager = inject(DialogManager);
     private readonly interpolator = inject(TemplateInterpolator);
@@ -90,8 +85,9 @@ export class SelectField implements ControlValueAccessor {
         this.interpolator.fetchJson<{ description: Record<string, string> }>(option.filePath).then((json) => {
             if (!json?.description) return;
             const review = this.builderState.reviewData();
-            const agent = (review['aiAgent'] as string) || 'default';
-            const content = json.description[agent] ?? json.description['default'] ?? '';
+            const agent = (review[STATE_KEYS.AI_AGENT] as string) || BUILDER_DICTIONARY.common.defaultAssetKey;
+            const content =
+                json.description[agent] ?? json.description[BUILDER_DICTIONARY.common.defaultAssetKey] ?? '';
             this.dialogManager.openInfoDialog(option.label, content).subscribe();
         });
     }

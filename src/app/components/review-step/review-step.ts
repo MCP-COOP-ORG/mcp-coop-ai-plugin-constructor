@@ -11,18 +11,11 @@ import { TuiHandler } from '@taiga-ui/cdk';
 import { TuiButton, TuiIcon, TuiLoader, TuiNotificationService } from '@taiga-ui/core';
 import { TuiTree } from '@taiga-ui/kit';
 import { CodeEditor, StepHeader } from '@shared/components';
-import {
-    BUILDER_DICTIONARY,
-    BUILDER_STEPS,
-    DEFAULT_LANGUAGE,
-    GeneratedFile,
-    LANGUAGE_MAP,
-    STEP_IDS,
-} from '@shared/constants';
+import { BUILDER_DICTIONARY, BUILDER_STEPS, DEFAULT_LANGUAGE, LANGUAGE_MAP, STEP_IDS } from '@shared/constants';
 import { GENERATED_AI_ENVIRONMENTS } from '@shared/configs';
 import { ArchiveGenerator, BuilderState, DialogManager } from '@services';
-
-import { buildFileTree, FileTreeNode } from '@shared/utils';
+import { GeneratedFile, FileTreeNode } from '@shared/models';
+import { buildFileTree } from '@shared/utils';
 
 @Component({
     selector: 'app-review-step',
@@ -51,14 +44,16 @@ export class ReviewStep {
     readonly editMode = signal(false);
     readonly editContent = signal('');
     readonly isDirty = signal(false);
-    readonly activeEnvironment = signal<string>((this.builderState.reviewData()['aiAgent'] as string) || 'antigravity');
+    readonly activeEnvironment = signal<string>(
+        this.builderState.reviewData().aiAgent || BUILDER_DICTIONARY.defaults.aiAgent,
+    );
 
     // ── Computed ──────────────────────────────────────────────────────────────
     readonly activeFile = computed(() => this.files().find((f) => f.path === this.activeFilePath()) ?? null);
     readonly archiveName = computed(() => {
         const desc = this.builderState.descriptionData();
-        const projectIdentity = (desc['projectIdentity'] as Record<string, unknown>) || {};
-        const projectName = (projectIdentity['name'] as string) || 'ai-context';
+        const projectIdentity = desc.projectIdentity || {};
+        const projectName = projectIdentity.name || BUILDER_DICTIONARY.review.fallbackArchiveName;
         return (
             projectName
                 .trim()
@@ -80,8 +75,11 @@ export class ReviewStep {
 
     constructor() {
         // Ensure global state matches local default if it was empty
-        if (!this.builderState.reviewData()['aiAgent']) {
-            this.builderState.reviewData.update((data) => ({ ...data, aiAgent: this.activeEnvironment() }));
+        if (!this.builderState.reviewData().aiAgent) {
+            this.builderState.reviewData.update((data) => ({
+                ...data,
+                aiAgent: this.activeEnvironment(),
+            }));
         }
 
         afterNextRender(() => {

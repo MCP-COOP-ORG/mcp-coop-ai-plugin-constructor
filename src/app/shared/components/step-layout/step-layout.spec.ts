@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { StepLayout } from './step-layout';
 import { Component } from '@angular/core';
-import { BUILDER_STEPS, BuilderBlockConfig } from '@shared/constants';
+import { BUILDER_STEPS } from '@shared/constants';
+import { BuilderBlockConfig } from '@shared/models';
 import { vi } from 'vitest';
 
 @Component({

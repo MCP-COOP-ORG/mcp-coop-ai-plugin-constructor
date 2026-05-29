@@ -1,10 +1,4 @@
-export type CodeLanguage = 'markdown' | 'json' | 'yaml';
-
-export interface GeneratedFile {
-    readonly path: string;
-    readonly type: 'file' | 'folder';
-    readonly content: string;
-}
+import { CodeLanguage } from '@shared/models';
 
 export const LANGUAGE_MAP: Record<string, CodeLanguage> = {
     '.json': 'json',

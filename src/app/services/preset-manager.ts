@@ -13,8 +13,8 @@ export class PresetManager {
     private readonly platformId = inject(PLATFORM_ID);
     private readonly builderState = inject(BuilderState);
     private readonly notifications = inject(TuiNotificationService);
-    private readonly STORAGE_KEY = 'builderPresets';
-    private readonly MAX_PRESETS = 10;
+    private readonly STORAGE_KEY = BUILDER_DICTIONARY.storageKeys.presets;
+    private readonly MAX_PRESETS = BUILDER_DICTIONARY.limits.presetsLimit;
 
     readonly presets = signal<Preset[]>([]);
     readonly userPresets = computed(() => this.presets().filter((p) => !p.isSystem));
@@ -37,13 +37,12 @@ export class PresetManager {
         // Remove any GENERATED_PRESETS before finding index, because we only save to local storage
         const localPresets = this.presets().filter((p) => !p.isSystem);
 
-        const finalName = name.trim() || `Preset ${localPresets.length + 1}`;
+        const finalName = name.trim() || `${BUILDER_DICTIONARY.presets.defaultNamePrefix} ${localPresets.length + 1}`;
         const existingIndex = localPresets.findIndex((p) => p.name.toLowerCase() === finalName.toLowerCase());
 
         if (existingIndex !== -1) {
-            if (stateToSave.description && stateToSave.description['projectIdentity']) {
-                (stateToSave.description['projectIdentity'] as Record<string, unknown>)['preset'] =
-                    localPresets[existingIndex].id;
+            if (stateToSave.description?.projectIdentity) {
+                stateToSave.description.projectIdentity.preset = localPresets[existingIndex].id;
             }
             localPresets[existingIndex] = {
                 ...localPresets[existingIndex],
@@ -52,8 +51,8 @@ export class PresetManager {
             };
         } else {
             const newId = Date.now().toString();
-            if (stateToSave.description && stateToSave.description['projectIdentity']) {
-                (stateToSave.description['projectIdentity'] as Record<string, unknown>)['preset'] = newId;
+            if (stateToSave.description?.projectIdentity) {
+                stateToSave.description.projectIdentity.preset = newId;
             }
             const newPreset: Preset = {
                 id: newId,

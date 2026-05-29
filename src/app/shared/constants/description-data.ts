@@ -1,16 +1,17 @@
-import { BuilderBlockConfig } from './builder-steps';
+import { STATE_KEYS } from './builder-steps';
+import { BuilderBlockConfig } from '@shared/models';
 import { BUILDER_DICTIONARY } from './builder-dictionary';
 import { GENERATED_PROJECT_META } from '@shared/configs';
 
 export const DESCRIPTION_BLOCKS: BuilderBlockConfig[] = [
     {
-        id: 'projectIdentity',
-        title: 'Plugin Identity',
+        id: STATE_KEYS.PROJECT_IDENTITY,
+        title: BUILDER_DICTIONARY.labels.pluginIdentity,
         icon: '@tui.folder-code',
         type: 'composite',
         fields: [
             {
-                id: 'name',
+                id: STATE_KEYS.PROJECT_NAME,
                 type: 'input',
                 label: BUILDER_DICTIONARY.labels.projectName,
                 placeholder: BUILDER_DICTIONARY.placeholders.projectName,
@@ -19,7 +20,7 @@ export const DESCRIPTION_BLOCKS: BuilderBlockConfig[] = [
                 maxLength: 100,
             },
             {
-                id: 'preset',
+                id: STATE_KEYS.PRESET,
                 type: 'select',
                 label: BUILDER_DICTIONARY.presets.label,
                 placeholder: BUILDER_DICTIONARY.presets.placeholder,
@@ -27,7 +28,7 @@ export const DESCRIPTION_BLOCKS: BuilderBlockConfig[] = [
                 options: [], // dynamically populated
             },
             {
-                id: 'domains',
+                id: STATE_KEYS.DOMAINS,
                 type: 'multi-select',
                 label: BUILDER_DICTIONARY.labels.businessDomains,
                 placeholder: BUILDER_DICTIONARY.placeholders.businessDomains,
@@ -39,7 +40,7 @@ export const DESCRIPTION_BLOCKS: BuilderBlockConfig[] = [
                 })),
             },
             {
-                id: 'description',
+                id: STATE_KEYS.DESCRIPTION,
                 type: 'textarea',
                 label: BUILDER_DICTIONARY.labels.projectIdentity,
                 placeholder: BUILDER_DICTIONARY.placeholders.projectIdentity,

@@ -1,18 +1,19 @@
 import { Injectable, signal, effect, PLATFORM_ID, inject, WritableSignal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { GENERATED_PAGES_CONFIG } from '@shared/configs';
-import { BuilderSnapshot } from '@shared/models';
+import { BuilderSnapshot, DescriptionState, ReviewState } from '@shared/models';
+import { BUILDER_DICTIONARY, APP_ROUTES, STEP_IDS } from '@shared/constants';
 
 @Injectable({
     providedIn: 'root',
 })
 export class BuilderState {
     private readonly platformId = inject(PLATFORM_ID);
-    private readonly STORAGE_KEY = 'builderState';
+    private readonly STORAGE_KEY = BUILDER_DICTIONARY.storageKeys.state;
 
     // Signals for custom steps
-    readonly descriptionData = signal<Record<string, unknown>>({});
-    readonly reviewData = signal<Record<string, unknown>>({});
+    readonly descriptionData = signal<DescriptionState>({});
+    readonly reviewData = signal<ReviewState>({});
     readonly editedFiles = signal<Record<string, string>>({});
     readonly isStepValid = signal<boolean>(true);
     readonly triggerValidation = signal<number>(0);
@@ -93,7 +94,7 @@ export class BuilderState {
         if (isPlatformBrowser(this.platformId)) {
             sessionStorage.removeItem(this.STORAGE_KEY);
             // Hard reload to completely wipe form states and memory
-            window.location.href = '/builder/description';
+            window.location.href = `${APP_ROUTES.BUILDER}/${STEP_IDS.DESCRIPTION}`;
         }
     }
 }

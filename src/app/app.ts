@@ -3,6 +3,8 @@ import { RouterOutlet } from '@angular/router';
 import { TUI_DARK_MODE, TuiRoot } from '@taiga-ui/core';
 import { AppHeader } from '@shared/components';
 
+import { BUILDER_DICTIONARY } from '@shared/constants';
+
 @Component({
     selector: 'app-root',
     imports: [RouterOutlet, TuiRoot, AppHeader],
@@ -15,10 +17,14 @@ export class App {
 
     constructor() {
         try {
-            // 1. Initial sync from platform theme
-            const platformTheme = localStorage.getItem('theme');
+            const themeKey = BUILDER_DICTIONARY.storageKeys.theme;
+            const darkVal = BUILDER_DICTIONARY.theme.dark;
+            const lightVal = BUILDER_DICTIONARY.theme.light;
 
-            if (platformTheme === 'dark') {
+            // 1. Initial sync from platform theme
+            const platformTheme = localStorage.getItem(themeKey);
+
+            if (platformTheme === darkVal) {
                 this.darkMode.set(true);
             } else {
                 this.darkMode.set(false);
@@ -27,9 +33,9 @@ export class App {
             // 2. Sync toggles back to platform theme
             effect(() => {
                 if (this.darkMode() === true) {
-                    localStorage.setItem('theme', 'dark');
+                    localStorage.setItem(themeKey, darkVal);
                 } else {
-                    localStorage.setItem('theme', 'light');
+                    localStorage.setItem(themeKey, lightVal);
                 }
             });
         } catch {

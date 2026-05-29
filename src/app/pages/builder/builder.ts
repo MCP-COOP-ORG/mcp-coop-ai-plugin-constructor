@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { TuiButton } from '@taiga-ui/core';
 import { TuiStep, TuiStepper } from '@taiga-ui/kit';
 import { filter, map, startWith } from 'rxjs';
 import { APP_ROUTES, BUILDER_DICTIONARY, BUILDER_STEPS } from '@shared/constants';
+import { isNavigationEnd } from '@shared/utils';
 import { ArchiveGenerator, BuilderState, DialogManager } from '@services';
 import { Injector } from '@angular/core';
 
@@ -47,8 +48,8 @@ export class Builder {
     // This is a reactive way to track the active URL without manual subscriptions
     private readonly urlSignal = toSignal(
         this.router.events.pipe(
-            filter((event) => event instanceof NavigationEnd),
-            map((event) => (event as NavigationEnd).urlAfterRedirects),
+            filter(isNavigationEnd),
+            map((event) => event.urlAfterRedirects),
             startWith(this.router.url),
         ),
     );
@@ -95,7 +96,7 @@ export class Builder {
 
     getPlugin(): void {
         const reviewData = this.builderState.reviewData();
-        const activeAgent = (reviewData['aiAgent'] as string) || 'antigravity';
+        const activeAgent = reviewData.aiAgent || 'antigravity';
 
         const dictionary = this.view.getPluginDialog;
         const instructionTexts = dictionary.instructions;

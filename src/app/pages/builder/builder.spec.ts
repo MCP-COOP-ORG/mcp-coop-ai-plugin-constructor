@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { Builder } from './builder';
-import { APP_ROUTES, BUILDER_STEPS, GeneratedFile } from '@shared/constants';
+import { APP_ROUTES, BUILDER_STEPS } from '@shared/constants';
+import { GeneratedFile } from '@shared/models';
 import { vi } from 'vitest';
 import { signal } from '@angular/core';
 import { of } from 'rxjs';

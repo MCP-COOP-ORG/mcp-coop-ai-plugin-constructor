@@ -1,7 +1,8 @@
 import { Directive, inject, OnInit, WritableSignal, DestroyRef, effect } from '@angular/core';
 import { FormControl, FormGroup, Validators, ValidatorFn } from '@angular/forms';
 import { BuilderState } from '@services';
-import { BuilderBlockConfig } from '@shared/constants';
+import { BUILDER_DICTIONARY } from '@shared/constants';
+import { FormStepView } from '@shared/models';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime } from 'rxjs';
 
@@ -10,7 +11,7 @@ export abstract class BaseFormStep implements OnInit {
     protected readonly builderState = inject(BuilderState);
     protected readonly destroyRef = inject(DestroyRef);
 
-    abstract readonly view: { blocksArray: BuilderBlockConfig[]; [key: string]: unknown };
+    abstract readonly view: FormStepView;
 
     form!: FormGroup;
 
@@ -95,8 +96,10 @@ export abstract class BaseFormStep implements OnInit {
             this.builderState.isStepValid.set(status === 'VALID');
         });
 
-        this.form.valueChanges.pipe(debounceTime(300), takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-            this.stateSignal.set(this.form.getRawValue() as Record<string, unknown>);
-        });
+        this.form.valueChanges
+            .pipe(debounceTime(BUILDER_DICTIONARY.timeouts.formDebounceMs), takeUntilDestroyed(this.destroyRef))
+            .subscribe(() => {
+                this.stateSignal.set(this.form.getRawValue() as Record<string, unknown>);
+            });
     }
 }

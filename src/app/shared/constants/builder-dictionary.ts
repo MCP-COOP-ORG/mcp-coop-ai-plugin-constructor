@@ -13,6 +13,7 @@ export const BUILDER_DICTIONARY = {
         contents: 'Contents',
         projectIdentity: 'Project Identity',
         projectName: 'Project Name',
+        pluginIdentity: 'Plugin Identity',
         businessDomains: 'Domain-Specific Rules',
         welcomeTitle: 'MCP COOP AI Plugin Constructor',
         welcomeTitleLink: 'MCP COOP',
@@ -49,6 +50,8 @@ export const BUILDER_DICTIONARY = {
         loadedLabel: 'Preset Loaded',
         loadedMessage: 'The builder state has been updated.',
         empty: 'No presets saved',
+        systemLabelSuffix: ' (System)',
+        defaultNamePrefix: 'Preset',
     },
     icons: {
         downloadButton: '@tui.download',
@@ -73,8 +76,33 @@ export const BUILDER_DICTIONARY = {
     },
     limits: {
         textarea: 1000,
+        textareaDefaultLimit: 300,
         dropdownSearchMinLength: 2,
         sidebarMaxItems: 10,
+        presetsLimit: 10,
+    },
+    storageKeys: {
+        theme: 'theme',
+        state: 'builderState',
+        presets: 'builderPresets',
+    },
+    timeouts: {
+        scrollLockMs: 1000,
+        formDebounceMs: 300,
+        errorAutoCloseMs: 5000,
+    },
+    theme: {
+        dark: 'dark',
+        light: 'light',
+    },
+    defaults: {
+        aiAgent: 'antigravity',
+    },
+    common: {
+        recommended: 'recommended',
+        noOptionsFound: 'No options found',
+        defaultAssetKey: 'default',
+        untitled: 'untitled',
     },
     header: {
         toggleThemeAriaLabel: 'Toggle color theme',
@@ -97,6 +125,8 @@ export const BUILDER_DICTIONARY = {
         editWarningMessage:
             'Manual edits apply only to the current environment. Changing the environment later will discard these edits because files are regenerated from scratch. To make global changes, return to the previous steps.',
         editWarningConfirm: 'Understood',
+        dateFormat: 'd MMM yyyy',
+        fallbackArchiveName: 'ai-context',
     },
     assets: {
         hero: 'ai-builder-hero.webp',
@@ -128,5 +158,33 @@ export const BUILDER_DICTIONARY = {
             claude: 'To install this plugin in your project:<br><br>1. Click <span class="highlight">"Download ZIP"</span> to save the configuration.<br><br>2. Extract the ZIP contents directly into your project\'s root directory.<br><br>3. Verify that the <span class="highlight">".claude/"</span> directory is created at the root.<br><br>4. Restart your Claude Code CLI session to load the rules.',
             cursor: 'To install this plugin in your project:<br><br>1. Click <span class="highlight">"Download ZIP"</span> to save the configuration.<br><br>2. Extract the ZIP contents directly into your project\'s root directory.<br><br>3. Verify that the plugin folder is created at the root.<br><br>4. Restart your Cursor editor to activate the custom rules (.mdc) and hooks.',
         },
+    },
+    steps: {
+        description: {
+            label: 'Plugin',
+            title: 'Plugin Configuration',
+            description:
+                'Define the core business logic, primary goals, and domain constraints of your project.\nThis provides the AI with deep contextual understanding to avoid generic assumptions.\n\nInjected into the root configuration files:\ne.g., CLAUDE.md, GEMINI.md, AGENTS.md, etc.',
+            highlights: [
+                'core business logic',
+                'domain constraints',
+                'deep contextual understanding',
+                'avoid generic assumptions',
+                'CLAUDE.md',
+                'GEMINI.md',
+                'AGENTS.md',
+            ],
+        },
+        review: {
+            label: 'Review',
+            title: 'Review & Export',
+            description:
+                'Review the generated configuration files (Markdown rules/skills and JSON settings) for your agent environment.\nYou can make manual tweaks to the code before downloading the final bundle.\n\nExports as a standalone bundle:\ne.g., my-project.zip',
+            highlights: ['Markdown rules/skills', 'JSON settings', 'manual tweaks', 'my-project.zip'],
+        },
+    },
+    manifest: {
+        version: '1.0.0',
+        author: 'MCP COOP AI Plugin Constructor',
     },
 } as const;

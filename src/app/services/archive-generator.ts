@@ -1,9 +1,9 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { strToU8, zipSync } from 'fflate';
-import { GeneratedFile, CORE_DIRECTIVES } from '@shared/constants';
+import { CORE_DIRECTIVES, BUILDER_DICTIONARY } from '@shared/constants';
 import { CLAUDE, CURSOR, ANTIGRAVITY } from '@shared/schemas';
 import { GENERATED_PLATFORMS_CONFIG, GENERATED_PROJECT_META } from '@shared/configs';
-import { ArchivePattern } from '@shared/models';
+import { ArchivePattern, GeneratedFile } from '@shared/models';
 import { BuilderState } from './builder-state';
 import { TemplateInterpolator } from './template-interpolator';
 import {
@@ -51,7 +51,7 @@ export class ArchiveGenerator {
         const desc = this.builderState.descriptionData();
         const review = this.builderState.reviewData();
 
-        const agent = (review['aiAgent'] as string) || 'antigravity';
+        const agent = review.aiAgent || BUILDER_DICTIONARY.defaults.aiAgent;
         const schema = SCHEMA_MAP[agent] ?? ANTIGRAVITY;
         const platformConfig = GENERATED_PLATFORMS_CONFIG[agent as keyof typeof GENERATED_PLATFORMS_CONFIG];
 
@@ -60,11 +60,11 @@ export class ArchiveGenerator {
             dynamicContext = { ...dynamicContext, ...this.builderState.dynamicData[key]() };
         });
 
-        const projectIdentity = (desc['projectIdentity'] as Record<string, unknown>) || {};
-        const combinedDescription = (projectIdentity['description'] as string) || '';
+        const projectIdentity = desc.projectIdentity || {};
+        const combinedDescription = projectIdentity.description || '';
 
         let domainText = '';
-        const domains = projectIdentity['domains'] as string[];
+        const domains = projectIdentity.domains;
         if (Array.isArray(domains)) {
             const domainDescriptions = domains
                 .map((dId) => GENERATED_PROJECT_META.find((meta) => meta.id === dId)?.description)
@@ -75,7 +75,8 @@ export class ArchiveGenerator {
             }
         }
 
-        const projectName = (projectIdentity['name'] as string) || 'untitled';
+        const projectName = projectIdentity.name || BUILDER_DICTIONARY.common.untitled;
+
         const pluginName = toPluginName(projectName);
 
         const context: Record<string, unknown> = {
@@ -135,8 +136,9 @@ export class ArchiveGenerator {
 
         // Derive archive name from project name
         const desc = this.builderState.descriptionData();
-        const projectIdentity = (desc['projectIdentity'] as Record<string, unknown>) || {};
-        const projectName = (projectIdentity['name'] as string) || 'ai-context';
+        const projectIdentity = desc.projectIdentity || {};
+        const projectName = projectIdentity.name || BUILDER_DICTIONARY.review.fallbackArchiveName;
+
         const archiveName =
             projectName
                 .trim()

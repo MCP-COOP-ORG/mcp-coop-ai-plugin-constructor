@@ -1,10 +1,8 @@
 import { Injectable, computed, inject } from '@angular/core';
 import { GENERATED_PAGES_CONFIG } from '@shared/configs';
-import { ConfigItem } from '@shared/models';
+import { ConfigItem, RecommendationStatus } from '@shared/models';
+import { isStringArray } from '@shared/utils';
 import { BuilderState } from './builder-state';
-
-/** Visual status of a skill relative to the current selection. */
-export type RecommendationStatus = 'recommended' | 'discouraged';
 
 /**
  * Computes recommendation/discouraged status for all ConfigItems
@@ -51,7 +49,7 @@ export class RecommendationEngine {
         return Object.values(this.builderState.dynamicData)
             .map((signal) => signal())
             .flatMap((data) => Object.values(data))
-            .filter((val): val is string[] => Array.isArray(val))
+            .filter(isStringArray)
             .reduce((set, ids) => {
                 ids.forEach((id) => set.add(id));
                 return set;

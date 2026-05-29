@@ -6,6 +6,17 @@ The MCP COOP AI Plugin Constructor is a standalone web application built with An
 
 ## Development History
 
+### Commit (Pending): refactor: introduce strict typing patterns, custom models, and type guards to eliminate type assertions
+
+**Status:** Completed
+**Key Features Implemented:**
+
+- **Centralized TypeScript Models**: Migrated all local/inline interface declarations with shapes containing more than 2 fields into separate modules within `src/app/shared/models/`. Created models for selection options (`SelectOption`), builder page layout (`BuilderStep`, `BuilderBlockConfig`, `BuilderFieldConfig`, `FormStepView`), CodeMirror editor (`GeneratedFile`, `FileTreeNode`, `CodeLanguage`), lifecycle hooks (`HookConfig`, `HookEntriesRegistry`), and snapshot management (`BuilderSnapshot`, `DescriptionState`, `ReviewState`, etc.).
+- **Removal of Unsafe Type Assertions**: Replaced all unsafe TypeScript type casting (`as string`, `as Record<...>`, `as string[]`) with strictly typed signal definitions in `BuilderState`, and structured property accesses in `PresetManager` and `ArchiveGenerator`.
+- **Reusable Type Guards**: Created custom Type Guards (`isStringArray`, `isNavigationEnd`) in `src/app/shared/utils/type-guards.ts` to perform safe runtime and build-time type narrowing for router events and parsed assets.
+- **Clean Constants & Configuration Typings**: Removed all interface definitions from constants (`builder-steps.ts`, `review-editor.ts`, `description-data.ts`) and utility files, importing them exclusively from models. Strictly typed environment configs like `GENERATED_AI_ENVIRONMENTS` in `generated-pages-config.ts` as `SelectOption[]`.
+- **Linter & Test Verification**: Resolved all ESLint unused import errors resulting from refactoring. Ran full validation (`npm run typecheck`, `npm run lint`, and `npm run test:ci` passing all 213 unit tests) ensuring zero linter disable directives.
+
 ### Commit (Pending): feat: introduce formal logic directives, clean platform templates, and snippet style guide
 
 **Status:** Completed

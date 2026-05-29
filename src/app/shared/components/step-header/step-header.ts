@@ -11,5 +11,5 @@ import { TextFormatPipe } from '@shared/pipes';
 export class StepHeader {
     title = input.required<string>();
     description = input.required<string>();
-    highlights = input<string[]>([]);
+    highlights = input<readonly string[]>([]);
 }
