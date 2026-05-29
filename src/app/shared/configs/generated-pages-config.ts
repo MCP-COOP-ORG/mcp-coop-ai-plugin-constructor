@@ -770,7 +770,7 @@ export const GENERATED_PLATFORMS_CONFIG: Record<string, PlatformConfig> = {
         id: 'antigravity',
         label: 'Antigravity',
         content:
-            '# {{ name }} Agent System Rules & Context\n\nYou are an expert AI assistant working on the **{{ name }}** project.\n\n## Project Context\n{{ description }}\n\n## Domain-Specific Rules\n{{ domains }}\n\n## Core Directives\n{{ core_directives }}',
+            '# {{ name }}\n\n## Project Context\n{{ description }}\n\n## Domain-Specific Rules\n{{ domains }}\n\n## Core Directives\n{{ core_directives }}',
         templates: {
             skill: '---\nname: {{ name }}\ndescription: {{ description }}\n---\n\n# {{ name }}\n\n{{ content }}',
             rule: '---\nname: {{ name }}\ndescription: {{ description }}\n---\n\n{{ content }}',
@@ -787,7 +787,7 @@ export const GENERATED_PLATFORMS_CONFIG: Record<string, PlatformConfig> = {
         id: 'claude',
         label: 'Claude',
         content:
-            '# {{ name }} - Claude Project Instructions\n\nYou are Claude, an expert AI coding assistant assigned to the **{{ name }}** project.\n\n## Project Context\n{{ description }}\n\n## Domain-Specific Rules\n{{ domains }}\n\n## Core Directives\n{{ core_directives }}',
+            '# {{ name }}\n\n## Project Context\n{{ description }}\n\n## Domain-Specific Rules\n{{ domains }}\n\n## Core Directives\n{{ core_directives }}',
         templates: {
             skill: '---\nname: {{ name }}\ndescription: {{ description }}\n---\n\n# {{ name }}\n\n{{ content }}',
             rule: '# {{ name }}\n\n{{ content }}',
@@ -804,7 +804,7 @@ export const GENERATED_PLATFORMS_CONFIG: Record<string, PlatformConfig> = {
         id: 'cursor',
         label: 'Cursor',
         content:
-            '# {{ name }} - Cursor AI Instructions\n\nYou are an expert AI coding assistant for Cursor, working on the **{{ name }}** project.\n\n## Project Context\n{{ description }}\n\n## Domain-Specific Rules\n{{ domains }}\n\n## Core Directives\n{{ core_directives }}',
+            '# {{ name }}\n\n## Project Context\n{{ description }}\n\n## Domain-Specific Rules\n{{ domains }}\n\n## Core Directives\n{{ core_directives }}',
         templates: {
             skill: '---\nname: {{ name }}\ndescription: {{ description }}\n---\n\n# {{ name }}\n\n{{ content }}',
             rule: '---\ndescription: {{ description }}\nglobs: {{ globs }}\n---\n\n{{ content }}',
@@ -1045,7 +1045,7 @@ export const GENERATED_PROJECT_META: MetaInformation[] = [
     {
         label: 'AI Assistant & Bot',
         description:
-            'This project focuses on artificial intelligence features, integrating LLMs, chatbot interfaces, automated workflows, and smart data processing capabilities.',
+            'This project operates in the AI agent and LLM integration domain, encompassing chatbot interfaces, agentic workflows, prompt and context engineering, and plugin/skill architectures. Code must account for non-deterministic model outputs, structured response handling, and clear separation between deterministic application logic and stochastic LLM reasoning. Treat all AI-generated content as untrusted input requiring validation before downstream use.',
         id: 'ai-assistant',
     },
     {

@@ -6,6 +6,16 @@ The MCP COOP AI Plugin Constructor is a standalone web application built with An
 
 ## Development History
 
+### Commit (Pending): feat: introduce formal logic directives, clean platform templates, and snippet style guide
+
+**Status:** Completed
+**Key Features Implemented:**
+
+- **Structured Core Directives**: Expanded `src/app/shared/constants/core-directives.ts` with 7 core reasoning directives: Think Before Act, Execute With Discipline, Dialectical Reasoning, and the 4 laws of formal logic from Chelpanov (Identity, Non-Contradiction, Excluded Middle, Sufficient Reason). Each directive integrates structured constraints, reasoning patterns, and error handling without technology/project specific constraints.
+- **Snippet Authoring Guide**: Created `docs/snippet-authoring-guide.md` defining markdown instruction snippet patterns for AI agents (headings, lists, alerts, sizes, constraints, default vs platform-specific files).
+- **Clean Platform Templates**: Simplified templates in `public/assets/platforms/` (`antigravity.json`, `claude.json`, `cursor.json`) by removing redundant "expert assistant assigned to project..." phrases, keeping only `# {{ name }}` to keep instruction context clean and concise.
+- **Refined Domain Descriptions**: Enhanced the "AI Assistant & Bot" domain metadata (`ai-assistant.json`) with guidelines for prompt engineering, plugin architectures, non-deterministic model outputs, and input validation. Regenerated `GENERATED_PROJECT_META` inside `src/app/shared/configs/generated-pages-config.ts` to reflect the updated domain details.
+
 ### Commit (Pending): feat(ui): replace direct download with Get Plugin dialog and environment-specific instructions
 
 **Status:** Completed

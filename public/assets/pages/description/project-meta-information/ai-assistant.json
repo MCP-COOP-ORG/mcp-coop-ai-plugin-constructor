@@ -1,4 +1,4 @@
 {
     "label": "AI Assistant & Bot",
-    "description": "This project focuses on artificial intelligence features, integrating LLMs, chatbot interfaces, automated workflows, and smart data processing capabilities."
+    "description": "This project operates in the AI agent and LLM integration domain, encompassing chatbot interfaces, agentic workflows, prompt and context engineering, and plugin/skill architectures. Code must account for non-deterministic model outputs, structured response handling, and clear separation between deterministic application logic and stochastic LLM reasoning. Treat all AI-generated content as untrusted input requiring validation before downstream use."
 }

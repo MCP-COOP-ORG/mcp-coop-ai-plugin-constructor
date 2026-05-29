@@ -1,7 +1,7 @@
 {
     "id": "cursor",
     "label": "Cursor",
-    "content": "# {{ name }} - Cursor AI Instructions\n\nYou are an expert AI coding assistant for Cursor, working on the **{{ name }}** project.\n\n## Project Context\n{{ description }}\n\n## Domain-Specific Rules\n{{ domains }}\n\n## Core Directives\n{{ core_directives }}",
+    "content": "# {{ name }}\n\n## Project Context\n{{ description }}\n\n## Domain-Specific Rules\n{{ domains }}\n\n## Core Directives\n{{ core_directives }}",
     "templates": {
         "skill": "---\nname: {{ name }}\ndescription: {{ description }}\n---\n\n# {{ name }}\n\n{{ content }}",
         "rule": "---\ndescription: {{ description }}\nglobs: {{ globs }}\n---\n\n{{ content }}",
