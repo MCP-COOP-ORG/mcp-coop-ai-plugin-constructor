@@ -1,10 +1,8 @@
 {
     "description": {
-        "default": "This is a placeholder content for eslint.",
-        "claude": "This is a placeholder content for eslint.",
-        "cursor": "This is a placeholder content for eslint.",
-        "antigravity": "This is a placeholder content for eslint."
+        "default": "## ESLint Standards\n\n- Use ESLint flat config (`eslint.config.js`) for modern, consolidated configuration.\n- **NEVER** use `eslint-disable` or `eslint-disable-next-line` comments. All linting errors MUST be fixed at the root cause.\n- Enforce strict boundaries and dependency rules using plugins (e.g., preventing cross-module imports).\n- Configure ESLint to run automatically on save in the IDE and via pre-commit hooks.\n- Resolve all linter warnings — treat them as errors in the CI pipeline."
     },
-    "recommendedWith": ["prettier", "typescript"],
-    "discouragedWith": []
+    "recommendedWith": ["prettier"],
+    "discouragedWith": [],
+    "visibility": true
 }

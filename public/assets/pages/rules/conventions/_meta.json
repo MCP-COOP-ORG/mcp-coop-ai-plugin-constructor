@@ -2,5 +2,7 @@
     "title": "Core Architecture",
     "icon": "@tui.shield-check",
     "type": "checkbox",
-    "order": 1
+    "order": 1,
+    "commonInfo": "## Core Architecture & Conventions\n\n### General Principles\n\n- Write code for humans first, machines second.\n- Keep components small and focused on a single responsibility.\n- Aim for high cohesion and low coupling between modules.\n- Establish clear domain boundaries and avoid leaky abstractions.\n- Use continuous refactoring to keep technical debt low.",
+    "visibility": true
 }

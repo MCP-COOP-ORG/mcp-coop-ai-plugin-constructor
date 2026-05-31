@@ -53,7 +53,7 @@ export class DescriptionStep extends BaseFormStep {
                 if (presetField) {
                     presetField.options = presets.map((p) => ({
                         id: p.id,
-                        label: p.isSystem ? `${p.name}${BUILDER_DICTIONARY.presets.systemLabelSuffix}` : p.name,
+                        label: p.name,
                     }));
                 }
             }

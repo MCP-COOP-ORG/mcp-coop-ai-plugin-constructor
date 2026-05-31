@@ -1,6 +1,8 @@
 {
-    "title": "Code Quality Rules",
-    "icon": "@tui.check-circle",
+    "title": "Code Quality",
+    "icon": "@tui.medal",
     "type": "checkbox",
-    "order": 2
+    "order": 2,
+    "commonInfo": "## Code Quality Fundamentals\n\n### Static Analysis\n\n- Enforce strict typing across the entire codebase.\n- Treat compiler warnings and linter errors as build failures.\n- **NEVER** disable linter rules via inline comments (`eslint-disable`) without a documented technical justification.\n\n### Reliability\n\n- Ensure invalid states are unrepresentable through type design.\n- Eliminate \"magic numbers\" and hardcoded strings; extract them into well-named constants or dictionaries.\n- Decouple view logic from business logic using patterns like View Models or Presenters.\n\n### Maintenance\n\n- Code is read far more often than it is written — optimize for readability and comprehensibility.\n- Automated tests are a core part of code quality — write tests that validate behavior, not implementation details.\n- Refactor continuously as you add features (Boy Scout Rule: leave the codebase better than you found it).",
+    "visibility": true
 }

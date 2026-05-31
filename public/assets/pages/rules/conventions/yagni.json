@@ -1,0 +1,8 @@
+{
+    "description": {
+        "default": "## YAGNI (You Aren't Gonna Need It)\n\n- **NEVER** build features or generic abstractions for hypothetical future use cases.\n- Implement only what is strictly required to satisfy current requirements.\n- Delay design decisions until the last responsible moment when you have the most information.\n- Strip out speculative \"hooks\" or extension points that aren't currently being used."
+    },
+    "recommendedWith": ["kiss", "dry"],
+    "discouragedWith": [],
+    "visibility": true
+}

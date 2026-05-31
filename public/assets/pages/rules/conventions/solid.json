@@ -1,0 +1,8 @@
+{
+    "description": {
+        "default": "## SOLID Principles\n\n- **Single Responsibility (SRP)**: A class/module should have one, and only one, reason to change.\n- **Open/Closed (OCP)**: Entities should be open for extension but closed for modification. Use interfaces and polymorphism.\n- **Liskov Substitution (LSP)**: Derived classes must be substitutable for their base classes without altering the correctness of the program.\n- **Interface Segregation (ISP)**: Create fine-grained interfaces that are client-specific. Avoid \"fat\" interfaces.\n- **Dependency Inversion (DIP)**: Depend on abstractions (interfaces), not on concretions (implementations). High-level modules should not depend on low-level modules."
+    },
+    "recommendedWith": ["clean-architecture"],
+    "discouragedWith": [],
+    "visibility": true
+}

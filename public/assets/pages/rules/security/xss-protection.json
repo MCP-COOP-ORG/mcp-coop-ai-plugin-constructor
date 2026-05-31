@@ -1,10 +1,8 @@
 {
     "description": {
-        "default": "This is a placeholder content for xss-protection.",
-        "claude": "This is a placeholder content for xss-protection.",
-        "cursor": "This is a placeholder content for xss-protection.",
-        "antigravity": "This is a placeholder content for xss-protection."
+        "default": "## XSS Protection\n\n- Utilize the framework's native DOM sanitization (e.g., Angular's `DomSanitizer`) — **NEVER** bypass security trusts (`bypassSecurityTrustHtml`) without strict justification and manual sanitization.\n- **NEVER** render raw HTML from untrusted user input directly into the DOM.\n- Use `textContent` or framework interpolation (which auto-escapes) instead of `innerHTML` when displaying user data.\n- Enforce a strict Content Security Policy (CSP) via HTTP headers or meta tags to restrict the sources of executable scripts.\n- Validate and sanitize all external URLs before using them in `href` or `src` attributes to prevent `javascript:` URI attacks."
     },
-    "recommendedWith": ["auth-guards"],
-    "discouragedWith": []
+    "recommendedWith": [],
+    "discouragedWith": [],
+    "visibility": true
 }

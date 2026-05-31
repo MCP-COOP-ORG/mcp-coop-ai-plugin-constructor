@@ -12,5 +12,6 @@
             "type": "command",
             "command": "git status --porcelain 2>/dev/null | head -20"
         }
-    }
+    },
+    "visibility": true
 }

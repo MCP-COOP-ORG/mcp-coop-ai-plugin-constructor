@@ -1,0 +1,8 @@
+{
+    "description": {
+        "default": "## Clean Architecture\n\n- Organize the system into concentric layers: Domain (core), Application (use cases), Adapters (interfaces), and Infrastructure (external).\n- Enforce the **Dependency Rule**: Source code dependencies must point only inward, toward higher-level policies.\n- Keep the Domain layer pure: **NEVER** import UI frameworks, databases, or third-party libraries into domain entities.\n- Use interfaces (Ports) in the inner layers and implement them (Adapters) in the outer layers.\n- Isolate use cases into explicit command/query handlers or services.\n- Push side effects (I/O, database, network) to the outermost edges of the system."
+    },
+    "recommendedWith": ["solid"],
+    "discouragedWith": ["mvc"],
+    "visibility": true
+}

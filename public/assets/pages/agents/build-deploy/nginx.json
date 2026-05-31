@@ -1,0 +1,8 @@
+{
+    "description": {
+        "default": "## Nginx Configuration Standards\n\n- Configure `try_files $uri $uri/ /index.html` for SPA routing — all non-file requests must fall back to the app entry point.\n- Enable gzip compression for text-based assets (`text/html`, `application/javascript`, `text/css`, `application/json`).\n- Set `Cache-Control: public, max-age=31536000, immutable` for hashed static assets (JS, CSS bundles).\n- Set `Cache-Control: no-cache` for `index.html` and service worker files to ensure users always get the latest version.\n- **NEVER** expose server version or internal headers — add `server_tokens off`.\n- Use `location` blocks with precise matching for static assets and API proxying.\n- Configure `gzip_min_length` to avoid compressing tiny responses where overhead exceeds benefit."
+    },
+    "recommendedWith": ["docker"],
+    "discouragedWith": [],
+    "visibility": true
+}

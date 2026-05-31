@@ -7,5 +7,7 @@
         "antigravity": "Notification",
         "claude": "Notification"
     },
-    "description": "Fires when the AI triggers a system notification or alert."
+    "description": "Fires when the AI triggers a system notification or alert.",
+    "visibility": true,
+    "commonInfo": "## System Notifications\nTrigger native OS alerts when the agent requires explicit user attention or approval."
 }

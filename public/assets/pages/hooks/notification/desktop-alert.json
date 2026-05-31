@@ -13,5 +13,6 @@
             "type": "command",
             "command": "osascript -e 'display notification \"Claude Code needs your attention\" with title \"Agent Notification\"' 2>/dev/null"
         }
-    }
+    },
+    "visibility": true
 }

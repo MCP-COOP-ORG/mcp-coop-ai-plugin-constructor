@@ -1,0 +1,5 @@
+{
+    "label": "Platform-as-a-Service (PaaS)",
+    "description": "## PaaS Domain Requirements\n\n- **Infrastructure Abstraction**: Design systems that hide underlying infrastructure complexity from the end-user. Prioritize declarative configuration over imperative scripting.\n- **Resource Isolation**: Ensure strict sandboxing for user-provided code or containers. Assume all user workloads are potentially hostile.\n- **API-First Design**: The platform MUST be fully controllable via APIs. UIs and CLIs should be built exclusively on top of the public API surface.\n- **Observability**: Implement deep telemetry by default. Every system component must expose metrics, logs, and traces for high-availability monitoring and debugging.",
+    "visibility": true
+}

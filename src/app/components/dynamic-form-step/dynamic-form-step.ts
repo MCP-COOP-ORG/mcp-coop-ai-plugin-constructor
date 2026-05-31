@@ -28,11 +28,14 @@ export class DynamicFormStep extends BaseFormStep implements OnInit {
      */
     readonly view = {
         step: GENERATED_PAGES_CONFIG[this.stepId],
-        blocksArray: GENERATED_PAGES_CONFIG[this.stepId].categories.map((cat: ConfigCategory) => ({
-            ...cat,
-            options: cat.items,
-            ...(cat.default ? { default: cat.default } : {}),
-        })),
+        blocksArray: GENERATED_PAGES_CONFIG[this.stepId].categories
+            .filter((cat: ConfigCategory) => cat.visibility !== false)
+            .map((cat: ConfigCategory) => ({
+                ...cat,
+                options: cat.items.filter((item) => item.visibility === true),
+                ...(cat.default ? { default: cat.default } : {}),
+            }))
+            .filter((cat) => cat.options.length > 0),
     };
 
     protected override get stateSignal(): WritableSignal<Record<string, unknown>> {

@@ -1,10 +1,8 @@
 {
     "description": {
-        "default": "This is a placeholder content for husky.",
-        "claude": "This is a placeholder content for husky.",
-        "cursor": "This is a placeholder content for husky.",
-        "antigravity": "This is a placeholder content for husky."
+        "default": "## Husky & Git Hooks\n\n- Use Husky to enforce quality gates on the developer's machine before code reaches the remote repository.\n- Configure a `pre-commit` hook that runs formatting, linting, and type-checking on staged files (via `lint-staged`).\n- **NEVER** bypass hooks (`git commit --no-verify`) unless resolving complex merge conflicts.\n- Keep hooks fast — only run checks on modified files, not the entire codebase, during the pre-commit phase."
     },
     "recommendedWith": ["eslint", "prettier"],
-    "discouragedWith": []
+    "discouragedWith": [],
+    "visibility": true
 }

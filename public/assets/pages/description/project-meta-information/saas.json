@@ -1,4 +1,5 @@
 {
-    "label": "SaaS",
-    "description": "A multi-tenant Software-as-a-Service architecture designed for cloud scalability and subscription management. It features robust user authentication, tiered access control, and analytics."
+    "label": "B2B SaaS Platform",
+    "description": "## SaaS Domain Requirements\n\n- **Multi-Tenancy & Data Isolation**: Tenant data isolation is paramount. Every database query, API route, and cache key MUST be scoped by `tenantId` or `workspaceId` to prevent catastrophic cross-tenant data leaks.\n- **Billing & Subscriptions**: Build resilient, idempotent webhook handlers for payment gateways (Stripe, LemonSqueezy). Assume network failures and retry events gracefully without duplicating charges.\n- **Access Control (RBAC)**: Implement strict Role-Based Access Control at both the API boundary and UI component level. Never trust client-side role claims for authorization.\n- **Scalability**: Design stateless API endpoints to allow horizontal scaling. Offload heavy computational tasks (reports, bulk exports, emails) to background worker queues.",
+    "visibility": true
 }

@@ -1,6 +1,8 @@
 {
-    "title": "Security Rules",
+    "title": "Security",
     "icon": "@tui.lock",
     "type": "checkbox",
-    "order": 3
+    "order": 4,
+    "commonInfo": "## Security Fundamentals\n\n### Data Protection\n\n- **NEVER** trust client-side data. All inputs must be validated on the server.\n- **NEVER** store sensitive data (tokens, passwords, PII) in `localStorage` without encryption.\n- Use `sessionStorage` for ephemeral state that should be cleared when the tab closes.\n\n### Authentication & Authorization\n\n- Implement Principle of Least Privilege: users and services should only have access to what they strictly need.\n- Fail securely: if authorization fails or errors occur, the system should default to denying access.\n- Ensure all API endpoints verify both authentication (who you are) and authorization (what you can do).\n\n### Vulnerability Prevention\n\n- Keep dependencies updated and regularly scan for known vulnerabilities (CVEs).\n- **NEVER** expose `.env` files or secret keys in client-side bundles.\n- Use parameterized queries or ORMs on the backend to prevent SQL Injection.",
+    "visibility": true
 }

@@ -1,5 +1,8 @@
 {
     "description": {
-        "default": "## Brainstorm & Solution Exploration\n\nWhen tackling complex problems:\n1. Generate at least 2-3 alternative approaches before committing to one.\n2. Evaluate each approach against trade-offs: performance, maintainability, complexity.\n3. Consider edge cases and failure modes for each solution.\n4. Prefer battle-tested patterns over novel inventions unless there's a clear advantage.\n5. Document the reasoning behind the chosen approach for future reference."
-    }
+        "default": "## Brainstorming & Solution Evaluation Workflow\n\nUse this workflow when the user asks for ideas, architecture designs, or \"how should we do this?\"\n\n### Phase 1: Problem Definition\n1. Identify the core business constraint and technical limitations.\n2. Summarize the problem back to the user to ensure alignment.\n\n### Phase 2: Option Generation\n1. Formulate exactly 2 to 3 distinct technical approaches.\n2. For each approach, define:\n   - **Pros**: Why it works well.\n   - **Cons**: Trade-offs, risks, or technical debt introduced.\n   - **Complexity**: Low, Medium, or High.\n\n### Phase 3: Recommendation & Decision\n1. Select the approach that best fits the project's Core Directives (e.g., SOLID, Zero Literals).\n2. Present the options using a Markdown table for easy comparison.\n3. State your recommendation clearly at the end.\n4. **Checkpoint**: Wait for the user to select an option before moving to the Planning workflow."
+    },
+    "recommendedWith": ["planning"],
+    "discouragedWith": [],
+    "visibility": true
 }

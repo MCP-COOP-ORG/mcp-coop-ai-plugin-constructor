@@ -1,0 +1,8 @@
+{
+    "description": {
+        "default": "## DRY (Don't Repeat Yourself)\n\n- Every piece of knowledge must have a single, unambiguous, authoritative representation within a system.\n- Consolidate duplicate logic into reusable functions or components.\n- Extract magic numbers and hardcoded strings into named constants.\n- Generalize shared behavior, but do not prematurely abstract if the code only occurs twice (Rule of Three).\n- Apply DRY to infrastructure, configurations, and documentation as well as source code."
+    },
+    "recommendedWith": ["kiss", "yagni"],
+    "discouragedWith": [],
+    "visibility": true
+}

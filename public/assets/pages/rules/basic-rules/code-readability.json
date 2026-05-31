@@ -1,5 +1,8 @@
 {
     "description": {
-        "default": "## Code Readability & Maintainability\n\n- Write self-documenting code with clear, descriptive variable and function names.\n- Keep functions short and focused on a single responsibility.\n- Avoid deeply nested conditionals — use early returns and guard clauses.\n- Prefer composition over inheritance.\n- Follow the DRY principle (Don't Repeat Yourself) but not at the cost of clarity.\n- Use meaningful comments to explain **why**, not **what**."
-    }
+        "default": "## Code Readability\n\n- Optimize for vertical reading: keep line lengths reasonable and group related logic together without excessive whitespace.\n- Use descriptive, intention-revealing names even if they are long. `calculateTotalTaxAmount` is better than `calcTax`.\n- Avoid negative conditionals where positive ones are possible (e.g., use `isEnabled` instead of `isNotDisabled`).\n- Format complex boolean expressions across multiple lines, or extract them into named variables.\n- Keep indentation shallow. If a function is nested 3 or 4 levels deep, extract inner logic."
+    },
+    "recommendedWith": ["naming-conventions"],
+    "discouragedWith": [],
+    "visibility": true
 }

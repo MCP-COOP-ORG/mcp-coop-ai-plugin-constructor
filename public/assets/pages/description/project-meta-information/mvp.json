@@ -1,0 +1,5 @@
+{
+    "label": "Startup MVP",
+    "description": "## MVP Domain Requirements\n\n- **Speed to Market**: Prioritize rapid iteration and shipping over perfect architecture. Implement only what is strictly necessary to validate the core business hypothesis.\n- **YAGNI (You Aren't Gonna Need It)**: Aggressively avoid premature optimization. Do not build generic, highly scalable abstractions for features that might change or be removed next week.\n- **Pragmatic Debt**: It is acceptable to hardcode non-critical configurations and defer edge-case handling. However, technical debt MUST be explicitly documented (e.g., using `// TODO: Tech Debt` comments).\n- **Core Flow Focus**: Spend 90% of development effort polishing the \"Happy Path\" of the primary user workflow. Gracefully degrade or use simple error messages for secondary flows.",
+    "visibility": true
+}

@@ -1,10 +1,8 @@
 {
     "description": {
-        "default": "This is a placeholder content for clean-code.",
-        "claude": "This is a placeholder content for clean-code.",
-        "cursor": "This is a placeholder content for clean-code.",
-        "antigravity": "This is a placeholder content for clean-code."
+        "default": "## Clean Code Principles\n\n- Write small, single-purpose functions — ideally under 20 lines.\n- Extract complex conditional logic into well-named helper functions or variables.\n- Avoid deep nesting — use early returns (guard clauses) to handle edge cases first.\n- Prefer descriptive names over short ones — **NEVER** use single-letter variables unless for simple loop counters.\n- Avoid side effects in functions — prefer pure functions where possible.\n- Comment the \"why\", not the \"what\" — the code should explain what it does.\n- Eliminate dead code immediately — do not leave commented-out blocks \"just in case\"."
     },
-    "recommendedWith": ["solid", "eslint"],
-    "discouragedWith": []
+    "recommendedWith": ["solid", "dry", "kiss"],
+    "discouragedWith": [],
+    "visibility": true
 }

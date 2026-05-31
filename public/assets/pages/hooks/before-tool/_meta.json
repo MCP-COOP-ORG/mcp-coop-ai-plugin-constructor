@@ -8,5 +8,7 @@
         "claude": "PreToolUse",
         "cursor": "preToolUse"
     },
-    "description": "Fires every time the AI is about to execute a tool or shell command."
+    "description": "Fires every time the AI is about to execute a tool or shell command.",
+    "visibility": true,
+    "commonInfo": "## Pre-Tool Execution Guards\nIntercept and validate tool parameters before execution to prevent destructive actions or enforce security policies."
 }

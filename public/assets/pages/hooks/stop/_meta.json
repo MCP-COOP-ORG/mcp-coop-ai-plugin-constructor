@@ -7,5 +7,7 @@
         "claude": "Stop",
         "cursor": "stop"
     },
-    "description": "Fires when the AI session is explicitly stopped or finished."
+    "description": "Fires when the AI session is explicitly stopped or finished.",
+    "visibility": true,
+    "commonInfo": "## Execution Completion\nRun auditing scripts (like git status) when the agent finishes its assigned task and goes idle."
 }

@@ -1,10 +1,8 @@
 {
     "description": {
-        "default": "This is a placeholder content for typescript.",
-        "claude": "This is a placeholder content for typescript.",
-        "cursor": "This is a placeholder content for typescript.",
-        "antigravity": "This is a placeholder content for typescript."
+        "default": "## TypeScript Development Standards\n\n- Enable `strict: true` in `tsconfig.json` — this includes `strictNullChecks`, `noImplicitAny`, and `strictFunctionTypes`.\n- **NEVER** use `any` — use `unknown` for untyped values, then narrow with type guards.\n- **NEVER** use unsafe type assertions (`as Type`) — use runtime narrowing (`typeof`, `instanceof`, custom type guards).\n- Use `readonly` for properties and parameters that should not be mutated after initialization.\n- Prefer `interface` for object shapes and `type` for unions, intersections, and mapped types.\n- Use discriminated unions with a literal `type` field for state machines and polymorphic data.\n- Configure path aliases (`@shared/...`, `@services`) and enforce them via linter — **NEVER** use deep relative imports (`../../..`).\n- Use `as const` for literal objects and arrays that represent fixed configurations.\n- Prefer `Record<K, V>` over `{ [key: string]: V }` for index signatures."
     },
-    "recommendedWith": ["eslint", "strict-typing"],
-    "discouragedWith": []
+    "recommendedWith": ["angular", "eslint", "vitest"],
+    "discouragedWith": [],
+    "visibility": true
 }

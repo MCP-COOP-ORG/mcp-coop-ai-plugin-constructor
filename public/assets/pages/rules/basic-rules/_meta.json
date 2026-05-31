@@ -1,8 +1,8 @@
 {
     "title": "Basic Rules",
-    "icon": "@tui.shield",
+    "icon": "@tui.book-open",
     "type": "checkbox",
-    "order": 100,
-    "default": true,
-    "description": "Foundational coding standards and constraints recommended for every project."
+    "order": 3,
+    "commonInfo": "## Basic Rules Fundamentals\n\n### Communication\n\n- Code is a medium of communication between developers. Optimize for clarity over brevity.\n- Use pervasive, unambiguous domain terminology (Ubiquitous Language).\n- Document the \"why\" and \"what\" behind non-obvious design decisions, workarounds, or business logic.\n\n### Consistency\n\n- Follow established project conventions consistently, even if they differ from personal preference.\n- Use automated formatting tools (Prettier) to eliminate debates over code style.\n- Name variables, functions, and files following a predictable, project-wide scheme.\n\n### Robustness\n\n- Design systems to fail safely and predictably.\n- Validate all inputs at system boundaries (API endpoints, UI forms).\n- Implement global error boundaries to prevent catastrophic UI crashes and ensure graceful degradation.",
+    "visibility": true
 }

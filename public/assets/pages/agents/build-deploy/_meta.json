@@ -1,0 +1,8 @@
+{
+    "title": "Build & Deploy",
+    "icon": "@tui.rocket",
+    "type": "checkbox",
+    "order": 6,
+    "visibility": true,
+    "commonInfo": "## Build & Deploy Fundamentals\n\n### Reproducible Builds\n\n- Pin all dependency versions explicitly — lock files (`package-lock.json`, `yarn.lock`) **MUST** be committed to version control.\n- Use deterministic install commands (`npm ci`, not `npm install`) in CI/CD pipelines.\n- Pin base image and tool versions (`node:22-alpine`, not `node:latest`) — **NEVER** use `latest` tags in production.\n\n### Environment Management\n\n- Separate build-time and runtime configuration — **NEVER** embed secrets or environment-specific values at build time.\n- Maintain strict environment parity between development, staging, and production.\n- Use environment variables for runtime configuration — **NEVER** hardcode hostnames, ports, or API URLs.\n\n### Pipeline Design\n\n- Structure pipelines as isolated stages: lint → typecheck → test → build → deploy.\n- **NEVER** deploy without passing all quality gates (lint, type-check, tests).\n- Cache dependencies and build artifacts between pipeline runs to minimize build times.\n- Tag every deployable artifact with a unique identifier (commit SHA, build number).\n\n### Artifact Management\n\n- Build artifacts **MUST** be immutable — **NEVER** modify a deployed artifact in place.\n- Use multi-stage builds to separate build dependencies from runtime image.\n- Clean up dangling images and unused artifacts to prevent disk exhaustion."
+}

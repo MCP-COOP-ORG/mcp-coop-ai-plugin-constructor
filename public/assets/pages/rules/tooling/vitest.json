@@ -1,10 +1,8 @@
 {
     "description": {
-        "default": "This is a placeholder content for vitest.",
-        "claude": "This is a placeholder content for vitest.",
-        "cursor": "This is a placeholder content for vitest.",
-        "antigravity": "This is a placeholder content for vitest."
+        "default": "## Vitest Configuration\n\n- Define explicit coverage thresholds in `vitest.config.ts` (Lines, Branches, Functions, Statements) and fail the build if they are not met.\n- Group tests using `describe` blocks logically, and use `beforeEach`/`afterEach` for setup and teardown to ensure test isolation.\n- Run tests in watch mode (`vitest --watch`) during active development for immediate feedback.\n- Use Vitest's UI (`vitest --ui`) for easier debugging and visualization of coverage reports.\n- Configure path aliases in Vitest to match TypeScript configuration (`tsconfig.json`)."
     },
-    "recommendedWith": ["vue", "typescript"],
-    "discouragedWith": ["jest"]
+    "recommendedWith": [],
+    "discouragedWith": ["jest"],
+    "visibility": true
 }
