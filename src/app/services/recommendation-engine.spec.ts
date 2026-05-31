@@ -73,12 +73,12 @@ describe('RecommendationEngine', () => {
     it('should work across multiple pages (agents + rules + workflows)', () => {
         // Select nestjs (agents) which recommends typescript and docker
         builderState.dynamicData['agents'].set({ backend: ['nestjs'] });
-        // Select gitflow (workflows) which discourages trunk-based
-        builderState.dynamicData['workflows'].set({ development: ['gitflow'] });
+        // Select clean-architecture (rules) which discourages mvc
+        builderState.dynamicData['rules'].set({ conventions: ['clean-architecture'] });
 
         const map = engine.statusMap();
         expect(map.get('typescript')).toBe('recommended');
-        expect(map.get('trunk-based')).toBe('discouraged');
+        expect(map.get('mvc')).toBe('discouraged');
     });
 
     it('should return undefined via getStatus for neutral items', () => {

@@ -1,0 +1,8 @@
+{
+    "name": "mcp-coop-ai-plugin-constructor-plugin",
+    "description": "This is a deterministic configuration engine for **AI-Driven Development (AIDD)**. It eliminates the primary failure mode of LLMs: context-free hallucinations. By default, foundation models guess architectural boundaries, causing technical debt.\n\nThis client-side application visually constructs **autonomous AI agents** explicitly bound to a project's codebase. Users define platforms, stacks, and architectures. The **Smart Rules Engine** validates dependencies for logical consistency. The critical feature is the **Core Directives** injection. It embeds **formal logic constraints** (Identity, Sufficient Reason) and **dialectical reasoning** (Think Before Act) into the agent's context window. This strictly forces the AI to analyze code, request clarifications, and stop assuming.\n\nThe output is a zero-backend, locally generated **native IDE plugin** ensuring 100% data privacy. It standardizes erratic AI into a **disciplined engineering unit**.",
+    "version": "1.0.0",
+    "author": {
+        "name": "MCP COOP AI Plugin Constructor"
+    }
+}

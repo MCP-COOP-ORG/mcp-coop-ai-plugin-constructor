@@ -1,6 +1,6 @@
 {
     "description": {
-        "default": "## ESLint Standards\n\n- Use ESLint flat config (`eslint.config.js`) for modern, consolidated configuration.\n- **NEVER** use `eslint-disable` or `eslint-disable-next-line` comments. All linting errors MUST be fixed at the root cause.\n- Enforce strict boundaries and dependency rules using plugins (e.g., preventing cross-module imports).\n- Configure ESLint to run automatically on save in the IDE and via pre-commit hooks.\n- Resolve all linter warnings — treat them as errors in the CI pipeline."
+        "default": "## ESLint Standards\n\n- Use ESLint flat config (`eslint.config.js`) for modern, consolidated configuration.\n- **NO LINTER CRUTCHES**: Absolutely NO `eslint-disable` or `eslint-disable-next-line` comments allowed. All linting and TypeScript errors MUST be fixed \"honestly\" at the root cause (e.g., using `() => undefined` instead of empty blocks, properly linking `<label for>` to `<textarea id>`, strictly typing `any` to `unknown` or specific generics).\n- Enforce strict boundaries and dependency rules using plugins (e.g., preventing cross-module imports).\n- Configure ESLint to run automatically on save in the IDE and via pre-commit hooks.\n- Resolve all linter warnings \u2014 treat them as errors in the CI pipeline."
     },
     "recommendedWith": ["prettier"],
     "discouragedWith": [],

@@ -3,8 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 
 import { CheckboxGroup } from './checkbox-group';
-import { RecommendationEngine, BuilderState, TemplateInterpolator } from '@services';
-import { TuiDialogService } from '@taiga-ui/core';
+import { RecommendationEngine, BuilderState, TemplateInterpolator, DialogManager } from '@services';
 import { ConfigItem } from '@shared/models';
 
 const MOCK_OPTIONS: ConfigItem[] = [
@@ -17,7 +16,7 @@ describe('CheckboxGroup', () => {
     let component: CheckboxGroup;
     let fixture: ComponentFixture<CheckboxGroup>;
     let mockRecommendationEngine: { getStatus: ReturnType<typeof vi.fn> };
-    let mockDialogService: { open: ReturnType<typeof vi.fn> };
+    let mockDialogManager: { openInfoDialog: ReturnType<typeof vi.fn> };
     let mockInterpolator: { fetchJson: ReturnType<typeof vi.fn> };
 
     beforeEach(async () => {
@@ -27,8 +26,8 @@ describe('CheckboxGroup', () => {
             getStatus: vi.fn().mockReturnValue(undefined),
         };
 
-        mockDialogService = {
-            open: vi.fn().mockReturnValue(of(undefined)),
+        mockDialogManager = {
+            openInfoDialog: vi.fn().mockReturnValue(of(undefined)),
         };
 
         mockInterpolator = {
@@ -45,7 +44,7 @@ describe('CheckboxGroup', () => {
             providers: [
                 BuilderState,
                 { provide: RecommendationEngine, useValue: mockRecommendationEngine },
-                { provide: TuiDialogService, useValue: mockDialogService },
+                { provide: DialogManager, useValue: mockDialogManager },
                 { provide: TemplateInterpolator, useValue: mockInterpolator },
             ],
         }).compileComponents();
@@ -102,7 +101,7 @@ describe('CheckboxGroup', () => {
         expect(component.getStatus('opt1')).toBeUndefined();
     });
 
-    it('should call TuiDialogService.open with correct params on showInfo', async () => {
+    it('should call DialogManager.openInfoDialog with correct params on showInfo', async () => {
         const fakeEvent = { preventDefault: vi.fn(), stopPropagation: vi.fn() } as unknown as Event;
 
         await component.showInfo(fakeEvent, MOCK_OPTIONS[0]);
@@ -113,10 +112,10 @@ describe('CheckboxGroup', () => {
 
         // Wait for the promise to resolve
         await vi.waitFor(() => {
-            expect(mockDialogService.open).toHaveBeenCalledWith('Default description for testing', {
-                label: 'Option 1',
-                size: 'm',
-            });
+            expect(mockDialogManager.openInfoDialog).toHaveBeenCalledWith(
+                'Option 1',
+                'Default description for testing',
+            );
         });
     });
 
@@ -138,6 +137,6 @@ describe('CheckboxGroup', () => {
 
         // showInfo is async, we need to wait for it
         await fixture.whenStable();
-        expect(mockDialogService.open).toHaveBeenCalled();
+        expect(mockDialogManager.openInfoDialog).toHaveBeenCalled();
     });
 });

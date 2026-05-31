@@ -6,13 +6,14 @@ This document serves as the absolute source of truth for the project's architect
 
 ## 1. High-Level Technology Stack
 
-- **Framework:** Angular 21+ (Strictly Standalone Components, no `NgModules`).
+- **Framework:** Angular 21.2+ (Strictly Standalone Components, no `NgModules`).
 - **State Management:** Angular Signals (Strictly no `NgRx`, no `RxJS` Subjects for state).
-- **UI Library:** Taiga UI 5.x.
+- **UI Library:** Taiga UI 5.5.
 - **Micro-Frontend Architecture:** `@angular-architects/native-federation`.
 - **Client-Side ZIP Generation:** `fflate`.
-- **Code Editor:** CodeMirror 6.
+- **Code Editor:** CodeMirror 6.42.
 - **Testing:** Vitest & JSDOM (Strictly enforced >85% global coverage).
+- **Static Analysis & Tooling:** ESLint, Prettier, and Husky enforce strict linting, formatting, and the Zero-Literals policy during pre-commit hooks.
 - **Production Infrastructure:** Docker, Nginx, Google Cloud Workload Identity Federation, PWA.
 
 ---
@@ -26,17 +27,18 @@ The Builder is a 100% Client-Side Rendered (CSR) application with no backend log
 We do not hardcode UI steps or options in TypeScript. The entire builder UI is dynamically generated based on the contents of the `public/assets/` directory.
 
 1. The script `scripts/generate-pages-config.ts` runs at build time (`npm run generate:pages`).
-2. It crawls `public/assets/pages/` (agents, rules, workflows, hooks) and `public/assets/platforms/` (cursor, claude, etc.).
+2. It crawls `public/assets/pages/` (agents, rules, workflows, hooks) and `public/assets/platforms/` (antigravity, claude, cursor).
 3. It generates a type-safe TypeScript configuration file (`GENERATED_PAGES_CONFIG`).
 4. The application routing and `DynamicFormStep` component iterate over this configuration to render the Stepper, tabs, checkboxes, and radio buttons dynamically.
 
-### B. State Management (`BuilderState`)
+### B. State Management (`BuilderState` & Managers)
 
-Instead of a massive monolithic state object, the application state is completely reactive and dynamic.
+Instead of a massive monolithic state object, the application state is completely reactive and modular.
 
-- The `BuilderState` service maintains a `dynamicData: Record<string, WritableSignal<string[]>>` map.
-- As the user navigates through dynamically generated pages, the state dynamically allocates Signals for new form controls.
-- This ensures **Granular Reactivity**: changing an option in "Backend" only triggers updates for the "Backend" UI block, not the entire application.
+- **`BuilderState`**: Maintains a `dynamicData: Record<string, WritableSignal<string[]>>` map. As the user navigates through dynamically generated pages, the state dynamically allocates Signals for new form controls. This ensures **Granular Reactivity**: changing an option in "Backend" only triggers updates for the "Backend" UI block.
+- **`PresetService`**: Serializes current `BuilderState` into JSON configurations and saves/restores them.
+- **`DialogManager`**: Orchestrates modals and contextual overlays dynamically.
+- **`GlobalErrorHandler`**: A centralized error boundary required for intercepting exceptions and displaying standardized toasts.
 
 ### C. Recommendation Engine (Cross-Page Dependency Tracking)
 
@@ -49,13 +51,41 @@ The `RecommendationEngine` is a reactive service that ensures logical consistenc
 
 ### D. Archive Generation (`ArchiveGenerator` & `TemplateInterpolator`)
 
-When the user clicks "Download" on the Review Step, the application must compile all selected options into a single archive.
+When the user clicks "Download", the application compiles all selected options into a single archive.
 
-1. `ArchiveGenerator` reads the active platform (e.g., `cursor`) from the `BuilderState`.
-2. It loads the platform's specific schema from `public/assets/platforms/cursor.json`.
+1. `ArchiveGenerator` reads the active AI Environment from the `BuilderState`.
+2. It loads the platform's specific `ArchivePattern` schema from `src/app/shared/schemas/` (e.g., `antigravity.ts`, `claude.ts`).
 3. It iterates over the selected IDs in `BuilderState.dynamicData`.
-4. `TemplateInterpolator` fetches the JSON snippets for each ID, processes platform-specific overrides, and injects the raw markdown strings into the platform's master template using `{{ dynamicCategory }}` tokens.
-5. `fflate` compresses the generated strings into a `.zip` blob in memory and triggers a native browser download.
+4. `TemplateInterpolator` fetches the JSON snippets for each ID, processes platform-specific overrides from `public/assets/platforms/`, and injects raw strings into the master template.
+5. **Core Directives Injection**: `TemplateInterpolator` also injects the Single Source of Truth string defined in `src/app/shared/constants/core-directives.ts` replacing the `{{ core_directives }}` placeholder.
+6. `fflate` compresses the generated files into a `.zip` blob in memory and triggers a native browser download.
+
+### E. Deep Dive: Dynamic Forms & Reactive State
+
+The core complexity of the application lies in how it seamlessly translates raw file-system JSON assets into a fully functional, stateful, and reactive form without hardcoding UI logic.
+
+#### 1. Universal Routing & `DynamicFormStep`
+
+Instead of creating a dedicated Angular Component for every single step (e.g., `AgentsComponent`, `RulesComponent`), the application uses a single universal `DynamicFormStep`.
+
+- **Route Interception:** The component uses `ActivatedRoute` to extract the `stepId` from the route snapshot.
+- **View Model Construction:** It dynamically builds a `readonly view` object by querying `GENERATED_PAGES_CONFIG[stepId]`. It strictly filters the generated categories and items based on the `visibility` flags defined in the original JSON schemas.
+- **Performance:** By using `ChangeDetectionStrategy.OnPush`, the step only re-renders when the specifically bound reactive Signal triggers an update, bypassing unnecessary DOM checks.
+
+#### 2. Dynamic State Allocation (`BuilderState`)
+
+To avoid the performance bottlenecks of a massive monolithic state tree, `BuilderState` utilizes a dynamic allocation strategy.
+
+- **Pre-Allocation:** During initialization, the service iterates over `Object.keys(GENERATED_PAGES_CONFIG)` and explicitly pre-allocates a `WritableSignal<Record<string, unknown>>` for _every_ configured page.
+- **Direct Binding:** When a `DynamicFormStep` is instantiated, it maps its internal `stateSignal` directly to its pre-allocated slice: `this.builderState.dynamicData[this.stepId]`.
+- **Granular Reactivity:** This isolation guarantees that clicking a checkbox on the "Rules" page only triggers reactivity for the "Rules" UI tree. It prevents cross-contamination of change detection cycles across the app.
+
+#### 3. State Persistence (The Memento Pattern)
+
+The application ensures that user sessions survive accidental refreshes using a reactive implementation of the Memento pattern.
+
+- **Auto-Serialization:** An Angular `effect()` is established inside `BuilderState`. Whenever _any_ underlying signal mutations occur, the effect seamlessly serializes the entire dynamic state map into a `BuilderSnapshot` and commits it to `sessionStorage`.
+- **SSR Safety Guard:** The storage API calls are strictly shielded behind `isPlatformBrowser(this.platformId)` to prevent server-side rendering crashes and maintain maximum compatibility.
 
 ---
 
@@ -102,21 +132,22 @@ The application has two parallel build targets defined in `angular.json`:
 ```text
 src/
 ├── app/
-│   ├── pages/               # Routable "Smart" container components (Welcome, Builder, NotFound). They connect the router to the layout.
-│   ├── components/          # "Dumb" UI feature blocks representing specific workflow steps (SetupStep, ReviewStep, DynamicFormStep).
-│   ├── services/            # Core business logic layer (BuilderState, ArchiveGenerator, RecommendationEngine, PresetService).
-│   ├── shared/              # Reusable UI elements, pipes, custom form controls (RadioGroup, MultiSelect), models, and constants.
-│   │   ├── models/          # Central TypeScript interfaces and type definitions (e.g., PageConfig, BuilderStep, SelectOption).
-│   │   ├── constants/       # builder-dictionary.ts, builder-steps.ts (Zero Literals Enforcement).
+│   ├── pages/               # Routable "Smart" container components (Welcome, Builder, NotFound).
+│   ├── components/          # "Dumb" UI feature blocks representing specific workflow steps.
+│   ├── services/            # Core logic (BuilderState, ArchiveGenerator, RecommendationEngine, PresetService, DialogManager).
+│   ├── shared/              # Reusable UI elements, pipes, models, schemas, and constants.
+│   │   ├── schemas/         # ArchivePattern schemas dictating ZIP structures (antigravity.ts, claude.ts).
+│   │   ├── models/          # Central TypeScript interfaces and type definitions.
+│   │   ├── constants/       # builder-dictionary.ts, core-directives.ts (Zero Literals Enforcement).
 │   │   └── utils/           # Helper functions (DOM manipulation, FileTree generation, Type Guards).
 │   ├── app.config.ts        # Global application configuration (Providers, Router, Taiga UI init).
 │   └── app.routes.ts        # Application routing rules.
-├── styles/                  # Global CSS variables, resets, and Taiga UI theme customizations (themes.scss).
+├── styles/                  # Global CSS variables, resets, and Taiga UI theme customizations.
 └── index.html               # Main entry point.
 
 public/
 ├── assets/
-│   ├── pages/               # JSON snippets defining the steps, categories, and prompt data (agents, rules, workflows, hooks).
-│   ├── platforms/           # JSON files defining the structure and default templates for target IDEs (Cursor, Windsurf).
+│   ├── pages/               # JSON snippets defining steps, categories, and prompt data (agents, rules).
+│   ├── platforms/           # Master JSON definitions for target IDE platforms (antigravity.json, claude.json, cursor.json).
 │   └── images/              # Static media assets (e.g., hero image).
 ```
