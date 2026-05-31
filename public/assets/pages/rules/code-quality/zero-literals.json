@@ -1,10 +1,8 @@
 {
     "description": {
-        "default": "This is a placeholder content for zero-literals.",
-        "claude": "This is a placeholder content for zero-literals.",
-        "cursor": "This is a placeholder content for zero-literals.",
-        "antigravity": "This is a placeholder content for zero-literals."
+        "default": "## Zero Literals Policy (SSOT)\n\n- **NEVER** hardcode user-facing text, error messages, or configuration values directly in UI components or templates.\n- Extract all literals into a Single Source of Truth (SSOT), such as a centralized dictionary object (e.g., `BUILDER_DICTIONARY`).\n- Define UI structures (forms, steps, navigation) via configuration arrays rather than hardcoding DOM elements.\n- This pattern ensures the codebase is fully internationalization-ready (i18n) and permits global copy changes without touching component logic."
     },
-    "recommendedWith": ["strict-typing"],
-    "discouragedWith": []
+    "recommendedWith": ["view-model-pattern"],
+    "discouragedWith": [],
+    "visibility": true
 }

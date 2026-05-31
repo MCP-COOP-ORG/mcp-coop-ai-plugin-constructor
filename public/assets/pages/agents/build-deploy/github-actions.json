@@ -1,0 +1,8 @@
+{
+    "description": {
+        "default": "## GitHub Actions CI/CD Standards\n\n- Structure workflows as sequential jobs with explicit `needs` dependencies: `quality-checks` → `build` → `deploy`.\n- Use `actions/checkout@v4` and `actions/setup-node@v4` — **NEVER** use unversioned action references.\n- Use `npm ci` for dependency installation — **NEVER** use `npm install` in CI.\n- Cache `node_modules` or use lock-file-based caching to minimize install times.\n- Run all quality gates (lint, typecheck, test) in a dedicated job **before** the build job.\n- Use Workload Identity Federation for cloud authentication — **NEVER** use long-lived JSON key files.\n- Tag Docker images with both `latest` and `${{ github.sha }}` for traceability.\n- Use `workflow_dispatch` trigger for manual deployments alongside push-based automation.\n- Use path filters to avoid unnecessary builds when only documentation changes."
+    },
+    "recommendedWith": ["docker"],
+    "discouragedWith": [],
+    "visibility": true
+}

@@ -17,5 +17,6 @@
             "type": "command",
             "command": "eval \"$(direnv export bash 2>/dev/null)\""
         }
-    }
+    },
+    "visibility": true
 }

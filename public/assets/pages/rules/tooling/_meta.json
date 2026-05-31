@@ -1,6 +1,8 @@
 {
-    "title": "Tooling & Quality",
+    "title": "Tooling",
     "icon": "@tui.wrench",
     "type": "checkbox",
-    "order": 4
+    "order": 5,
+    "commonInfo": "## Tooling Fundamentals\n\n### Automation First\n\n- Automate formatting, linting, and type-checking — machines should argue about style, not humans.\n- Hook critical checks into the git lifecycle (pre-commit, pre-push) to prevent bad code from entering the repository.\n- Treat CI/CD pipelines as the ultimate source of truth for code quality.\n\n### Tool Configuration\n\n- Keep tool configuration centralized and version-controlled.\n- Rely on recommended rule sets from tool authors before customizing heavily.\n- Document any deviations from standard rules (e.g., why a specific ESLint rule is turned off globally).\n\n### Developer Experience (DX)\n\n- Fast feedback loops are critical — configure tools to run incrementally where possible.\n- Ensure local tooling matches CI tooling exactly to avoid \"it works on my machine\" issues.\n- Provide clear error messages and fix instructions when tooling blocks a developer action.",
+    "visibility": true
 }

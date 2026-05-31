@@ -8,5 +8,7 @@
         "claude": "SessionStart",
         "cursor": "sessionStart"
     },
-    "description": "Fires immediately when the AI session or project starts."
+    "description": "Fires immediately when the AI session or project starts.",
+    "visibility": true,
+    "commonInfo": "## Session Initialization\nInject environment variables, aliases, and contextual git history when the agent boots up."
 }

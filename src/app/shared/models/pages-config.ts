@@ -2,6 +2,7 @@ export interface MetaInformation {
     id: string;
     label: string;
     description: string;
+    visibility?: boolean;
 }
 
 export interface ConfigItem {
@@ -10,6 +11,7 @@ export interface ConfigItem {
     filePath: string;
     recommendedWith?: string[];
     discouragedWith?: string[];
+    visibility?: boolean;
 }
 
 export interface ConfigCategory {
@@ -21,6 +23,8 @@ export interface ConfigCategory {
     description?: string;
     events?: Record<string, string>;
     default?: boolean;
+    commonInfo?: string;
+    visibility?: boolean;
     items: ConfigItem[];
 }
 

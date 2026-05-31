@@ -1,8 +1,8 @@
 {
     "title": "Basic Workflows",
-    "icon": "@tui.zap",
+    "icon": "@tui.cpu",
     "type": "checkbox",
-    "order": 100,
-    "default": true,
-    "description": "Essential AI agent workflows recommended for every project."
+    "order": 2,
+    "commonInfo": "## Process Execution\n\n- Do not skip steps. Verification is mandatory.\n- If a step fails, stop the workflow and communicate the failure.\n- Artifacts (`task.md`, `implementation_plan.md`) are the source of truth for workflow state.",
+    "visibility": true
 }

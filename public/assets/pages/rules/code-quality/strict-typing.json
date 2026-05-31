@@ -1,10 +1,8 @@
 {
     "description": {
-        "default": "This is a placeholder content for strict-typing.",
-        "claude": "This is a placeholder content for strict-typing.",
-        "cursor": "This is a placeholder content for strict-typing.",
-        "antigravity": "This is a placeholder content for strict-typing."
+        "default": "## Strict Typing Enforcement\n\n- Enable all strict mode flags in `tsconfig.json` (`strictNullChecks`, `noImplicitAny`, etc.).\n- **NEVER** use the `any` type. If the shape is unknown, use `unknown` and apply runtime type guards.\n- **NEVER** use unsafe type casting (`as MyType`). Instead, use type predicates (`is MyType`) that validate the data at runtime.\n- Use `readonly` arrays and properties by default to prevent accidental mutations.\n- Define comprehensive interfaces for all external API boundaries and domain entities.\n- Avoid optional properties (`?`) when the absence of a value implies a distinct state — use discriminated unions instead."
     },
-    "recommendedWith": ["typescript", "eslint"],
-    "discouragedWith": []
+    "recommendedWith": ["eslint"],
+    "discouragedWith": [],
+    "visibility": true
 }

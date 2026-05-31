@@ -1,0 +1,8 @@
+{
+    "description": {
+        "default": "## BEM Architecture\n\n- Use Block-Element-Modifier (`block__element--modifier`) naming convention for CSS classes.\n- **Block**: Standalone entity that is meaningful on its own (e.g., `header`, `menu`, `button`).\n- **Element**: A part of a block that has no standalone meaning and is semantically tied to its block (e.g., `menu__item`, `header__title`).\n- **Modifier**: A flag on a block or element to change appearance or behavior (e.g., `button--disabled`, `menu__item--active`).\n- Use SCSS nesting (`&__element`, `&--modifier`) to explicitly define BEM structure.\n- **NEVER** use nested element selectors (e.g., `block__elem1__elem2`) — elements are always direct children of the block in naming."
+    },
+    "recommendedWith": [],
+    "discouragedWith": [],
+    "visibility": true
+}

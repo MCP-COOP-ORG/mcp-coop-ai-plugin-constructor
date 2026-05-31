@@ -1,5 +1,8 @@
 {
     "description": {
-        "default": "## Error Handling Standards\n\n- Never swallow exceptions silently — always log or re-throw.\n- Use typed error classes or error codes for predictable error flows.\n- Validate inputs at system boundaries (API endpoints, user inputs).\n- Implement graceful degradation over hard crashes.\n- Return meaningful error messages to callers without exposing internals."
-    }
+        "default": "## Error Handling\n\n- **NEVER** swallow exceptions silently with empty `catch` blocks.\n- Use a centralized `GlobalErrorHandler` to intercept unhandled exceptions and display standardized user-facing toasts.\n- Throw domain-specific custom errors rather than generic `Error` objects to allow precise handling.\n- Return meaningful, localized error messages to the user without exposing stack traces or internal system details.\n- Distinguish between expected operational errors (e.g., validation failure, network timeout) and unexpected programmer errors (bugs)."
+    },
+    "recommendedWith": [],
+    "discouragedWith": [],
+    "visibility": true
 }

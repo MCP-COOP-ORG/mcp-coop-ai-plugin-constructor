@@ -1,4 +1,5 @@
 {
-    "label": "AI Assistant & Bot",
-    "description": "This project operates in the AI agent and LLM integration domain, encompassing chatbot interfaces, agentic workflows, prompt and context engineering, and plugin/skill architectures. Code must account for non-deterministic model outputs, structured response handling, and clear separation between deterministic application logic and stochastic LLM reasoning. Treat all AI-generated content as untrusted input requiring validation before downstream use."
+    "label": "AI Agents & LLMs",
+    "description": "## AI Domain Requirements\n\n- **Stochastic vs Deterministic**: Strictly decouple unpredictable LLM inference from core deterministic business logic. Do not mix AI reasoning directly into state-mutating functions.\n- **Input Validation**: Treat all AI-generated content (especially structured JSON responses) as untrusted input. Always parse and validate data schemas before executing downstream system actions.\n- **Context Economics**: Optimize context windows. Avoid overloading prompts with redundant historical data or massive full-file dumps. Provide only the minimum required state.\n- **Agentic Loops**: Design robust error recovery for autonomous tool usage. Build circuit breakers for rate limits, API timeouts, and infinite thought loops.",
+    "visibility": true
 }

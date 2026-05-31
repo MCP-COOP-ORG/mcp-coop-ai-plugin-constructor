@@ -1,5 +1,8 @@
 {
     "description": {
-        "default": "## Project Context Loading\n\nAt the start of every session:\n1. Read the project's documentation files (README, ARCHITECTURE, CONTRIBUTING) to understand the codebase structure.\n2. Identify the tech stack, frameworks, and package versions from configuration files.\n3. Check for existing coding conventions, linting configs, and formatting rules.\n4. Understand the directory structure and module boundaries before making changes.\n5. Never assume — always verify the current state of the code."
-    }
+        "default": "## Agent Session Initialization Workflow\n\nExecute this workflow **implicity** at the start of every new conversation or major context switch.\n\n### Phase 1: Pre-Flight Check\n1. Read the system prompt and `GEMINI.md` carefully to internalize the project's strict prohibitions (e.g., no `any`, no `eslint-disable`).\n2. If MCP tools are available (e.g., `mcp_taiga-ui_get_overview`), execute them to load framework-specific context into your memory.\n3. Read `docs/context.md` to understand the most recent commits and current architectural state.\n\n### Phase 2: Environment Validation\n1. Verify the current working directory.\n2. Run `git status` to check the current branch and ensure there are no conflicting uncommitted changes that might interfere with your work.\n3. **Checkpoint**: If the tree is dirty and it wasn't expected, warn the user.\n\n### Phase 3: Acknowledgment\n1. Greet the user concisely.\n2. State the current branch and confirm that the project directives have been loaded.\n3. Ask for the first task."
+    },
+    "recommendedWith": [],
+    "discouragedWith": [],
+    "visibility": true
 }

@@ -6,4 +6,5 @@ export interface Preset {
     state: BuilderSnapshot;
     createdAt: number;
     isSystem?: boolean;
+    visibility?: boolean;
 }

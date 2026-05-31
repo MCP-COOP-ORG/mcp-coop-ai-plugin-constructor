@@ -1,0 +1,8 @@
+{
+    "title": "Version Control",
+    "icon": "@tui.git-branch",
+    "type": "checkbox",
+    "order": 1,
+    "commonInfo": "## Version Control Discipline\n\n- Commit messages MUST follow Conventional Commits (`feat:`, `fix:`, `refactor:`).\n- Commits must be atomic — one logical change per commit.\n- Rebase local feature branches on top of the latest integration branch to keep history linear before opening a PR.",
+    "visibility": true
+}

@@ -6,6 +6,17 @@ The MCP COOP AI Plugin Constructor is a standalone web application built with An
 
 ## Development History
 
+### Commit (Pending): feat: implement deep workflow algorithms, refine hook visibility, and standardize project meta information
+
+**Status:** Completed
+**Key Features Implemented:**
+
+- **Deep Workflow Algorithms**: Renamed `development` workflow category to `version-control` to align with Gitflow. Completely rewrote 5 workflow snippets (`gitflow.json`, `planning.json`, `brainstorm.json`, `orchestrator.json`, `init-agent.json`) from simple summaries into highly structured, phased algorithms with strict Checkpoints for the AI agent to follow.
+- **Hook Visibility Engine**: Implemented `visibility: true` filtering across the application for Presets and Project Meta Information inside `generate-pages-config.ts`. Analyzed 29 hook categories, identifying and enabling visibility only for 8 actionable shell/mcp hooks (e.g., `lockfile-guard`, `auto-prettier`), while keeping placeholder dummy hooks hidden from the UI but retained in the filesystem.
+- **Project Meta Information Standardization**: Renamed UI labels from "Domain-Specific Rules" to "Project Meta Information" in `builder-dictionary.ts` for clarity. Transformed 4 domain schemas (`ai-assistant.json`, `saas.json`, `paas.json`, `mvp.json`) into rich Markdown guidelines focusing on strict architectural requirements (e.g., stochastic vs deterministic decoupling, multi-tenancy isolation).
+- **Preset Isolation Fix**: Modified the `Web Platform (Angular)` preset to exclusively control downstream checkboxes (Agents, Workflows, Rules). Removed the legacy `description` block from its state to prevent it from overwriting the user's initial Project Identity inputs.
+- **TypeScript Interface Extension**: Expanded the `Preset` and `MetaInformation` interfaces in `src/app/shared/models/` to strictly type the new `visibility?: boolean;` flag, resolving TS2353 compilation errors.
+
 ### Commit (Pending): refactor: introduce BaseFormField to eliminate CVA boilerplate and stabilize global test coverage
 
 **Status:** Completed

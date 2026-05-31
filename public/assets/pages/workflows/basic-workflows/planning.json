@@ -1,5 +1,8 @@
 {
     "description": {
-        "default": "## Planning & Task Decomposition\n\nBefore starting implementation:\n1. Break the task into small, verifiable sub-tasks.\n2. Identify dependencies between sub-tasks and establish execution order.\n3. Assess the blast radius — trace all call sites and components affected by the change.\n4. For each sub-task, define clear success criteria and verification steps.\n5. Present the plan to the developer for review before proceeding."
-    }
+        "default": "## Deep Planning Workflow\n\nExecute this workflow whenever a task requires architectural changes, touches multiple files, or involves high ambiguity.\n\n### Phase 1: Discovery (No Code Changes)\n1. Read the user's request carefully.\n2. Use `grep_search`, `list_dir`, and `view_file` to map the current state of the codebase.\n3. Check `docs/context.md` or `docs/architecture.md` for existing patterns.\n4. **Checkpoint**: If you lack context, stop and ask the user clarifying questions. Do NOT guess.\n\n### Phase 2: Plan Construction\n1. Create or update `implementation_plan.md`.\n2. Document the goal, required changes, and specifically map out files to be modified, created, or deleted.\n3. Highlight any risks or breaking changes using `> [!WARNING]` alerts.\n\n### Phase 3: User Approval\n1. Stop execution.\n2. Explicitly ask the user to review `implementation_plan.md`.\n3. **NEVER** proceed to writing code until the user says \"Approved\" or \"Go ahead\"."
+    },
+    "recommendedWith": ["orchestrator"],
+    "discouragedWith": [],
+    "visibility": true
 }

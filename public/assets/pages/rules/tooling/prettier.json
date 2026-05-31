@@ -1,10 +1,8 @@
 {
     "description": {
-        "default": "This is a placeholder content for prettier.",
-        "claude": "This is a placeholder content for prettier.",
-        "cursor": "This is a placeholder content for prettier.",
-        "antigravity": "This is a placeholder content for prettier."
+        "default": "## Prettier Standards\n\n- Use Prettier as the absolute authority on code formatting — disable all ESLint rules that conflict with Prettier.\n- Provide a project-root `.prettierrc` configuration file to ensure identical formatting across all IDEs and environments.\n- Configure Prettier to format on save in the IDE.\n- Enforce formatting on staged files using `lint-staged` before commits are allowed.\n- **NEVER** manually format code to bypass Prettier's output."
     },
-    "recommendedWith": ["eslint", "husky"],
-    "discouragedWith": []
+    "recommendedWith": ["eslint"],
+    "discouragedWith": [],
+    "visibility": true
 }

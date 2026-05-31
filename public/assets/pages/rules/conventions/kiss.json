@@ -1,0 +1,8 @@
+{
+    "description": {
+        "default": "## KISS (Keep It Simple, Stupid)\n\n- Choose the simplest solution that effectively solves the problem.\n- Avoid clever, complex, or overly \"smart\" code that is difficult for others to understand.\n- Defer optimization until it's proven necessary by profiling (avoid premature optimization).\n- Prefer standard library functions and established patterns over custom implementations.\n- Ask yourself: \"Is there a simpler way to write this without losing clarity or performance?\""
+    },
+    "recommendedWith": ["dry", "yagni"],
+    "discouragedWith": [],
+    "visibility": true
+}

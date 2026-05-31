@@ -1,5 +1,8 @@
 {
     "description": {
-        "default": "## Orchestrator & Task Delegation\n\nWhen coordinating multi-step tasks:\n1. Define clear boundaries and responsibilities for each sub-task.\n2. Establish input/output contracts between coordinated units.\n3. Execute steps in the correct dependency order — never skip prerequisites.\n4. Validate the output of each step before proceeding to the next.\n5. Handle partial failures gracefully — one failed sub-task should not crash the entire pipeline."
-    }
+        "default": "## Multi-Step Orchestration Workflow\n\nUse this workflow to manage the execution of a long, multi-file implementation plan.\n\n### Phase 1: Initialization\n1. Create or update the `task.md` artifact.\n2. Break down the approved implementation plan into a checklist of atomic, verifiable tasks.\n\n### Phase 2: Iterative Execution\n1. Pick the first uncompleted task. Mark it as `[/]` (in progress).\n2. Execute the code changes for that specific task ONLY.\n3. Run local verification (e.g., `npm run lint`, `npm run typecheck`, or specific tests).\n4. **Checkpoint**: If verification fails, fix the errors immediately. Do not move to the next task.\n5. Mark the task as `[x]` (completed).\n\n### Phase 3: Synchronization\n1. Summarize what was done in the current step to the user.\n2. Ask if you should proceed to the next checklist item.\n3. Repeat Phase 2 until the checklist is fully complete."
+    },
+    "recommendedWith": ["planning"],
+    "discouragedWith": [],
+    "visibility": true
 }

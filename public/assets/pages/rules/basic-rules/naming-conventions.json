@@ -1,5 +1,8 @@
 {
     "description": {
-        "default": "## Naming Conventions\n\n- Use `camelCase` for variables, functions, and methods.\n- Use `PascalCase` for classes, interfaces, types, and components.\n- Use `UPPER_SNAKE_CASE` for constants and environment variables.\n- Use `kebab-case` for file names and directory names.\n- Prefix boolean variables with `is`, `has`, `should`, or `can`.\n- Avoid abbreviations and acronyms unless universally understood."
-    }
+        "default": "## Naming Conventions\n\n- Use `camelCase` for variables, functions, properties, and methods.\n- Use `PascalCase` for classes, interfaces, type aliases, and components.\n- Use `UPPER_SNAKE_CASE` for constants, environment variables, and dictionary objects.\n- Use `kebab-case` for file names and directory names (e.g., `user-profile.component.ts`).\n- Prefix boolean variables and functions returning booleans with `is`, `has`, `should`, `can`, or `will`.\n- Use imperative verbs for function names (e.g., `calculateTotal`, `fetchData`, not `total` or `data`)."
+    },
+    "recommendedWith": ["code-readability"],
+    "discouragedWith": [],
+    "visibility": true
 }

@@ -1,10 +1,8 @@
 {
     "description": {
-        "default": "This is a placeholder content for auth-guards.",
-        "claude": "This is a placeholder content for auth-guards.",
-        "cursor": "This is a placeholder content for auth-guards.",
-        "antigravity": "This is a placeholder content for auth-guards."
+        "default": "## Auth Guards\n\n- Protect all authenticated routes using Route Guards (`canActivate`, `canMatch`).\n- Route guards should verify token existence and validity synchronously if possible, or asynchronously via an auth service.\n- Redirect unauthenticated users immediately to the login page, preserving the intended destination URL for post-login redirection.\n- Handle role-based access control (RBAC) at the route level to prevent unauthorized navigation to admin or restricted areas.\n- **NEVER** rely solely on client-side route guards for security — the backend API must also enforce authorization on every request."
     },
-    "recommendedWith": ["xss-protection"],
-    "discouragedWith": []
+    "recommendedWith": [],
+    "discouragedWith": [],
+    "visibility": true
 }

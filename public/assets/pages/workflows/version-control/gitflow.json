@@ -1,0 +1,8 @@
+{
+    "description": {
+        "default": "## Gitflow Workflow Process\n\nThis project strictly follows the Gitflow branching model. Execute these steps strictly in order.\n\n### Phase 1: Feature Initiation\n1. Ensure you are on the `develop` branch and it is up to date (`git pull origin develop`).\n2. Create a new branch: `git checkout -b feature/your-feature-name`.\n3. **Checkpoint**: Do not proceed until you have verified the branch name and current HEAD.\n\n### Phase 2: Active Development\n1. Implement the feature. Keep changes focused and atomic.\n2. Commit frequently using Conventional Commits.\n3. If `develop` advances, rebase your feature branch: `git fetch origin && git rebase origin/develop`.\n\n### Phase 3: Integration (Pull Request)\n1. Push your branch: `git push -u origin feature/your-feature-name`.\n2. Open a Pull Request against the `develop` branch.\n3. **NEVER** merge directly. Wait for CI quality checks (lint, tests) to pass.\n\n### Phase 4: Release & Hotfixes (Admin Only)\n- **Release**: Branched from `develop` (`release/vX.Y.Z`). Merged into BOTH `main` and `develop`.\n- **Hotfix**: Branched from `main` (`hotfix/bug-name`). Merged into BOTH `main` and `develop`."
+    },
+    "recommendedWith": [],
+    "discouragedWith": [],
+    "visibility": true
+}

@@ -1,0 +1,8 @@
+{
+    "description": {
+        "default": "## Vitest Testing Standards\n\n- Configure global coverage thresholds (lines, branches, statements, functions) and enforce them in CI — failing coverage **MUST** block deployment.\n- Use `jsdom` or `happy-dom` as the test environment for component tests that interact with DOM.\n- Mock external dependencies (`fetch`, `localStorage`, `sessionStorage`) at the test boundary — **NEVER** call real network endpoints in unit tests.\n- Use `vi.spyOn()` for observing method calls — prefer spies over manual mock implementations.\n- Clear all shared state (`sessionStorage.clear()`, `vi.restoreAllMocks()`) in `beforeEach` to prevent test bleed.\n- Write tests that validate **behavior**, not implementation details — test what the component does, not how it does it.\n- Use `describe` blocks to group related tests and `it` for individual assertions with descriptive names.\n- **NEVER** use `any` in test files — apply the same strict typing rules as production code."
+    },
+    "recommendedWith": ["typescript", "angular"],
+    "discouragedWith": ["jest"],
+    "visibility": true
+}

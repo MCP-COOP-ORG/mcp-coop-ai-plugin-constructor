@@ -1,0 +1,22 @@
+{
+    "name": "Web Platform (Angular)",
+    "createdAt": 0,
+    "isSystem": true,
+    "visibility": true,
+    "state": {
+        "agents": {
+            "frontend": ["angular", "typescript"]
+        },
+        "workflows": {
+            "version-control": ["gitflow"],
+            "basic-workflows": ["planning", "orchestrator", "brainstorm", "init-agent"]
+        },
+        "rules": {
+            "conventions": ["clean-code", "solid", "clean-architecture", "bem", "dry", "kiss", "yagni"],
+            "code-quality": ["strict-typing", "zero-literals", "view-model-pattern"],
+            "basic-rules": ["code-readability", "error-handling", "naming-conventions"],
+            "security": ["auth-guards", "xss-protection"],
+            "tooling": ["eslint", "prettier", "husky", "vitest"]
+        }
+    }
+}

@@ -8,5 +8,7 @@
         "claude": "PreCompact",
         "cursor": "preCompact"
     },
-    "description": "Fires before the AI attempts to compress or compact its context history."
+    "description": "Fires before the AI attempts to compress or compact its context history.",
+    "visibility": true,
+    "commonInfo": "## Context Compaction\nSave critical information or state to memory before the LLM context window is compressed."
 }

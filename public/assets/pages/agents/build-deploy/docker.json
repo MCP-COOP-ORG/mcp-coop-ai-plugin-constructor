@@ -1,0 +1,8 @@
+{
+    "description": {
+        "default": "## Docker Development Standards\n\n### Image Construction\n\n- Use multi-stage builds to separate build dependencies from runtime image.\n- Pin base image versions explicitly (`node:22-alpine`, not `node:latest`).\n- **NEVER** run containers as root — always specify `USER` directive.\n- Use `npm ci` instead of `npm install` for deterministic installs.\n\n### Build Context\n\n- Use `.dockerignore` to exclude `node_modules`, `.git`, and build artifacts.\n- Prefer `COPY` over `ADD` unless extracting archives.\n- Order `Dockerfile` instructions by change frequency — static layers first.\n- Combine related `RUN` commands with `&&` to minimize layer count.\n\n> [!WARNING]\n> Never store secrets in environment variables at build time — use runtime injection or secret mounts."
+    },
+    "recommendedWith": ["nginx", "github-actions"],
+    "discouragedWith": [],
+    "visibility": true
+}

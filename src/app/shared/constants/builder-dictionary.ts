@@ -14,7 +14,7 @@ export const BUILDER_DICTIONARY = {
         projectIdentity: 'Project Identity',
         projectName: 'Project Name',
         pluginIdentity: 'Plugin Identity',
-        businessDomains: 'Domain-Specific Rules',
+        businessDomains: 'Project Meta Information',
         welcomeTitle: 'MCP COOP AI Plugin Constructor',
         welcomeTitleLink: 'MCP COOP',
         welcomeTitleText: ' AI Plugin Constructor',
@@ -31,7 +31,7 @@ export const BUILDER_DICTIONARY = {
     placeholders: {
         projectIdentity: 'Describe your project goal, key features, and core identity...',
         projectName: 'e.g. My Awesome Project',
-        businessDomains: 'Select domain rules...',
+        businessDomains: 'Select project meta information...',
     },
     presets: {
         label: 'Plugin Presets (Optional)',

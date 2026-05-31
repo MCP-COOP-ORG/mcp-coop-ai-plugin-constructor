@@ -17,5 +17,6 @@
             "type": "command",
             "command": "echo 'Context compaction starting — ensure critical info is saved to AGENTS.md or memory files' >&2"
         }
-    }
+    },
+    "visibility": true
 }

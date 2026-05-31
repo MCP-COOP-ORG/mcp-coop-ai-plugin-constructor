@@ -1,0 +1,8 @@
+{
+    "description": {
+        "default": "## View Model Pattern\n\n- Consolidate all UI-bound data (dictionaries, configurations, computed states) into a single, cohesive `readonly view` object within the component.\n- Expose only the `view` object to the template, rather than polluting the component instance with numerous disparate properties.\n- This pattern enforces strict separation between raw domain data and the shaped data required for rendering.\n- Example: `readonly view = { title: DICT.title, steps: this.stepsSignal() };`."
+    },
+    "recommendedWith": ["zero-literals"],
+    "discouragedWith": [],
+    "visibility": true
+}
