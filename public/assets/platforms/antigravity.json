@@ -4,11 +4,11 @@
     "content": "# {{ name }}\n\n## Project Context\n{{ description }}\n\n## Domain-Specific Rules\n{{ domains }}\n\n## Core Directives\n{{ core_directives }}",
     "templates": {
         "skill": "---\nname: {{ name }}\ndescription: {{ description }}\n---\n\n# {{ name }}\n\n{{ content }}",
-        "rule": "---\nname: {{ name }}\ndescription: {{ description }}\n---\n\n{{ content }}",
+        "rule": "---\nname: {{ name }}\ndescription: {{ description }}\ntrigger: {{ trigger }}\n---\n\n{{ content }}",
         "workflow": "---\nname: {{ name }}\ndescription: {{ description }}\n---\n\n{{ content }}"
     },
     "defaults": {
-        "trigger": "always",
+        "trigger": "always_on",
         "skillDescription": "Standard engineering skills and patterns for {{category}}.",
         "ruleDescription": "Standard rules and conventions for {{category}}.",
         "workflowDescription": "Standard operational workflow for {{item}}."

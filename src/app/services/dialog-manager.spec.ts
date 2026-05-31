@@ -40,9 +40,10 @@ describe('DialogManager', () => {
     it('should open info dialog with correct params', () => {
         const spy = vi.spyOn(dialogService, 'open').mockReturnValue(of(undefined));
         service.openInfoDialog('Title', 'Content', 'l');
-        expect(spy).toHaveBeenCalledWith('Content', {
+        expect(spy).toHaveBeenCalledWith(expect.any(Object), {
             label: 'Title',
             size: 'l',
+            data: 'Content',
         });
     });
 

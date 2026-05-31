@@ -4,6 +4,7 @@ import { PolymorpheusComponent } from '@taiga-ui/polymorpheus';
 import { TUI_CONFIRM } from '@taiga-ui/kit';
 
 import { Observable } from 'rxjs';
+import { MarkdownDialog } from '@shared/components';
 
 /**
  * Centralized facade service for opening application dialogs.
@@ -25,9 +26,10 @@ export class DialogManager {
     }
 
     openInfoDialog(title: string, content: string, size: 's' | 'm' | 'l' = 'm'): Observable<void> {
-        return this.dialogService.open<void>(content, {
+        return this.dialogService.open<void>(new PolymorpheusComponent(MarkdownDialog, this.injector), {
             label: title,
             size,
+            data: content,
         });
     }
 

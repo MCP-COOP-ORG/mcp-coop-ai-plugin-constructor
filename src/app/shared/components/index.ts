@@ -8,3 +8,4 @@ export * from './input-field/input-field';
 export * from './multi-select-field/multi-select-field';
 export * from './select-field/select-field';
 export * from './code-editor/code-editor';
+export * from './markdown-dialog/markdown-dialog';
