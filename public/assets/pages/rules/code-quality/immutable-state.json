@@ -1,0 +1,8 @@
+{
+    "description": {
+        "default": "## Immutable State Patterns\n\n- Represent application state as immutable data classes — **NEVER** mutate state objects in place.\n- Use `sealed` classes (Dart) or discriminated unions (TypeScript) for state variants — exhaustive `switch` expressions **MUST** cover every variant at compile time.\n- Generate immutable models with `copyWith` methods — use code generation (`freezed`, `built_value`) to eliminate hand-written boilerplate.\n- State transitions **MUST** produce new instances — **NEVER** modify fields on existing state objects.\n- Use value equality (not reference equality) for state comparison — this enables efficient change detection and prevents unnecessary UI rebuilds.\n- Keep state classes flat — **NEVER** nest mutable collections inside immutable wrappers.\n- Separate UI state (loading, error, success) from domain entities — do not overload domain models with presentation concerns."
+    },
+    "recommendedWith": ["flutter", "clean-architecture", "solid"],
+    "discouragedWith": [],
+    "visibility": true
+}

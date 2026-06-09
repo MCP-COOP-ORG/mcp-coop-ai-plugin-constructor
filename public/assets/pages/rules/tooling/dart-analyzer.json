@@ -1,0 +1,8 @@
+{
+    "description": {
+        "default": "## Dart Static Analysis Standards\n\n- Include `package:flutter_lints/flutter.yaml` as the baseline rule set in `analysis_options.yaml`.\n- Enable strict analyzer settings: `strict-casts: true`, `strict-inference: true`, `strict-raw-types: true` — these catch implicit dynamic types and unsafe casts at compile time.\n- Enable `require_trailing_commas` lint rule — trailing commas enforce multi-line formatting and produce cleaner diffs.\n- Enable `prefer_const_constructors`, `prefer_const_declarations`, and `prefer_const_literals_to_create_immutables` for maximum widget rebuild optimization.\n- Treat all analyzer warnings as errors in CI — run `dart analyze --fatal-warnings` and block merges on any violation.\n- Use `dart fix --apply` regularly to auto-migrate deprecated API usages and apply quick-fixes across the entire codebase.\n- For domain-specific architectural enforcement (e.g., naming conventions for BLoCs), use the `custom_lint` package to author project-specific lint rules.\n- **NEVER** suppress analyzer warnings with `// ignore:` comments unless accompanied by a justification comment explaining why the suppression is necessary."
+    },
+    "recommendedWith": ["flutter", "dart-format"],
+    "discouragedWith": [],
+    "visibility": true
+}

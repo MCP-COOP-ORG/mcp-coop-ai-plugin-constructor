@@ -1,0 +1,8 @@
+{
+    "description": {
+        "default": "## Dart Formatting Standards\n\n- Use `dart format` as the single authority on code formatting — **NEVER** manually adjust formatting to override its output.\n- Always add trailing commas to function parameters, argument lists, collection literals, and widget constructors that span multiple lines.\n- Order import directives in three groups separated by blank lines: `dart:` core libraries first, `package:` external dependencies second, relative project imports third.\n- Sort imports alphabetically within each group — configure your IDE to organize imports on save.\n- Run `dart format --set-exit-if-changed .` in CI pipelines — block merges on any formatting violation.\n- Use `dart format --line-length=80` (Dart default) unless the team has explicitly agreed on an alternative — **NEVER** mix line lengths across files.\n- Place `export` directives in a separate section after all import statements."
+    },
+    "recommendedWith": ["flutter", "dart-analyzer"],
+    "discouragedWith": [],
+    "visibility": true
+}
