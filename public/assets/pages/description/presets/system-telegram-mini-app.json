@@ -2,13 +2,21 @@
     "name": "Telegram Mini App",
     "createdAt": 0,
     "isSystem": true,
+    "visibility": true,
     "state": {
-        "description": {},
-        "review": {},
         "agents": {
-            "frontend": ["react"],
-            "backend": ["express"],
-            "database": ["postgresql"]
+            "frontend": ["react", "telegram-mini-app", "typescript"]
+        },
+        "workflows": {
+            "version-control": ["gitflow"],
+            "basic-workflows": ["planning", "orchestrator", "brainstorm", "init-agent"]
+        },
+        "rules": {
+            "conventions": ["clean-code", "solid", "fsd", "dry", "kiss", "yagni"],
+            "code-quality": ["strict-typing", "immutable-state"],
+            "basic-rules": ["code-readability", "error-handling", "naming-conventions"],
+            "security": ["auth-guards", "xss-protection"],
+            "tooling": ["eslint", "prettier", "husky", "jest"]
         }
     }
 }
