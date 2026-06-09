@@ -165,8 +165,19 @@ export const GENERATED_PAGES_CONFIG: Record<string, PageConfig> = {
                         id: 'react-native',
                         label: 'React Native',
                         filePath: 'assets/pages/agents/mobile/react-native.json',
-                        recommendedWith: ['react', 'typescript', 'jest'],
+                        recommendedWith: [
+                            'react',
+                            'typescript',
+                            'jest',
+                            'eslint',
+                            'prettier',
+                            'clean-architecture',
+                            'strict-typing',
+                            'immutable-state',
+                            'secure-storage',
+                        ],
                         discouragedWith: ['flutter', 'swift'],
+                        visibility: true,
                     },
                     {
                         id: 'swift',
@@ -1113,6 +1124,30 @@ export const GENERATED_PRESETS: Preset[] = [
             },
         },
         id: 'mobile-flutter',
+    },
+    {
+        name: 'Mobile Platform (React Native)',
+        createdAt: 0,
+        isSystem: true,
+        visibility: true,
+        state: {
+            agents: {
+                mobile: ['react-native'],
+                frontend: ['react', 'typescript'],
+            },
+            workflows: {
+                'version-control': ['gitflow'],
+                'basic-workflows': ['planning', 'orchestrator', 'brainstorm', 'init-agent'],
+            },
+            rules: {
+                conventions: ['clean-code', 'solid', 'clean-architecture', 'dry', 'kiss', 'yagni'],
+                'code-quality': ['strict-typing', 'immutable-state'],
+                'basic-rules': ['code-readability', 'error-handling', 'naming-conventions'],
+                security: ['secure-storage'],
+                tooling: ['eslint', 'prettier', 'husky', 'jest'],
+            },
+        },
+        id: 'mobile-react-native',
     },
     {
         name: 'Web Platform (Angular)',
