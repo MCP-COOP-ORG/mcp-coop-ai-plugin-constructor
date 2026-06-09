@@ -141,13 +141,25 @@ export const GENERATED_PAGES_CONFIG: Record<string, PageConfig> = {
                 icon: '@tui.smartphone',
                 type: 'checkbox',
                 order: 5,
+                visibility: true,
+                commonInfo:
+                    '## Mobile Development Fundamentals\n\n### Responsive Design & Adaptive Layout\n\n- Design for variable screen sizes, pixel densities, and aspect ratios — **NEVER** assume a fixed viewport.\n- Respect platform safe areas (notches, status bars, navigation bars) — use framework-provided safe area wrappers.\n- Support both portrait and landscape orientations unless explicitly scoped to one.\n- Use relative sizing and flexible layouts instead of hardcoded pixel dimensions.\n\n### Offline-First & Data Persistence\n\n- Assume network connectivity is unreliable — cache critical data locally and sync when connection is restored.\n- Implement optimistic UI updates for user actions — confirm with server asynchronously.\n- **NEVER** block the UI thread with synchronous network calls or heavy I/O operations.\n- Persist user session state to survive app restarts and process termination.\n\n### Platform Guidelines\n\n- Follow **Material Design** guidelines for Android and **Human Interface Guidelines** for iOS.\n- Use platform-adaptive components that respect native user expectations (navigation patterns, gestures, typography).\n- **NEVER** mix platform idioms — a bottom tab bar on Android and a hamburger menu on iOS is acceptable; the reverse is not.\n\n### App Lifecycle & Background Handling\n\n- Handle foreground/background transitions gracefully — pause timers, close connections, save draft state.\n- Release expensive resources (camera, GPS, audio) when the app moves to background.\n- Implement state restoration so users return to exactly where they left off.\n\n### Permissions & Privacy\n\n- Request permissions lazily at the point of use — **NEVER** request all permissions at app launch.\n- Provide clear, user-facing explanations for why each permission is needed before the system dialog appears.\n- Gracefully degrade functionality when permissions are denied — **NEVER** crash or show blank screens.\n\n### Accessibility\n\n- Provide semantic labels for all interactive and informational elements for screen readers (VoiceOver, TalkBack).\n- Ensure minimum touch target sizes of 48x48dp for all interactive elements.\n- Support dynamic text scaling — **NEVER** use fixed font sizes that ignore user accessibility settings.\n- Maintain sufficient color contrast ratios (WCAG AA minimum: 4.5:1 for text, 3:1 for large text).',
                 items: [
                     {
                         id: 'flutter',
                         label: 'Flutter',
                         filePath: 'assets/pages/agents/mobile/flutter.json',
-                        recommendedWith: ['docker'],
+                        recommendedWith: [
+                            'clean-architecture',
+                            'clean-code',
+                            'solid',
+                            'error-handling',
+                            'dart-analyzer',
+                            'dart-format',
+                            'secure-storage',
+                        ],
                         discouragedWith: ['react-native', 'swift'],
+                        visibility: true,
                     },
                     {
                         id: 'react-native',
@@ -668,6 +680,13 @@ export const GENERATED_PAGES_CONFIG: Record<string, PageConfig> = {
                 visibility: true,
                 items: [
                     {
+                        id: 'immutable-state',
+                        label: 'Immutable State',
+                        filePath: 'assets/pages/rules/code-quality/immutable-state.json',
+                        recommendedWith: ['flutter', 'clean-architecture', 'solid'],
+                        visibility: true,
+                    },
+                    {
                         id: 'strict-typing',
                         label: 'Strict Typing',
                         filePath: 'assets/pages/rules/code-quality/strict-typing.json',
@@ -739,6 +758,13 @@ export const GENERATED_PAGES_CONFIG: Record<string, PageConfig> = {
                         visibility: true,
                     },
                     {
+                        id: 'secure-storage',
+                        label: 'Secure Storage',
+                        filePath: 'assets/pages/rules/security/secure-storage.json',
+                        recommendedWith: ['flutter', 'error-handling'],
+                        visibility: true,
+                    },
+                    {
                         id: 'xss-protection',
                         label: 'Xss Protection',
                         filePath: 'assets/pages/rules/security/xss-protection.json',
@@ -756,6 +782,20 @@ export const GENERATED_PAGES_CONFIG: Record<string, PageConfig> = {
                     '## Tooling Fundamentals\n\n### Automation First\n\n- Automate formatting, linting, and type-checking — machines should argue about style, not humans.\n- Hook critical checks into the git lifecycle (pre-commit, pre-push) to prevent bad code from entering the repository.\n- Treat CI/CD pipelines as the ultimate source of truth for code quality.\n\n### Tool Configuration\n\n- Keep tool configuration centralized and version-controlled.\n- Rely on recommended rule sets from tool authors before customizing heavily.\n- Document any deviations from standard rules (e.g., why a specific ESLint rule is turned off globally).\n\n### Developer Experience (DX)\n\n- Fast feedback loops are critical — configure tools to run incrementally where possible.\n- Ensure local tooling matches CI tooling exactly to avoid "it works on my machine" issues.\n- Provide clear error messages and fix instructions when tooling blocks a developer action.',
                 visibility: true,
                 items: [
+                    {
+                        id: 'dart-analyzer',
+                        label: 'Dart Analyzer',
+                        filePath: 'assets/pages/rules/tooling/dart-analyzer.json',
+                        recommendedWith: ['flutter', 'dart-format'],
+                        visibility: true,
+                    },
+                    {
+                        id: 'dart-format',
+                        label: 'Dart Format',
+                        filePath: 'assets/pages/rules/tooling/dart-format.json',
+                        recommendedWith: ['flutter', 'dart-analyzer'],
+                        visibility: true,
+                    },
                     {
                         id: 'eslint',
                         label: 'Eslint',
@@ -1008,6 +1048,7 @@ export const ASSET_FILE_PATHS: Record<string, string> = {
     'code-readability': 'assets/pages/rules/basic-rules/code-readability.json',
     'error-handling': 'assets/pages/rules/basic-rules/error-handling.json',
     'naming-conventions': 'assets/pages/rules/basic-rules/naming-conventions.json',
+    'immutable-state': 'assets/pages/rules/code-quality/immutable-state.json',
     'strict-typing': 'assets/pages/rules/code-quality/strict-typing.json',
     'view-model-pattern': 'assets/pages/rules/code-quality/view-model-pattern.json',
     'zero-literals': 'assets/pages/rules/code-quality/zero-literals.json',
@@ -1023,7 +1064,10 @@ export const ASSET_FILE_PATHS: Record<string, string> = {
     solid: 'assets/pages/rules/conventions/solid.json',
     yagni: 'assets/pages/rules/conventions/yagni.json',
     'auth-guards': 'assets/pages/rules/security/auth-guards.json',
+    'secure-storage': 'assets/pages/rules/security/secure-storage.json',
     'xss-protection': 'assets/pages/rules/security/xss-protection.json',
+    'dart-analyzer': 'assets/pages/rules/tooling/dart-analyzer.json',
+    'dart-format': 'assets/pages/rules/tooling/dart-format.json',
     eslint: 'assets/pages/rules/tooling/eslint.json',
     husky: 'assets/pages/rules/tooling/husky.json',
     prettier: 'assets/pages/rules/tooling/prettier.json',
@@ -1047,6 +1091,29 @@ export const TEMPLATES: Record<string, string> = {
 };
 
 export const GENERATED_PRESETS: Preset[] = [
+    {
+        name: 'Mobile Platform (Flutter)',
+        createdAt: 0,
+        isSystem: true,
+        visibility: true,
+        state: {
+            agents: {
+                mobile: ['flutter'],
+            },
+            workflows: {
+                'version-control': ['gitflow'],
+                'basic-workflows': ['planning', 'orchestrator', 'brainstorm', 'init-agent'],
+            },
+            rules: {
+                conventions: ['clean-code', 'solid', 'clean-architecture', 'dry', 'kiss', 'yagni'],
+                'code-quality': ['immutable-state'],
+                'basic-rules': ['code-readability', 'error-handling', 'naming-conventions'],
+                security: ['secure-storage'],
+                tooling: ['dart-analyzer', 'dart-format'],
+            },
+        },
+        id: 'mobile-flutter',
+    },
     {
         name: 'Web Platform (Angular)',
         createdAt: 0,

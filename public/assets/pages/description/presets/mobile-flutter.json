@@ -1,0 +1,22 @@
+{
+    "name": "Mobile Platform (Flutter)",
+    "createdAt": 0,
+    "isSystem": true,
+    "visibility": true,
+    "state": {
+        "agents": {
+            "mobile": ["flutter"]
+        },
+        "workflows": {
+            "version-control": ["gitflow"],
+            "basic-workflows": ["planning", "orchestrator", "brainstorm", "init-agent"]
+        },
+        "rules": {
+            "conventions": ["clean-code", "solid", "clean-architecture", "dry", "kiss", "yagni"],
+            "code-quality": ["immutable-state"],
+            "basic-rules": ["code-readability", "error-handling", "naming-conventions"],
+            "security": ["secure-storage"],
+            "tooling": ["dart-analyzer", "dart-format"]
+        }
+    }
+}

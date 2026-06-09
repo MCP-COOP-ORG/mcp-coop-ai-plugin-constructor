@@ -1,0 +1,15 @@
+{
+    "hooks": {
+        "SessionStart": [
+            {
+                "matcher": "*",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "git log --oneline -20 2>/dev/null | jq -Rs '{\"systemMessage\": .}'"
+                    }
+                ]
+            }
+        ]
+    }
+}
