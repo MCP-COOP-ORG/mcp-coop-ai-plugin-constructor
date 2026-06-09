@@ -1,10 +1,8 @@
 {
     "description": {
-        "default": "This is a placeholder content for jest.",
-        "claude": "This is a placeholder content for jest.",
-        "cursor": "This is a placeholder content for jest.",
-        "antigravity": "This is a placeholder content for jest."
+        "default": "## Jest Testing Standards\n\n### Test Organization\n- Group related tests with `describe` blocks — nest them to reflect the module's API or behavior categories.\n- Use descriptive `it` block names that read as specifications — e.g., `it('returns null when user is not authenticated')` not `it('test auth')`.\n- Colocate test files next to the source files they test (`component.test.tsx` alongside `component.tsx`) — **NEVER** put all tests in a separate root-level `__tests__` directory.\n- Use `beforeEach` for shared setup and `afterEach` for cleanup — ensure every test runs in complete isolation.\n\n### Mocking Philosophy\n- Mock at the **boundary** — mock HTTP clients, database connections, and third-party services, not internal business logic.\n- Use `jest.mock()` for module-level mocks and `jest.spyOn()` for observing calls without replacing implementation.\n- Reset all mocks between tests using `jest.clearAllMocks()` in `afterEach` — stale mock state causes flaky tests.\n- **NEVER** mock what you own — if a helper function is hard to test, refactor it instead of mocking it.\n\n### Assertions & Matchers\n- Prefer specific matchers (`toHaveBeenCalledWith`, `toMatchObject`, `toContain`) over generic ones (`toBeTruthy`, `toBeDefined`).\n- Assert on behavior and outcomes, not implementation details — test **what** the function returns, not **how** it computes it.\n- Use `expect.assertions(n)` in async tests to guarantee that all expected assertions actually run.\n\n### Snapshot Testing\n- Use snapshots **sparingly** — they detect unintended changes but provide low confidence for correctness.\n- **NEVER** blindly update snapshots without reviewing the diff — treat snapshot updates as code changes that require review.\n- Prefer inline snapshots (`toMatchInlineSnapshot`) for small, targeted output verification.\n\n### Coverage & CI\n- Define explicit coverage thresholds (Lines, Branches, Functions, Statements) in `jest.config` — fail the build if they are not met.\n- Target meaningful coverage (85%+ for business logic) — **NEVER** chase 100% by testing trivial getters or framework boilerplate.\n- Run the full test suite in CI on every pull request — gate merges on zero test failures."
     },
-    "recommendedWith": ["typescript", "eslint"],
-    "discouragedWith": ["vitest"]
+    "recommendedWith": ["typescript", "eslint", "react"],
+    "discouragedWith": ["vitest"],
+    "visibility": true
 }

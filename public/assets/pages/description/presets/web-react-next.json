@@ -1,22 +1,21 @@
 {
-    "name": "Mobile Platform (React Native)",
+    "name": "Web Platform (React + Next.js)",
     "createdAt": 0,
     "isSystem": true,
     "visibility": true,
     "state": {
         "agents": {
-            "mobile": ["react-native"],
-            "frontend": ["typescript"]
+            "frontend": ["react", "next", "typescript"]
         },
         "workflows": {
             "version-control": ["gitflow"],
             "basic-workflows": ["planning", "orchestrator", "brainstorm", "init-agent"]
         },
         "rules": {
-            "conventions": ["clean-code", "solid", "clean-architecture", "dry", "kiss", "yagni"],
+            "conventions": ["clean-code", "solid", "fsd", "dry", "kiss", "yagni"],
             "code-quality": ["strict-typing", "immutable-state"],
             "basic-rules": ["code-readability", "error-handling", "naming-conventions"],
-            "security": ["secure-storage"],
+            "security": ["auth-guards", "xss-protection"],
             "tooling": ["eslint", "prettier", "husky", "jest"]
         }
     }

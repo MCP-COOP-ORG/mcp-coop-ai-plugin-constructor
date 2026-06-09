@@ -1,10 +1,8 @@
 {
     "description": {
-        "default": "This is a placeholder content for fsd.",
-        "claude": "This is a placeholder content for fsd.",
-        "cursor": "This is a placeholder content for fsd.",
-        "antigravity": "This is a placeholder content for fsd."
+        "default": "## Feature-Sliced Design (FSD)\n\n### Layer Hierarchy\n- Organize the project into six layers with strict top-to-bottom dependency direction: `app` → `pages` → `widgets` → `features` → `entities` → `shared`.\n- A layer may only import from layers **below** it — **NEVER** import upward (e.g., `entities` must not import from `features`).\n- `app/`: Global providers, routing configuration, and application-wide styles.\n- `pages/`: Route-level compositions that assemble widgets and features into complete screens.\n- `widgets/`: Self-contained, composable UI blocks that combine multiple features and entities (e.g., a product card with add-to-cart).\n- `features/`: User-facing interactions and actions scoped to a single capability (e.g., `auth/login`, `cart/addItem`).\n- `entities/`: Domain-specific business data and logic (e.g., `user`, `product`, `order`).\n- `shared/`: Reusable infrastructure with zero business logic — UI kit, hooks, API client, utilities, constants.\n\n### Slices & Segments\n- Group code within each layer by **business domain** (slices), not by file type — e.g., `features/auth/`, `entities/product/`.\n- Slices within the same layer **MUST** be independent — **NEVER** create cross-slice imports at the same layer level.\n- Structure each slice with standardized segments: `ui/` (components), `model/` (state, selectors), `api/` (network requests), `lib/` (local helpers), `config/` (constants).\n\n### Public API\n- Every slice **MUST** expose its functionality through a single `index.ts` barrel file — this is the Public API.\n- Everything not exported in `index.ts` is private — **NEVER** import internal files from another slice directly.\n- Use the FSD ESLint plugin to enforce import boundaries automatically — violations must block CI.\n\n### Practical Guidelines\n- Start with `shared/`, `entities/`, and `features/` layers — add `widgets/` and `pages/` as the application grows.\n- If a component is used in 3+ unrelated features, move it to `shared/ui/` — **NEVER** duplicate components across feature slices.\n- Name slices using the same terminology as the business domain — this keeps the codebase navigable for both developers and stakeholders."
     },
-    "recommendedWith": [],
-    "discouragedWith": ["hexagonal"]
+    "recommendedWith": ["react", "typescript"],
+    "discouragedWith": ["hexagonal", "clean-architecture"],
+    "visibility": true
 }
