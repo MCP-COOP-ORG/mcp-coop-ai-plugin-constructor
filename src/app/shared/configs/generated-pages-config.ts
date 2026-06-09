@@ -49,11 +49,20 @@ export const GENERATED_PAGES_CONFIG: Record<string, PageConfig> = {
                         discouragedWith: ['strict-typing'],
                     },
                     {
+                        id: 'next',
+                        label: 'Next',
+                        filePath: 'assets/pages/agents/frontend/next.json',
+                        recommendedWith: ['react', 'typescript', 'jest', 'eslint', 'prettier'],
+                        discouragedWith: ['angular', 'vue'],
+                        visibility: true,
+                    },
+                    {
                         id: 'react',
                         label: 'React',
                         filePath: 'assets/pages/agents/frontend/react.json',
-                        recommendedWith: ['typescript', 'javascript', 'jest'],
+                        recommendedWith: ['typescript', 'jest', 'eslint', 'prettier'],
                         discouragedWith: ['angular', 'vue'],
+                        visibility: true,
                     },
                     {
                         id: 'typescript',
@@ -166,7 +175,6 @@ export const GENERATED_PAGES_CONFIG: Record<string, PageConfig> = {
                         label: 'React Native',
                         filePath: 'assets/pages/agents/mobile/react-native.json',
                         recommendedWith: [
-                            'react',
                             'typescript',
                             'jest',
                             'eslint',
@@ -643,7 +651,9 @@ export const GENERATED_PAGES_CONFIG: Record<string, PageConfig> = {
                         id: 'fsd',
                         label: 'Fsd',
                         filePath: 'assets/pages/rules/conventions/fsd.json',
-                        discouragedWith: ['hexagonal'],
+                        recommendedWith: ['react', 'typescript'],
+                        discouragedWith: ['hexagonal', 'clean-architecture'],
+                        visibility: true,
                     },
                     {
                         id: 'hexagonal',
@@ -825,8 +835,9 @@ export const GENERATED_PAGES_CONFIG: Record<string, PageConfig> = {
                         id: 'jest',
                         label: 'Jest',
                         filePath: 'assets/pages/rules/tooling/jest.json',
-                        recommendedWith: ['typescript', 'eslint'],
+                        recommendedWith: ['typescript', 'eslint', 'react'],
                         discouragedWith: ['vitest'],
+                        visibility: true,
                     },
                     {
                         id: 'prettier',
@@ -1032,6 +1043,7 @@ export const ASSET_FILE_PATHS: Record<string, string> = {
     redis: 'assets/pages/agents/database/redis.json',
     angular: 'assets/pages/agents/frontend/angular.json',
     javascript: 'assets/pages/agents/frontend/javascript.json',
+    next: 'assets/pages/agents/frontend/next.json',
     react: 'assets/pages/agents/frontend/react.json',
     typescript: 'assets/pages/agents/frontend/typescript.json',
     vue: 'assets/pages/agents/frontend/vue.json',
@@ -1133,7 +1145,7 @@ export const GENERATED_PRESETS: Preset[] = [
         state: {
             agents: {
                 mobile: ['react-native'],
-                frontend: ['react', 'typescript'],
+                frontend: ['typescript'],
             },
             workflows: {
                 'version-control': ['gitflow'],
@@ -1171,6 +1183,52 @@ export const GENERATED_PRESETS: Preset[] = [
             },
         },
         id: 'web-platform-angular',
+    },
+    {
+        name: 'Web Platform (React + Next.js)',
+        createdAt: 0,
+        isSystem: true,
+        visibility: true,
+        state: {
+            agents: {
+                frontend: ['react', 'next', 'typescript'],
+            },
+            workflows: {
+                'version-control': ['gitflow'],
+                'basic-workflows': ['planning', 'orchestrator', 'brainstorm', 'init-agent'],
+            },
+            rules: {
+                conventions: ['clean-code', 'solid', 'fsd', 'dry', 'kiss', 'yagni'],
+                'code-quality': ['strict-typing', 'immutable-state'],
+                'basic-rules': ['code-readability', 'error-handling', 'naming-conventions'],
+                security: ['auth-guards', 'xss-protection'],
+                tooling: ['eslint', 'prettier', 'husky', 'jest'],
+            },
+        },
+        id: 'web-react-next',
+    },
+    {
+        name: 'Web Platform (React SPA)',
+        createdAt: 0,
+        isSystem: true,
+        visibility: true,
+        state: {
+            agents: {
+                frontend: ['react', 'typescript'],
+            },
+            workflows: {
+                'version-control': ['gitflow'],
+                'basic-workflows': ['planning', 'orchestrator', 'brainstorm', 'init-agent'],
+            },
+            rules: {
+                conventions: ['clean-code', 'solid', 'fsd', 'dry', 'kiss', 'yagni'],
+                'code-quality': ['strict-typing', 'immutable-state'],
+                'basic-rules': ['code-readability', 'error-handling', 'naming-conventions'],
+                security: ['auth-guards', 'xss-protection'],
+                tooling: ['eslint', 'prettier', 'husky', 'jest'],
+            },
+        },
+        id: 'web-react-spa',
     },
 ];
 
