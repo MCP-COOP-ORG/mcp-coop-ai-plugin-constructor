@@ -5,7 +5,8 @@
     "visibility": true,
     "state": {
         "agents": {
-            "frontend": ["react", "next", "typescript"]
+            "frontend": ["react", "next", "typescript"],
+            "database": ["supabase"]
         },
         "workflows": {
             "version-control": ["gitflow"],

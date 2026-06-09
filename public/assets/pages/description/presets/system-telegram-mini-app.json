@@ -5,7 +5,8 @@
     "visibility": true,
     "state": {
         "agents": {
-            "frontend": ["react", "telegram-mini-app", "typescript"]
+            "frontend": ["react", "telegram-mini-app", "typescript"],
+            "database": ["supabase"]
         },
         "workflows": {
             "version-control": ["gitflow"],

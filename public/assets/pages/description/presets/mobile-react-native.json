@@ -6,7 +6,8 @@
     "state": {
         "agents": {
             "mobile": ["react-native"],
-            "frontend": ["typescript"]
+            "frontend": ["typescript"],
+            "database": ["firebase"]
         },
         "workflows": {
             "version-control": ["gitflow"],
