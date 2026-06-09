@@ -5,7 +5,8 @@
     "visibility": true,
     "state": {
         "agents": {
-            "mobile": ["flutter"]
+            "mobile": ["flutter"],
+            "database": ["firebase"]
         },
         "workflows": {
             "version-control": ["gitflow"],

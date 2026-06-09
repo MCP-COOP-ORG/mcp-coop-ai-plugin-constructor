@@ -131,24 +131,43 @@ export const GENERATED_PAGES_CONFIG: Record<string, PageConfig> = {
                 icon: '@tui.database',
                 type: 'checkbox',
                 order: 4,
+                visibility: true,
+                commonInfo:
+                    '## Database Fundamentals\n\n### Connection Management\n- Use connection pooling for all database connections — **NEVER** open a new connection per request in production. Configure pool size based on the expected concurrency of the application.\n- Close connections and release resources in `finally` blocks or using connection wrappers — connection leaks are a top cause of production outages.\n- Use environment-specific connection strings — **NEVER** connect to production databases from development or CI environments.\n\n### Migrations & Schema Changes\n- Treat database schema as code — all changes **MUST** go through versioned migration files, never through manual UI or CLI edits in production.\n- Use an expand-contract pattern for zero-downtime migrations: first add the new column/table, deploy code that writes to both old and new, then remove the old column.\n- Test all migrations against a staging environment with production-like data volume before deploying to production.\n- **NEVER** run destructive migrations (DROP TABLE, DROP COLUMN) without a verified backup and a rollback plan.\n\n### Data Validation\n- Validate data at the application boundary **before** it reaches the database — use schema validators (Zod, Yup, class-validator) for all inputs.\n- Enforce constraints at the database level as a safety net (NOT NULL, UNIQUE, CHECK, FOREIGN KEY) — application-level validation alone is insufficient.\n- Sanitize all user inputs to prevent injection attacks (SQL injection, NoSQL injection) — use parameterized queries or ORM-generated queries, **NEVER** string concatenation.\n\n### Backup & Recovery\n- Automate database backups on a defined schedule — daily for most applications, hourly for critical data.\n- Regularly test backup restoration — an untested backup is not a backup.\n- Store backups in a geographically separate location from the primary database.\n\n### Multi-Tenancy & Data Isolation\n- Scope every database query by `tenantId` or `userId` — **NEVER** execute queries that could return or modify data belonging to another tenant.\n- Use database-level isolation mechanisms (Row Level Security, schema separation, or collection-level scoping) in addition to application-level filtering.\n\n### Secrets & Credentials\n- Store database credentials exclusively in environment variables or a secrets manager — **NEVER** commit connection strings, passwords, or API keys to source control.\n- Use separate credentials for each environment (dev, staging, production) with the minimum required permissions.\n- Rotate database credentials on a regular schedule and after any suspected compromise.',
                 items: [
+                    {
+                        id: 'firebase',
+                        label: 'Firebase',
+                        filePath: 'assets/pages/agents/database/firebase.json',
+                        recommendedWith: ['typescript'],
+                        discouragedWith: ['supabase'],
+                        visibility: true,
+                    },
                     {
                         id: 'mongodb',
                         label: 'Mongodb',
                         filePath: 'assets/pages/agents/database/mongodb.json',
-                        recommendedWith: ['express', 'javascript'],
+                        visibility: true,
                     },
                     {
                         id: 'postgresql',
                         label: 'Postgresql',
                         filePath: 'assets/pages/agents/database/postgresql.json',
-                        recommendedWith: ['nestjs', 'spring-boot', 'strict-typing'],
+                        visibility: true,
                     },
                     {
                         id: 'redis',
                         label: 'Redis',
                         filePath: 'assets/pages/agents/database/redis.json',
-                        recommendedWith: ['nestjs', 'docker'],
+                        visibility: true,
+                    },
+                    {
+                        id: 'supabase',
+                        label: 'Supabase',
+                        filePath: 'assets/pages/agents/database/supabase.json',
+                        recommendedWith: ['postgresql'],
+                        discouragedWith: ['firebase'],
+                        visibility: true,
                     },
                 ],
             },
@@ -1046,9 +1065,11 @@ export const ASSET_FILE_PATHS: Record<string, string> = {
     jest: 'assets/pages/rules/tooling/jest.json',
     nginx: 'assets/pages/agents/build-deploy/nginx.json',
     vitest: 'assets/pages/rules/tooling/vitest.json',
+    firebase: 'assets/pages/agents/database/firebase.json',
     mongodb: 'assets/pages/agents/database/mongodb.json',
     postgresql: 'assets/pages/agents/database/postgresql.json',
     redis: 'assets/pages/agents/database/redis.json',
+    supabase: 'assets/pages/agents/database/supabase.json',
     angular: 'assets/pages/agents/frontend/angular.json',
     javascript: 'assets/pages/agents/frontend/javascript.json',
     next: 'assets/pages/agents/frontend/next.json',
@@ -1131,6 +1152,7 @@ export const GENERATED_PRESETS: Preset[] = [
         state: {
             agents: {
                 mobile: ['flutter'],
+                database: ['firebase'],
             },
             workflows: {
                 'version-control': ['gitflow'],
@@ -1155,6 +1177,7 @@ export const GENERATED_PRESETS: Preset[] = [
             agents: {
                 mobile: ['react-native'],
                 frontend: ['typescript'],
+                database: ['firebase'],
             },
             workflows: {
                 'version-control': ['gitflow'],
@@ -1178,6 +1201,7 @@ export const GENERATED_PRESETS: Preset[] = [
         state: {
             agents: {
                 frontend: ['react', 'telegram-mini-app', 'typescript'],
+                database: ['supabase'],
             },
             workflows: {
                 'version-control': ['gitflow'],
@@ -1224,6 +1248,7 @@ export const GENERATED_PRESETS: Preset[] = [
         state: {
             agents: {
                 frontend: ['react', 'next', 'typescript'],
+                database: ['supabase'],
             },
             workflows: {
                 'version-control': ['gitflow'],
@@ -1247,6 +1272,7 @@ export const GENERATED_PRESETS: Preset[] = [
         state: {
             agents: {
                 frontend: ['react', 'typescript'],
+                database: ['supabase'],
             },
             workflows: {
                 'version-control': ['gitflow'],
