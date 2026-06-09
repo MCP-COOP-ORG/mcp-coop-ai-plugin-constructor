@@ -65,6 +65,14 @@ export const GENERATED_PAGES_CONFIG: Record<string, PageConfig> = {
                         visibility: true,
                     },
                     {
+                        id: 'telegram-mini-app',
+                        label: 'Telegram Mini App',
+                        filePath: 'assets/pages/agents/frontend/telegram-mini-app.json',
+                        recommendedWith: ['react', 'typescript', 'jest', 'eslint', 'prettier'],
+                        discouragedWith: ['angular', 'vue', 'flutter', 'react-native'],
+                        visibility: true,
+                    },
+                    {
                         id: 'typescript',
                         label: 'Typescript',
                         filePath: 'assets/pages/agents/frontend/typescript.json',
@@ -1045,6 +1053,7 @@ export const ASSET_FILE_PATHS: Record<string, string> = {
     javascript: 'assets/pages/agents/frontend/javascript.json',
     next: 'assets/pages/agents/frontend/next.json',
     react: 'assets/pages/agents/frontend/react.json',
+    'telegram-mini-app': 'assets/pages/agents/frontend/telegram-mini-app.json',
     typescript: 'assets/pages/agents/frontend/typescript.json',
     vue: 'assets/pages/agents/frontend/vue.json',
     flutter: 'assets/pages/agents/mobile/flutter.json',
@@ -1160,6 +1169,29 @@ export const GENERATED_PRESETS: Preset[] = [
             },
         },
         id: 'mobile-react-native',
+    },
+    {
+        name: 'Telegram Mini App',
+        createdAt: 0,
+        isSystem: true,
+        visibility: true,
+        state: {
+            agents: {
+                frontend: ['react', 'telegram-mini-app', 'typescript'],
+            },
+            workflows: {
+                'version-control': ['gitflow'],
+                'basic-workflows': ['planning', 'orchestrator', 'brainstorm', 'init-agent'],
+            },
+            rules: {
+                conventions: ['clean-code', 'solid', 'fsd', 'dry', 'kiss', 'yagni'],
+                'code-quality': ['strict-typing', 'immutable-state'],
+                'basic-rules': ['code-readability', 'error-handling', 'naming-conventions'],
+                security: ['auth-guards', 'xss-protection'],
+                tooling: ['eslint', 'prettier', 'husky', 'jest'],
+            },
+        },
+        id: 'system-telegram-mini-app',
     },
     {
         name: 'Web Platform (Angular)',
