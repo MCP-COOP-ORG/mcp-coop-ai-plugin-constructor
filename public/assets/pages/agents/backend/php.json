@@ -1,10 +1,8 @@
 {
     "description": {
-        "default": "This is a placeholder content for php.",
-        "claude": "This is a placeholder content for php.",
-        "cursor": "This is a placeholder content for php.",
-        "antigravity": "This is a placeholder content for php."
+        "default": "## PHP Development Standards\n\n### Language & Type Safety\n\n- Enable `declare(strict_types=1)` in every PHP file — **NEVER** rely on implicit type coercion.\n- Use typed properties, return types, and union types on all class members and functions.\n- Use `enum` for finite sets of values — **NEVER** use class constants or magic strings for enumerations.\n- Use `readonly` classes and properties for immutable value objects and DTOs.\n- Use `match` expressions over `switch` statements — they enforce strict comparison (`===`) and return values.\n\n### Architecture & Autoloading\n\n- Use Composer for dependency management with PSR-4 autoloading — **NEVER** use manual `require` or `include` statements.\n- Use named arguments for functions with multiple optional parameters — improves readability and reduces positional errors.\n- Follow PSR-12 coding style — enforce it via `php-cs-fixer` or `phpcs` in CI.\n\n### Security\n\n- Use PDO with prepared statements for all database queries — **NEVER** concatenate user input into SQL strings.\n- Validate and sanitize all user input at the controller boundary — **NEVER** pass raw `$_GET` or `$_POST` values to business logic.\n- Use `password_hash()` with `PASSWORD_ARGON2ID` for password storage — **NEVER** use `md5()` or `sha1()` for hashing passwords.\n- Use CSRF tokens for all state-changing form submissions.\n\n### Error Handling\n\n- Use typed exceptions with domain-specific exception classes — **NEVER** throw generic `\\Exception`.\n- Register a global exception handler to return consistent error responses without exposing internals."
     },
     "recommendedWith": ["mongodb", "redis"],
-    "discouragedWith": ["nestjs", "spring-boot", "express"]
+    "discouragedWith": ["nestjs", "spring-boot", "express"],
+    "visibility": true
 }

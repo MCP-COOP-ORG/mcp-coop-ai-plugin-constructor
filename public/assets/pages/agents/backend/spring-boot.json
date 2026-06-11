@@ -1,10 +1,8 @@
 {
     "description": {
-        "default": "This is a placeholder content for spring-boot.",
-        "claude": "This is a placeholder content for spring-boot.",
-        "cursor": "This is a placeholder content for spring-boot.",
-        "antigravity": "This is a placeholder content for spring-boot."
+        "default": "## Spring Boot Development Standards\n\n### Layered Architecture\n\n- Follow strict layering: `@RestController` → `@Service` → `@Repository` — **NEVER** put business logic in Controllers.\n- Use constructor injection exclusively — **NEVER** use field injection with `@Autowired`.\n- Use `@ConfigurationProperties` with records for type-safe configuration binding — **NEVER** use `@Value` for complex or grouped configs.\n- Use Spring Profiles (`@Profile`) to separate dev, staging, and production configurations.\n\n### Data Access\n\n- Use Spring Data JPA repositories with derived query methods — **NEVER** write native SQL unless JPA query methods cannot express the query.\n- Annotate service methods with `@Transactional` — use `readOnly = true` for read-only operations to enable database optimizations.\n- Use `@EntityGraph` or `JOIN FETCH` to avoid N+1 query problems — **NEVER** rely on lazy loading without explicitly controlling fetch strategy.\n\n### Validation & Error Handling\n\n- Use Bean Validation annotations (`@Valid`, `@NotNull`, `@Size`, `@Pattern`) on DTO classes — validate at the controller boundary.\n- Centralize exception handling with `@RestControllerAdvice` and `@ExceptionHandler` — return `ProblemDetail` responses (RFC 7807).\n- Define domain-specific exception classes — **NEVER** throw generic `RuntimeException` from service code.\n\n### Security\n\n- Use Spring Security with filter chains for authentication and authorization — **NEVER** implement custom auth filters from scratch.\n- Use method-level security (`@PreAuthorize`) for fine-grained access control on service methods.\n- Store sensitive configuration in environment variables or a secrets manager — **NEVER** commit secrets to version control."
     },
     "recommendedWith": ["postgresql", "docker"],
-    "discouragedWith": ["nestjs", "express", "php"]
+    "discouragedWith": ["nestjs", "express", "php"],
+    "visibility": true
 }
