@@ -1,10 +1,8 @@
 {
     "description": {
-        "default": "This is a placeholder content for jest.",
-        "claude": "This is a placeholder content for jest.",
-        "cursor": "This is a placeholder content for jest.",
-        "antigravity": "This is a placeholder content for jest."
+        "default": "## Jest Testing Standards\n\n### Test Structure\n\n- Structure tests with `describe` blocks per unit and `it` blocks per behavior — name tests as user-facing requirements, not implementation details.\n- Use `beforeEach`/`afterEach` for setup and teardown — ensure every test runs in complete isolation with no shared mutable state.\n- Follow the **Arrange-Act-Assert** pattern in every test — separate setup, execution, and verification into distinct sections.\n\n### Mocking\n\n- Use `jest.mock()` for module-level mocks and `jest.spyOn()` for method-level mocks — always call `jest.restoreAllMocks()` in `afterEach`.\n- Mock external dependencies (network, filesystem, database) at the boundary — **NEVER** mock internal business logic.\n- Use `jest.fn()` for creating mock functions — assert with `toHaveBeenCalledWith()` for precise argument checking.\n\n### Assertions\n\n- Use specific matchers: `toEqual()` for deep equality, `toMatchObject()` for partial matching, `toThrow()` for error cases.\n- **NEVER** use `toBeTruthy()` or `toBeFalsy()` as lazy catch-all assertions — use precise matchers that verify the actual expected value.\n- Use `expect.assertions(n)` in async tests to guarantee all expected assertions ran.\n\n### Coverage & CI\n\n- Define explicit coverage thresholds in `jest.config.ts` (Lines, Branches, Functions, Statements) — fail CI if coverage drops below thresholds.\n- Use snapshot testing sparingly — only for serializable output (component trees, config objects) that changes infrequently.\n- Run tests in `--watch` mode during active development for immediate feedback.\n- Use `--bail` flag in CI to fail fast on the first broken test."
     },
     "recommendedWith": ["typescript", "eslint"],
-    "discouragedWith": ["vitest"]
+    "discouragedWith": ["vitest"],
+    "visibility": true
 }

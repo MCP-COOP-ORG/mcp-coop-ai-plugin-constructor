@@ -1,10 +1,8 @@
 {
     "description": {
-        "default": "This is a placeholder content for mvc.",
-        "claude": "This is a placeholder content for mvc.",
-        "cursor": "This is a placeholder content for mvc.",
-        "antigravity": "This is a placeholder content for mvc."
+        "default": "## MVC (Model-View-Controller)\n\n- **Model**: Contains all business logic, data access, and validation — this is the \"fat\" layer that encapsulates domain knowledge.\n- **View**: Responsible only for presentation and rendering — **NEVER** put business logic, data transformation, or formatting decisions in Views.\n- **Controller**: Thin orchestration layer that receives requests, delegates to Models/Services, and selects the appropriate View — **NEVER** put business logic in Controllers.\n- Keep Controllers focused on a single resource or workflow — one Controller per domain concept.\n- **NEVER** access the database or call external services directly from Controllers — always delegate to the Model or Service layer.\n- Use dependency injection to provide Models and Services to Controllers — **NEVER** instantiate them manually inside controller methods.\n- Prefer \"skinny Controllers, fat Models\" — if a Controller method exceeds 10 lines of logic, extract it into the Service/Model layer."
     },
     "recommendedWith": [],
-    "discouragedWith": []
+    "discouragedWith": ["clean-architecture"],
+    "visibility": true
 }

@@ -1,10 +1,8 @@
 {
     "description": {
-        "default": "This is a placeholder content for ddd.",
-        "claude": "This is a placeholder content for ddd.",
-        "cursor": "This is a placeholder content for ddd.",
-        "antigravity": "This is a placeholder content for ddd."
+        "default": "## Domain-Driven Design (DDD)\n\n- Define **Bounded Contexts** with explicit boundaries — each context owns its models, data store, and ubiquitous language.\n- Model domain concepts as **Entities** (identity-based, mutable) and **Value Objects** (equality-based, immutable).\n- Use **Aggregates** to enforce transactional consistency — only the Aggregate Root is accessible from outside the aggregate boundary.\n- Implement **Domain Events** for cross-context communication — **NEVER** create direct dependencies between Bounded Contexts.\n- Define **Repository** interfaces in the Domain layer — implement them in Infrastructure.\n- Use **Ubiquitous Language** — code identifiers (class names, method names, variables) **MUST** match the business terminology exactly.\n- Apply **Anti-Corruption Layer** when integrating with external systems or legacy code — translate external models into domain models at the boundary.\n- **NEVER** let persistence concerns leak into domain logic — Entities and Value Objects must be framework-agnostic."
     },
     "recommendedWith": ["clean-architecture"],
-    "discouragedWith": []
+    "discouragedWith": [],
+    "visibility": true
 }
