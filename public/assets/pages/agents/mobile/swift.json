@@ -1,10 +1,8 @@
 {
     "description": {
-        "default": "This is a placeholder content for swift.",
-        "claude": "This is a placeholder content for swift.",
-        "cursor": "This is a placeholder content for swift.",
-        "antigravity": "This is a placeholder content for swift."
+        "default": "## Swift & SwiftUI Development Standards\n\n### UI Architecture\n\n- Use **SwiftUI** for all UI — use UIKit only for features not yet available in SwiftUI (e.g., advanced camera controls, low-level text editing).\n- Follow **MVVM** pattern: Views observe `@Observable` classes — ViewModels contain presentation logic — Models are plain `struct` types.\n- Prefer small, composable Views — extract subviews into separate `struct` types when a view body exceeds ~30 lines.\n- Use `ViewModifier` for reusable styling and behavior — **NEVER** duplicate styling code across views.\n\n### State Management\n\n- Use `@State` for local view-owned state, `@Binding` for child-to-parent references, and `@Environment` for dependency injection.\n- Use `@Observable` (Observation framework) for ViewModels — **NEVER** use `ObservableObject` with `@Published` in new code (legacy pattern).\n- Keep state as local as possible — only promote to `@Environment` when multiple unrelated views need access.\n\n### Concurrency\n\n- Use structured concurrency (`async`/`await`, `TaskGroup`, `AsyncSequence`) for all asynchronous work — **NEVER** use completion handler callbacks in new code.\n- Use `@MainActor` for ViewModels and any code that updates UI state — **NEVER** dispatch to main queue manually.\n- Use `Task` with proper cancellation handling — check `Task.isCancelled` in long-running operations.\n\n### Data & Networking\n\n- Use `Codable` with `JSONDecoder`/`JSONEncoder` for all serialization — **NEVER** manually parse JSON dictionaries.\n- Prefer `struct` over `class` for data models — use `class` only when reference semantics or inheritance is required.\n- Use `URLSession` with `async`/`await` API for networking — configure shared session with appropriate timeout and caching policies.\n\n### Dependencies & Testing\n\n- Use Swift Package Manager for all dependencies — **NEVER** use CocoaPods for new projects.\n- Use protocol-oriented programming — define protocols for abstraction boundaries to enable testability and mock injection.\n- Use `#Preview` macro for SwiftUI previews — provide multiple preview configurations for different device sizes and states."
     },
     "recommendedWith": [],
-    "discouragedWith": ["flutter", "react-native"]
+    "discouragedWith": ["flutter", "react-native"],
+    "visibility": true
 }
