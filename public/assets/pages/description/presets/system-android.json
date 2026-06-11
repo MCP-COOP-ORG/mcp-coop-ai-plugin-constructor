@@ -6,7 +6,7 @@
         "description": {},
         "review": {},
         "agents": {
-            "frontend": ["kotlin"],
+            "mobile": ["kotlin"],
             "backend": ["spring-boot"],
             "database": ["postgresql"]
         }

@@ -6,8 +6,8 @@
         "description": {},
         "review": {},
         "agents": {
-            "frontend": ["swift"],
-            "backend": ["nest"],
+            "mobile": ["swift"],
+            "backend": ["nestjs"],
             "database": ["postgresql"]
         }
     }
