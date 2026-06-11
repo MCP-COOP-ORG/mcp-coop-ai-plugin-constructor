@@ -1,10 +1,8 @@
 {
     "description": {
-        "default": "This is a placeholder content for vue.",
-        "claude": "This is a placeholder content for vue.",
-        "cursor": "This is a placeholder content for vue.",
-        "antigravity": "This is a placeholder content for vue."
+        "default": "## Vue Development Standards\n\n### Composition API\n\n- Use `<script setup>` with Composition API exclusively — **NEVER** use Options API (`data()`, `methods`, `computed`) in new components.\n- Use `ref()` for primitive reactive values and `reactive()` for objects — prefer `ref()` for consistency since it works with both primitives and objects.\n- Use `computed()` for derived state — **NEVER** derive state inside `watch()` or `watchEffect()` callbacks.\n- Use `watchEffect()` for side effects that track dependencies automatically — use `watch()` only when you need the old value or explicit source tracking.\n\n### Component Design\n\n- Use `defineProps()` and `defineEmits()` with TypeScript generics for type-safe component interfaces — **NEVER** use runtime prop validation objects.\n- Use `defineModel()` for two-way binding in custom components — it replaces the `modelValue` + `update:modelValue` pattern.\n- Keep `<template>` logic simple — extract complex conditional or transformation logic into composables or `computed()` properties.\n- Use `defineExpose()` only when imperative parent access is genuinely required — prefer props and events for communication.\n\n### State Management\n\n- Use **Pinia** for global state management — **NEVER** use Vuex.\n- Define stores using the Composition API syntax (`setup` stores) — they integrate naturally with `ref()`, `computed()`, and composables.\n- Keep stores focused on a single domain — **NEVER** create a monolithic \"global\" store.\n\n### Performance\n\n- Use `defineAsyncComponent()` for heavy components that are not immediately visible — wrap with `<Suspense>` for loading states.\n- Use `v-once` for static content that never changes after initial render.\n- Provide a `:key` on `v-for` items using a stable unique identifier — **NEVER** use array index as key when the list can be reordered."
     },
     "recommendedWith": ["typescript", "javascript", "vitest"],
-    "discouragedWith": ["angular", "react"]
+    "discouragedWith": ["angular", "react"],
+    "visibility": true
 }

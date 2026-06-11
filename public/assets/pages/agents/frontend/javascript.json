@@ -1,10 +1,8 @@
 {
     "description": {
-        "default": "This is a placeholder content for javascript.",
-        "claude": "This is a placeholder content for javascript.",
-        "cursor": "This is a placeholder content for javascript.",
-        "antigravity": "This is a placeholder content for javascript."
+        "default": "## JavaScript Development Standards\n\n### Language Fundamentals\n\n- Use `const` by default for all declarations — use `let` only when reassignment is explicitly required. **NEVER** use `var`.\n- Use ES modules (`import`/`export`) exclusively — **NEVER** use CommonJS (`require`/`module.exports`) in frontend code.\n- Use `===` for all comparisons — **NEVER** use `==` which applies type coercion.\n- Use template literals for string interpolation and multi-line strings — **NEVER** use string concatenation with `+`.\n\n### Modern Syntax\n\n- Use optional chaining (`?.`) and nullish coalescing (`??`) instead of manual null checks and logical OR (`||`).\n- Use destructuring for function parameters, object access, and array unpacking — it makes intent explicit.\n- Use `for...of` for iteration and array methods (`.map()`, `.filter()`, `.reduce()`) for transformations — **NEVER** use `for...in` on arrays.\n- Prefer `structuredClone()` for deep cloning objects — **NEVER** use `JSON.parse(JSON.stringify())` which breaks `Date`, `Map`, `Set`, and `undefined` values.\n\n### Async Patterns\n\n- Use `async`/`await` for asynchronous code — **NEVER** use raw `.then()` chains unless composing dynamic promise pipelines.\n- Use `Promise.allSettled()` for parallel operations that should not fail-fast — use `Promise.all()` only when every result is required.\n- **NEVER** swallow errors in `catch` blocks — always log, re-throw, or handle with a user-facing fallback."
     },
     "recommendedWith": ["eslint"],
-    "discouragedWith": ["strict-typing"]
+    "discouragedWith": ["strict-typing"],
+    "visibility": true
 }
