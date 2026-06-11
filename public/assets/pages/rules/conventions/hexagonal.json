@@ -1,10 +1,8 @@
 {
     "description": {
-        "default": "This is a placeholder content for hexagonal.",
-        "claude": "This is a placeholder content for hexagonal.",
-        "cursor": "This is a placeholder content for hexagonal.",
-        "antigravity": "This is a placeholder content for hexagonal."
+        "default": "## Hexagonal Architecture (Ports & Adapters)\n\n- Organize code into three layers: **Domain** (core business logic), **Application** (use cases), and **Infrastructure** (external integrations).\n- Domain layer **MUST** have zero dependencies on frameworks, databases, or external services — it contains only pure business logic.\n- Define **Ports** as interfaces in the Domain layer for all external interactions — input ports for use cases, output ports for persistence and messaging.\n- Implement **Adapters** in the Infrastructure layer — they fulfill Port contracts using framework-specific code (HTTP controllers, ORM repositories, message brokers).\n- Application layer orchestrates use cases by calling Domain logic through Port interfaces — **NEVER** call Adapters directly from the Application layer.\n- **NEVER** import from Infrastructure into Domain — all dependency arrows **MUST** point inward toward the Domain core.\n- Use Dependency Injection to wire Adapters to Ports at application startup — the composition root is the only place that knows about concrete implementations."
     },
     "recommendedWith": ["clean-architecture"],
-    "discouragedWith": ["fsd"]
+    "discouragedWith": ["fsd", "mvc"],
+    "visibility": true
 }
