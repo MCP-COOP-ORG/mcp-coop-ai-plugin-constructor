@@ -37,25 +37,23 @@ describe('RecommendationEngine', () => {
     });
 
     it('should return discouraged status for items in discouragedWith of selected skill', () => {
-        // NestJS discourages spring-boot, php, express
+        // NestJS discourages spring-boot, php (but NOT express — NestJS runs on Express)
         builderState.dynamicData['agents'].set({ backend: ['nestjs'] });
         const map = engine.statusMap();
 
         expect(map.get('spring-boot')).toBe('discouraged');
         expect(map.get('php')).toBe('discouraged');
-        expect(map.get('express')).toBe('discouraged');
     });
 
     it('should give discouraged priority over recommended when conflicting', () => {
-        // NestJS recommends typescript, docker; discourages express
-        // Express recommends javascript, typescript, mongodb; discourages nestjs
+        // NestJS recommends typescript, docker
+        // Express recommends javascript, typescript, mongodb; discourages nestjs, spring-boot, php
         builderState.dynamicData['agents'].set({ backend: ['nestjs', 'express'] });
         const map = engine.statusMap();
 
         // Both recommend typescript → should still be recommended
         expect(map.get('typescript')).toBe('recommended');
-        // NestJS discourages express, Express discourages NestJS — both are selected, so they should not appear
-        // (selected items are excluded from the map)
+        // Selected items are excluded from the map
         expect(map.has('nestjs')).toBe(false);
         expect(map.has('express')).toBe(false);
     });

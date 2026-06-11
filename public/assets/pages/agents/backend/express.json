@@ -1,10 +1,8 @@
 {
     "description": {
-        "default": "This is a placeholder content for express.",
-        "claude": "This is a placeholder content for express.",
-        "cursor": "This is a placeholder content for express.",
-        "antigravity": "This is a placeholder content for express."
+        "default": "## Express.js Development Standards\n\n### Application Structure\n\n- Structure the app with `express.Router()` — one router file per resource or domain concept.\n- Apply middleware in strict order: `helmet()` → `cors()` → `express.json()` → routes → error handler.\n- Use `express.json()` with a `limit` option (e.g., `'100kb'`) to prevent large payload attacks.\n- **NEVER** use `app.use(cors())` without an explicit origin whitelist in production.\n\n### Error Handling\n\n- Wrap all async route handlers to catch rejected promises — use `express-async-errors` or a manual wrapper.\n- Centralize error handling in a single error middleware with signature `(err, req, res, next)` — **NEVER** handle errors individually in each route.\n- Return consistent error response format: `{ error: { code, message } }` — **NEVER** expose stack traces or internal details to clients.\n\n### Input Validation & Security\n\n- Validate all request inputs (`req.body`, `req.params`, `req.query`) at the controller boundary using `zod` or `joi` — **NEVER** trust raw input without validation.\n- Use `helmet()` middleware to set security-related HTTP headers — it prevents clickjacking, XSS, and MIME sniffing.\n- Use parameterized queries for all database operations — **NEVER** concatenate user input into query strings.\n- Use rate limiting middleware (`express-rate-limit`) on authentication and public-facing endpoints."
     },
     "recommendedWith": ["javascript", "typescript", "mongodb"],
-    "discouragedWith": ["nestjs", "spring-boot", "php"]
+    "discouragedWith": ["nestjs", "spring-boot", "php"],
+    "visibility": true
 }

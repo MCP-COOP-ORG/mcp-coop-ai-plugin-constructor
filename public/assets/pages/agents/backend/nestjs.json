@@ -1,10 +1,8 @@
 {
     "description": {
-        "default": "This is a placeholder content for nestjs.",
-        "claude": "This is a placeholder content for nestjs.",
-        "cursor": "This is a placeholder content for nestjs.",
-        "antigravity": "This is a placeholder content for nestjs."
+        "default": "## NestJS Development Standards\n\n### Architecture\n\n- Organize code into feature modules — each module encapsulates its Controllers, Services, and DTOs.\n- Follow strict layering: `Controller` (HTTP) → `Service` (business logic) → `Repository` (data access) — **NEVER** put business logic in Controllers.\n- Use constructor-based dependency injection via providers — **NEVER** instantiate services manually with `new`.\n- Use `ConfigModule` with `.env` files for environment-specific configuration — **NEVER** hardcode secrets or connection strings.\n\n### Validation & DTOs\n\n- Validate all incoming data using `class-validator` decorators on DTO classes — apply `ValidationPipe` globally.\n- Define separate DTOs for Create, Update, and Response — **NEVER** reuse the same DTO for input and output.\n- Use `class-transformer` with `@Exclude()` and `@Expose()` to control serialized output — **NEVER** return raw database entities to clients.\n\n### Request Lifecycle\n\n- Use **Guards** for authentication and authorization checks — they run before the route handler.\n- Use **Interceptors** for response transformation, caching, and logging — they wrap the execution stream.\n- Use **Pipes** for input validation and data transformation — apply them at the parameter or global level.\n- Use **Exception Filters** with `@Catch()` for centralized error handling — return consistent error format across all endpoints.\n\n### Data Access\n\n- Access the database through TypeORM repositories or Prisma Client — **NEVER** write raw SQL in Service classes.\n- Use transactions for multi-step database operations — wrap them in `DataSource.transaction()` or Prisma's `$transaction()`."
     },
     "recommendedWith": ["typescript", "postgresql", "docker"],
-    "discouragedWith": ["spring-boot", "php", "express"]
+    "discouragedWith": ["spring-boot", "php"],
+    "visibility": true
 }
